@@ -4,7 +4,7 @@ import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import { postProduct } from '../JS/actions/products';
 import { getProducts } from '../JS/actions/products';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 function AddModal() {
   const [show, setShow] = useState(false);
@@ -13,8 +13,9 @@ function AddModal() {
   const [Image, setImage] = useState('');
   const [Price, setPrice] = useState('');
   const [Categorie, setCategorie] = useState('');
+  const [Barcode, setBarcode] = useState('')
   const dispatch = useDispatch()
-  const  error = useSelector((state)=>state.productReducer.errors)
+  // const  error = useSelector((state)=>state.productReducer.errors)
   // console.log(error)
   
 
@@ -23,7 +24,7 @@ function AddModal() {
 
   const Add= async()=>{
     try {
-      dispatch(postProduct({Name,Stock,Image,Price,Categorie}));
+      dispatch(postProduct({Name,Stock,Image,Price,Categorie,Barcode}));
     } catch (error) {
     
       console.log(error) 
@@ -67,6 +68,11 @@ function AddModal() {
       <Form.Group className="mb-3" controlId="formBasicPassword">
         <Form.Label>Categorie</Form.Label>
         <Form.Control type="text" placeholder="Categorie" onChange={(e)=>setCategorie(e.target.value)} />
+      </Form.Group>
+
+      <Form.Group className="mb-3" controlId="formBasicPassword">
+        <Form.Label>Barcode</Form.Label>
+        <Form.Control type="text" placeholder="Barcode" onChange={(e)=>setBarcode(e.target.value)} />
       </Form.Group>
 
     </Form>

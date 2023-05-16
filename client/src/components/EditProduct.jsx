@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import axios from 'axios';
-import { getProducts } from '../JS/actions/products';
+import { getProducts, updateProduct } from '../JS/actions/products';
 import { useDispatch } from 'react-redux';
  
 
@@ -17,6 +17,7 @@ function EditModal(id) {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const [product, setProduct] = useState({})
+  const [update, setUpdate] = useState({})
   const dispatch = useDispatch()
   // const Open= ()=>{
   // dispatch(getProductById(id))
@@ -35,21 +36,17 @@ const Open= async()=>{
 
  const handlechange =(e)=>{
       // e.preventDefault()
-      setProduct( {...product,[e.target.name]: e.target.value})
-      console.log(product)
+      setUpdate( {[e.target.name]: e.target.value})
+      
  }
  
-  const Edit= async()=>{
-    try{
-       await axios.put(`/edit/${id.id}`, product )
-       
-    }catch(error){
-        console.log(error)
-    }
+
+  const Edit=()=>{
+    dispatch(updateProduct(id.id,update));
     dispatch(getProducts())
+    setUpdate('')
   }
 
-  
   const Delete = async()=>{
     try {
       await axios.delete(`/api/products/delete/${id.id}`)
@@ -57,6 +54,7 @@ const Open= async()=>{
       console.log(error)
     }
     dispatch(getProducts())
+    
   }
 
 
@@ -81,7 +79,7 @@ const Open= async()=>{
 
       <Form.Group className="mb-3" controlId="formBasicPassword">
         <Form.Label>Stock : {product.Stock}</Form.Label>
-        <Form.Control  name="Stock" onChange={handlechange} />
+        <Form.Control type='number' name="Stock" onChange={handlechange} />
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="formBasicPassword">
@@ -112,7 +110,7 @@ const Open= async()=>{
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={()=>{handleClose();Edit()}}>
+          <Button variant="primary" onClick={()=>{Edit();handleClose()}}>
             Edit
           </Button>
         </Modal.Footer>

@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const {Schema,model} = mongoose;
 
 const productSchema = new Schema ({
-    // _id: {type:Number},
+    ProductId: {type:Number},
     Name: {type:String, required:true},
     Image: {type:String},
     Barcode: {type:Number, unique:true},

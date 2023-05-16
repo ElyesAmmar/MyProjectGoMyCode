@@ -70,7 +70,7 @@ const Open= async()=>{
           <Modal.Title>{product.Name}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-
+        <img alt="productImage" src={product.Image} style={{height:'200px',width:'200px',marginLeft:'120px'}} />
         <Form>
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Name : {product.Name}</Form.Label>

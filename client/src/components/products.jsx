@@ -2,7 +2,7 @@ import React from "react";
 import { getProducts } from "../JS/actions/products";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import Cards from "./cards";
+import ProductTable from "./productTable";
 import Filter from "./Search";
 
 
@@ -15,18 +15,17 @@ const inputS = useSelector((state)=>state.productReducer.productSearch)
 
 useEffect(()=> {
     dispatch(getProducts())
-    
-    
 },[])
 
 
     return(
         
-        <div className="cards">
+        <div className="products">
             <Filter />
         {products
         .filter((prod)=> prod.Name.toLowerCase().includes(inputS.toLowerCase()))
-        .map((prod)=> <Cards key={prod._id} Name={prod.Name} Image={prod.Image} Stock={prod.Stock} Price={prod.Price} Barcode={prod.Barcode} Id={prod._id}/>)}
+        .map((prod)=> <ProductTable key={prod.ProductId} ProductId={prod.ProductId} Name={prod.Name} 
+        Categorie={prod.Categorie} Image={prod.Image} Stock={prod.Stock} Price={prod.Price} Barcode={prod.Barcode} Id={prod._id}/>)}
         </div>
     )
 

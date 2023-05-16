@@ -16,14 +16,17 @@
     padding-left: 30px;
 }
 
-.cards{
-    display: flex;
+.products{
+    /* display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: space-around; */
     width: 1000px;
-    margin: 30px auto;
-    
-    
+    text-align: center;
+    margin: 0 auto;
+}
+.tableProduct tr {
+   text-align: center;
+   vertical-align: middle;
 }
 
 .navbar-dashboard{

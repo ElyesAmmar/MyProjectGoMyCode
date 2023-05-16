@@ -5,6 +5,7 @@ const productSchema = new Schema ({
     // _id: {type:Number},
     Name: {type:String, required:true},
     Image: {type:String},
+    Barcode: {type:Number, unique:true},
     Stock: {type:Number, required:true},
     Price: {type:Number, required:true},
     Categorie: {type:String, required:true}

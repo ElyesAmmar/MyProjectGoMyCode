@@ -1,6 +1,7 @@
 const Products = require("../model/product");
 
 
+
 exports.getProducts = async(req, res)=>{
     try{
        const result= await Products.find({})
@@ -14,7 +15,7 @@ exports.getProducts = async(req, res)=>{
 exports.getOneProduct = async(req, res)=>{
     try {
         const id= req.params.id
-        const result = await Products.findOne({_id:id})
+        const result = await Products.findById(id)
         return res.status(200).send({msg:"getting product succes", response: result})
     } catch (error) {
         console.log(error)
@@ -37,7 +38,12 @@ exports.postProduct = async(req,res)=>{
         const query= req.body
         if(!query.Name || !query.Stock || !query.Categorie || !query.Price){
             return res.status(400).send({msg:"please enter the missing fields"})
-        }else{
+        }
+        const barcode= await Products.findOne({Barcode:query.Barcode})
+        if(barcode){
+            return res.status(400).send({msg:"Product exists"})
+        }
+        else{
             const newProduct= new Products(query);
             await newProduct.save()
         
@@ -75,3 +81,20 @@ exports.deleteProduct = async(req,res)=>{
         
     }
 }
+
+// exports.findProductCode = async(res,req)=>{
+//     try {
+//         const barcode= req.query.Barcode
+//         const product =  await Products.findOne({Barcode:barcode})
+//         // return res.status(200).send({msg:"getting product success", response: result})
+//         if (product) {
+//             console.log('Found product:', product);
+//            return res.json(product);
+//           } else {
+//             console.log('Product not found.');
+//            return res.status(404).json({ error: 'Product not found' });
+//           }
+//     } catch (error) {
+//         return res.status(500).send({msg:"getting Product failed"})
+//     }
+// }

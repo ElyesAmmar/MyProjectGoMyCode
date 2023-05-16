@@ -2,7 +2,7 @@
 import Card from 'react-bootstrap/Card';
 import EditModal from './EditProduct';
 
-function Cards({Name,Image,Stock,Price,Id}) {
+function Cards({Name,Image,Stock,Price,Id,Barcode}) {
   
   return (
     <Card style={{ height:'400px', width: '14rem' , marginBottom:"10px" }}>
@@ -11,7 +11,8 @@ function Cards({Name,Image,Stock,Price,Id}) {
         <Card.Title>{Name}</Card.Title>
         <Card.Text>
           stock : {Stock} <br/>
-          Price : {Price} TND
+          Price : {Price} TND <br/>
+          Barcode : {Barcode}
         </Card.Text>
 
         <EditModal id={Id} />

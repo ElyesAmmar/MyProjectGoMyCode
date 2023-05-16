@@ -99,6 +99,11 @@ const Open= async()=>{
         <Form.Control type="text" name="Image" onChange={handlechange}  />
       </Form.Group>
 
+      <Form.Group className="mb-3" controlId="formBasicPassword">
+        <Form.Label>Barcode : {product.Barcode} </Form.Label>
+        <Form.Control type="text" name="Barcode" onChange={handlechange}  />
+      </Form.Group>
+
     </Form>
 
         </Modal.Body>

@@ -7,7 +7,7 @@ export const getProducts =()=> async (dispatch)=> {
     dispatch({type:GET_PRODUCT_LOAD})
     try {
         let result = await axios.get('/api/products/')
-        
+        console.log(result)
         dispatch({
             type: GET_PRODUCT_SUCCESS,
             payload: result.data.response
@@ -65,3 +65,7 @@ export const searchP =(input)=>{
         payload: input
     }
 }
+
+
+
+

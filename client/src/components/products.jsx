@@ -16,6 +16,7 @@ const inputS = useSelector((state)=>state.productReducer.productSearch)
 useEffect(()=> {
     dispatch(getProducts())
     
+    
 },[])
 
 
@@ -25,7 +26,7 @@ useEffect(()=> {
             <Filter />
         {products
         .filter((prod)=> prod.Name.toLowerCase().includes(inputS.toLowerCase()))
-        .map((prod)=> <Cards key={prod._id} Name={prod.Name} Image={prod.Image} Stock={prod.Stock} Price={prod.Price} Id={prod._id}/>)}
+        .map((prod)=> <Cards key={prod._id} Name={prod.Name} Image={prod.Image} Stock={prod.Stock} Price={prod.Price} Barcode={prod.Barcode} Id={prod._id}/>)}
         </div>
     )
 

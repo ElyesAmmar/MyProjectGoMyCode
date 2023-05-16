@@ -1,7 +1,9 @@
 const express = require("express");
 require("dotenv").config({path:"./.env"});
 const connectDB = require("./config/connectDB");
-const Routes= require("./routes/productRoutes");
+const RoutesProduct= require("./routes/productRoutes");
+const RoutesClient= require("./routes/clientRoutes");
+
 
 const App = express();
 const PORT = process.env.PORT || 7011;
@@ -10,7 +12,9 @@ const PORT = process.env.PORT || 7011;
 App.use(express.json())
 
 
-App.use('/api/products', Routes)  // middleware routing
+App.use('/api/products', RoutesProduct)
+App.use('/api/clients', RoutesClient)  // middleware routing
+
 
 
 

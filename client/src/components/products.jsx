@@ -2,10 +2,9 @@ import React from "react";
 import { getProducts } from "../JS/actions/products";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import ProductTable from "./productTable";
 import Filter from "./Search";
-
-
+import Table from 'react-bootstrap/Table';
+import EditModal from './EditProduct';
 
 
 function Products() {
@@ -22,10 +21,41 @@ useEffect(()=> {
         
         <div className="products">
             <Filter />
+            <Table className='tableProduct' striped bordered hover size="sm">
+      <thead>
+        <tr>
+        <th style={{width:'40px'}}>#</th>
+          <th style={{width:'80px'}}>#</th>
+          <th style={{width:'100px'}}>Image</th>
+          <th style={{width:'250px'}}>Name</th>
+          <th style={{width:'80px'}}>Stock</th>
+          <th style={{width:'150px'}}>Price</th>
+          <th>Categorie</th>
+          <th style={{width:'120px'}}>Barcode</th>
+          <th style={{width:'120px'}}>Edit</th>
+        </tr>
+      </thead>
+
         {products
         .filter((prod)=> prod.Name.toLowerCase().includes(inputS.toLowerCase()))
-        .map((prod)=> <ProductTable key={prod.ProductId} ProductId={prod.ProductId} Name={prod.Name} 
-        Categorie={prod.Categorie} Image={prod.Image} Stock={prod.Stock} Price={prod.Price} Barcode={prod.Barcode} Id={prod._id}/>)}
+        .map((prod)=> 
+       
+      <tbody key={prod.ProductId}>
+        <tr>
+        <td></td>
+          <td>{prod.ProductId}</td>
+          <td><img alt="productImage" src={prod.Image} style={{height:'100px',width:'100px'}} /></td>
+          <td>{prod.Name}</td>
+          <td>{prod.Stock}</td>
+          <td>{prod.Price} TND</td>
+          <td>{prod.Categorie}</td>
+          <td>{prod.Barcode}</td>
+          <td><EditModal id={prod._id} /></td>
+        </tr>
+        
+      </tbody>)}
+    </Table>
+        
         </div>
     )
 

@@ -18,12 +18,12 @@ function Filter() {
   
 
   return (
-    <Navbar bg="light" expand="lg" style={{width:"1000px",margin:"0 auto 10px"}}>
+    <Navbar bg="light" expand="lg" style={{width:"1200px",margin:"5px auto 10px"}}>
       <Container fluid>
         <Navbar.Collapse id="navbarScroll">
         <Nav
             className="me-auto my-2 my-lg-0"
-            style={{ maxHeight: '100px' }}
+            // style={{ maxHeight: '100px' }}
             navbarScroll
           >
             <AddModal />

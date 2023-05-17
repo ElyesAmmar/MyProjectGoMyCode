@@ -31,6 +31,7 @@ export const postProduct =(newproduct)=> async (dispatch)=> {
             payload: result.data.msg
         })
     } catch (error) {
+        console.log(error)
         console.log(error.response.data.msg)
         dispatch({
             type: POST_PRODUCT_FAIL,

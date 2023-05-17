@@ -43,7 +43,7 @@ const Open= async()=>{
 
   const Edit=()=>{
     dispatch(updateProduct(id.id,update));
-    dispatch(getProducts())
+    dispatch(getProducts());
     setUpdate('')
   }
 

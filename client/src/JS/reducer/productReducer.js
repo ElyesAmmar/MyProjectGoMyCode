@@ -8,7 +8,7 @@ const initialeState = {
       product: {},
       errors: [],
       productSearch: "",
-      update:""
+      msgSuccess: ""
 }
 
 export const productReducer=(state=initialeState, {type,payload})=>{
@@ -27,12 +27,12 @@ export const productReducer=(state=initialeState, {type,payload})=>{
                 return {...state, errors: payload}
 
         case POST_PRODUCT_SUCCESS:
-             return {...state,  product: payload} 
+             return {...state,  msgSuccess: payload} 
          case POST_PRODUCT_FAIL:
                 return {...state, errors: payload}
         
         case UPDATE_PRODUCT:
-            return {...state, update: payload}
+            return {...state, msgSuccess: payload}
         
         case SEARCH_PRODUCT:
             return {...state, productSearch: payload}      

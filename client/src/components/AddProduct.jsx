@@ -4,19 +4,14 @@ import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import { postProduct } from '../JS/actions/products';
 import { getProducts } from '../JS/actions/products';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 function AddModal() {
   const [show, setShow] = useState(false);
-  const [Name, setName] = useState('');
-  const [Stock, setStock] = useState('');
-  const [Image, setImage] = useState('');
-  const [Price, setPrice] = useState('');
-  const [Categorie, setCategorie] = useState('');
-  const [Barcode, setBarcode] = useState('')
+  const [product, setProduct] = useState({Name:'',Stock:'',Image:'',Price:'',Categorie:'',Barcode:''})
   const dispatch = useDispatch()
-  // const  error = useSelector((state)=>state.productReducer.errors)
-  // console.log(error)
+  // const  success = useSelector((state)=>state.productReducer.msgSuccess)
+
   
 
   const handleClose = () => setShow(false);
@@ -24,14 +19,19 @@ function AddModal() {
 
   const Add= async()=>{
     try {
-      dispatch(postProduct({Name,Stock,Image,Price,Categorie,Barcode}));
+      console.log(product)
+      dispatch(postProduct(product));
+      setProduct({Name:'',Stock:'',Image:'',Price:'',Categorie:'',Barcode:''})
     } catch (error) {
     
       console.log(error) 
     }
     dispatch(getProducts())
+    
   }
-
+// useEffect(()=>{
+//   console.log(product)
+// })
   return (
     <>
       <Button variant="outline-secondary" onClick={handleShow}>
@@ -47,32 +47,32 @@ function AddModal() {
         <Form>
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Name</Form.Label>
-        <Form.Control type="text" placeholder="Name" onChange={(e)=>setName(e.target.value)} />
+        <Form.Control type="text" placeholder="Name" onChange={(e)=>setProduct({...product,Name: e.target.value})} />
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="formBasicPassword">
         <Form.Label>Stock</Form.Label>
-        <Form.Control  placeholder="stock" onChange={(e)=>setStock(e.target.value)} />
+        <Form.Control  placeholder="Stock" onChange={(e)=>setProduct({...product,Stock: e.target.value})} />
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="formBasicPassword">
         <Form.Label>Image</Form.Label>
-        <Form.Control type="text" placeholder="Image URL" onChange={(e)=>setImage(e.target.value)} />
+        <Form.Control type="text" placeholder="Image" onChange={(e)=>setProduct({...product,Image: e.target.value})} />
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="formBasicPassword">
         <Form.Label>Price</Form.Label>
-        <Form.Control  placeholder="Price" onChange={(e)=>setPrice(e.target.value)} />
+        <Form.Control  placeholder="Price" onChange={(e)=>setProduct({...product,Price: e.target.value})} />
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="formBasicPassword">
         <Form.Label>Categorie</Form.Label>
-        <Form.Control type="text" placeholder="Categorie" onChange={(e)=>setCategorie(e.target.value)} />
+        <Form.Control type="text" placeholder="Categorie" onChange={(e)=>setProduct({...product,Categorie: e.target.value})} />
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="formBasicPassword">
         <Form.Label>Barcode</Form.Label>
-        <Form.Control type="text" placeholder="Barcode" onChange={(e)=>setBarcode(e.target.value)} />
+        <Form.Control type="text" placeholder="Barcode" onChange={(e)=>setProduct({...product,Barcode: e.target.value})} />
       </Form.Group>
 
     </Form>

@@ -7,7 +7,7 @@ import {Link} from 'react-router-dom'
 
 function Bar() {
   return (
-    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" style={{position:"fixed",top:"0",width:"100%"}}>
       <Container>
         <Navbar.Brand href="">Elyes Ammar</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />

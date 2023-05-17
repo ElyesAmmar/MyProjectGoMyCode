@@ -1,8 +1,4 @@
-/* .dashboard{
-    position: absolute;
-    
-    
-} */
+
 .dashboard{
     background-color: rgb(231, 231, 231);
     display: block;
@@ -43,6 +39,7 @@
 }
 
 
+/* Home page */
 .logform{
     width: 500px;
     height: 300px;

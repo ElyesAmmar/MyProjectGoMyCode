@@ -1,5 +1,6 @@
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import AddClient from './Addclient';
 
 
 function ClientsBar() {
@@ -9,6 +10,7 @@ function ClientsBar() {
     <div>
     <div className='searchbar'>
       <div style={{paddingTop:'7px',paddingLeft:'7px'}}>
+        <AddClient />
       </div>
       <div style={{display:'flex',height:'45px',paddingTop:'7px',paddingRight:'7px'}}>
       <Form.Control

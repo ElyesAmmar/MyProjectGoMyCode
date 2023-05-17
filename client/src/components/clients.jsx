@@ -1,34 +1,50 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Table from 'react-bootstrap/Table';
 import ClientsBar from "./SearchBarClient";
+import { useDispatch, useSelector } from "react-redux";
+import { getClients } from "../JS/actions/clients";
 
 
 
 function Clients(){
+    const dispatch = useDispatch()
+    // const [clients, setClients] = useState([])
+
+    useEffect(()=>{
+        dispatch(getClients())
+    },[])
+    const clients = useSelector((state)=> state.clientReducer.clients)
+
+   
+
+
     return(
- <div>
+<div>
     <ClientsBar />
-    <Table striped bordered hover>
-      <thead>
+    <Table striped bordered hover className='tableProduct'>
+    <thead>
         <tr>
-          <th>Ref</th>
-          <th>Name</th>
-          <th>Email</th>
-          <th>Address</th>
-          <th>Company</th>
-          <th>Phone</th>
+        <th>Ref</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Address</th>
+        <th>Company</th>
+        <th>Phone</th>
         </tr>
-      </thead>
-      <tbody>
+    </thead>
+    {clients
+    .map((cl)=>   
+    <tbody key={cl.Reference}>
         <tr>
-          <td>1</td>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-          <td>@mdo</td>
-          <td>@mdo</td>
+        <td>Ref-{cl.Reference}</td>
+        <td>{cl.Name}</td>
+        <td>{cl.Email}</td>
+        <td>{cl.Address}</td>
+        <td>{cl.Company}</td>
+        <td>{cl.Phone}</td>
         </tr>
-       </tbody>
+    </tbody>
+    )}
     </Table>
 
 </div>

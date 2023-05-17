@@ -19,9 +19,9 @@ useEffect(()=> {
 
     return(
         
-        <div className="products">
-            <Filter />
-            <Table className='tableProduct' striped bordered hover size="sm">
+<div className="products">
+    <Filter />
+    <Table className='tableProduct' striped bordered hover size="sm">
       <thead>
         <tr>
         <th style={{width:'40px'}}>#</th>
@@ -39,11 +39,11 @@ useEffect(()=> {
         {products
         .filter((prod)=> prod.Name.toLowerCase().includes(inputS.toLowerCase()))
         .map((prod)=> 
-       
+      
       <tbody key={prod.ProductId}>
         <tr>
         <td></td>
-          <td>{prod.ProductId}</td>
+          <td>P-{prod.ProductId}</td>
           <td><img alt="productImage" src={prod.Image} style={{height:'100px',width:'100px'}} /></td>
           <td>{prod.Name}</td>
           <td>{prod.Stock}</td>
@@ -56,7 +56,7 @@ useEffect(()=> {
       </tbody>)}
     </Table>
         
-        </div>
+</div>
     )
 
 }

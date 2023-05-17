@@ -38,6 +38,7 @@ export const postProduct =(newproduct)=> async (dispatch)=> {
             payload: error.response.data.msg
         })
     }
+    dispatch(getProducts())
 }
 
 export const getProductById =(id)=> async(dispatch)=>{

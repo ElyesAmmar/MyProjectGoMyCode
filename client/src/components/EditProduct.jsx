@@ -32,21 +32,16 @@ const Open= async()=>{
       console.log(error)
     }
 }
-
-
- const handlechange =(e)=>{
+const handlechange =(e)=>{
       // e.preventDefault()
       setUpdate( {[e.target.name]: e.target.value})
       
- }
- 
-
-  const Edit=()=>{
+} 
+const Edit=()=>{
     dispatch(updateProduct(id.id,update));
     dispatch(getProducts());
     setUpdate('')
   }
-
   const Delete = async()=>{
     try {
       await axios.delete(`/api/products/delete/${id.id}`)

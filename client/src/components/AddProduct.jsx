@@ -3,7 +3,6 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import { postProduct } from '../JS/actions/products';
-import { getProducts } from '../JS/actions/products';
 import { useDispatch, useSelector } from 'react-redux';
 
 function AddModal() {
@@ -17,17 +16,10 @@ function AddModal() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const Add= async()=>{
-    try {
-      console.log(product)
+  const Add= ()=>{
+    
       dispatch(postProduct(product));
       setProduct({Name:'',Stock:'',Image:'',Price:'',Categorie:'',Barcode:''})
-    } catch (error) {
-    
-      console.log(error) 
-    }
-    dispatch(getProducts())
-    
   }
 // useEffect(()=>{
 //   console.log(product)

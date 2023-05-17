@@ -14,8 +14,8 @@ export const getClients=()=> async(dispatch)=>{
     } catch (error) {
         console.log(error)
         dispatch({
-            type:GET_CLIENTS_FAIL,
-            payload:error
+            type: GET_CLIENTS_FAIL,
+            payload: error
         })
     }
 

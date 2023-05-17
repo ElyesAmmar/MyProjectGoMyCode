@@ -24,8 +24,16 @@
     justify-content: space-around;
     width: 1200px;
     text-align: center;
-    margin: 0 auto;
+    margin: 20px auto;
     
+}
+.searchbar{
+    display: flex;
+    justify-content: space-between;
+    height: 50px;
+    width: 1200px;
+    background-color: rgb(235, 233, 233);
+   
 }
 .tableProduct tr {
    text-align: center;
@@ -54,3 +62,4 @@
     
     
 }
+

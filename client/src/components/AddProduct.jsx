@@ -11,8 +11,6 @@ function AddModal() {
   const dispatch = useDispatch()
   // const  success = useSelector((state)=>state.productReducer.msgSuccess)
 
-  
-
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 

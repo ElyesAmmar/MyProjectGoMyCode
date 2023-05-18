@@ -1,5 +1,5 @@
 import { GET_PRODUCT_LOAD, GET_PRODUCT_SUCCESS, GET_PRODUCT_FAIL,GET_ONEPRODUCT_FAIL,
-    POST_PRODUCT_SUCCESS, POST_PRODUCT_FAIL, SEARCH_PRODUCT, GET_ONEPRODUCT_SUCCESS, UPDATE_PRODUCT } from "../constant/actionsTypes";
+    POST_PRODUCT_SUCCESS, POST_PRODUCT_FAIL, SEARCH_PRODUCT, GET_ONEPRODUCT_SUCCESS, UPDATE_PRODUCT, DELETE_PRODUCT } from "../constant/actionsTypes";
 
 
 const initialeState = {
@@ -8,7 +8,7 @@ const initialeState = {
       product: {},
       errors: [],
       productSearch: "",
-      msgSuccess: ""
+      msg: ""
 }
 
 export const productReducer=(state=initialeState, {type,payload})=>{
@@ -32,7 +32,10 @@ export const productReducer=(state=initialeState, {type,payload})=>{
                 return {...state, errors: payload}
         
         case UPDATE_PRODUCT:
-            return {...state, msgSuccess: payload}
+            return {...state, msg: payload}
+
+        case DELETE_PRODUCT:
+            return {...state, msg: payload}
         
         case SEARCH_PRODUCT:
             return {...state, productSearch: payload}      

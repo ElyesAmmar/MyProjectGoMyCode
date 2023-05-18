@@ -16,9 +16,7 @@ function ClientsBar() {
     dispatch(searchClient(e.target.value))
     
   }
-  
-    
-  
+
   return (
     <div>
     <div className='searchbar'>

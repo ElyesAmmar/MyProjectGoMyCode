@@ -6,7 +6,6 @@ import { getClients } from "../JS/actions/clients";
 import EditClient from "./EditClient";
 
 
-
 function Clients(){
     const dispatch = useDispatch()
     // const [clients, setClients] = useState([])
@@ -17,13 +16,10 @@ function Clients(){
     },[])
     const clients = useSelector((state)=> state.clientReducer.clients)
 
-   
-
-
     return(
 <div>
     <ClientsBar />
-    <Table striped bordered hover className='tableProduct'>
+    <Table striped bordered hover className='tableClient'>
     <thead>
         <tr>
         <th>Ref</th>
@@ -40,8 +36,8 @@ function Clients(){
     .filter((cl)=> cl.Name.toLowerCase().includes(input.toLowerCase()))
     .map((cl)=>   
     <tbody key={cl.Reference}>
-        <tr>
-        <td>Ref-{cl.Reference}</td>
+        <tr >
+        <td >Ref-{cl.Reference}</td>
         <td>{cl.Name}</td>
         <td>{cl.Email}</td>
         <td>{cl.Address}</td>

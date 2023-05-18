@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import axios from 'axios';
-import { getProducts, updateProduct } from '../JS/actions/products';
+import { deleteProduct, getProducts, updateProduct } from '../JS/actions/products';
 import { useDispatch } from 'react-redux';
  
 
@@ -43,13 +43,7 @@ const Edit=()=>{
     setUpdate('')
   }
   const Delete = async()=>{
-    try {
-      await axios.delete(`/api/products/delete/${id.id}`)
-    } catch (error) {
-      console.log(error)
-    }
-    dispatch(getProducts())
-    
+    dispatch(deleteProduct(id.id))
   }
 
 

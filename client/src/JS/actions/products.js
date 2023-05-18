@@ -1,5 +1,5 @@
 import { GET_PRODUCT_LOAD, GET_PRODUCT_SUCCESS, GET_PRODUCT_FAIL, GET_ONEPRODUCT_SUCCESS, POST_PRODUCT_FAIL,
-        GET_ONEPRODUCT_FAIL, POST_PRODUCT_SUCCESS, SEARCH_PRODUCT, UPDATE_PRODUCT} from "../constant/actionsTypes";
+        GET_ONEPRODUCT_FAIL, POST_PRODUCT_SUCCESS, SEARCH_PRODUCT, UPDATE_PRODUCT, DELETE_PRODUCT} from "../constant/actionsTypes";
 import axios from "axios"
 
 export const getProducts =()=> async (dispatch)=> {
@@ -74,6 +74,19 @@ export const updateProduct= (id,update) => async(dispatch)=>{
      console.log(error)
         
     }
+}
+
+export const deleteProduct = (id) => async(dispatch)=>{
+    try {
+        let result = await axios.delete(`/api/products/delete/${id}`)
+        dispatch({
+            type: DELETE_PRODUCT,
+            payload: result.data.msg
+        })
+      } catch (error) {
+        console.log(error)
+      }
+      dispatch(getProducts())
 }
 
 export const searchP =(input)=>{

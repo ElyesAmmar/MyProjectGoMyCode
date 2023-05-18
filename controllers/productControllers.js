@@ -4,14 +4,23 @@ const Products = require("../model/product");
 
 exports.getProducts = async(req, res)=>{
     try{
-       const result= await Products.find({})
-       return res.status(200).send({msg:"getting Products success", response: result})
+    const result= await Products.find({})
+    return res.status(200).send({msg:"getting Products success", response: result})
     }catch(error){
         console.log(error)
         return res.status(500).send({msg:"getting Products failed"})
     }
 }
-
+exports.getProductsCategory = async (req, res)=>{
+    const category = req.query.category
+    try {
+        const result = await Products.find({Category:"Memoire"})
+        res.status(200).send({msg: "getting Products success", response: result})
+    } catch (error) {
+        console.log(error)
+        res.status(500).send({msg:"getting Products failed"})
+    }
+}
 exports.getOneProduct = async(req, res)=>{
     try {
         const id= req.params.id
@@ -35,7 +44,7 @@ exports.postProduct = async(req,res)=>{
             productid= 1
         } 
         const query= req.body
-        if(!query.Name || !query.Stock || !query.Categorie || !query.Price){
+        if(!query.Name || !query.Stock || !query.Category || !query.Price){
             return res.status(400).send({msg:"please enter the missing fields"})
         }
         const barcode= await Products.findOne({Barcode:query.Barcode})
@@ -70,7 +79,7 @@ exports.updateProduct = async(req,res)=>{
 exports.deleteProduct = async(req,res)=>{
     try {
         const id = req.params.id
-        await Products.findOneAndDelete({_id:id},{$set:{...req.body}})
+        await Products.findOneAndDelete({_id:id})
         
         return res.status(200).send({msg:"deleting Product success"})
 

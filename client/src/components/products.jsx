@@ -2,7 +2,7 @@ import React from "react";
 import { getProducts } from "../JS/actions/products";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import Filter from "./Search";
+import Filter from "./SearchBarProduct";
 import Table from 'react-bootstrap/Table';
 import EditModal from './EditProduct';
 
@@ -16,7 +16,7 @@ useEffect(()=> {
     dispatch(getProducts())
 },[])
 
-
+console.log(products.Category)
     return(
         
 <div className="products">
@@ -30,7 +30,7 @@ useEffect(()=> {
           <th style={{width:'250px'}}>Name</th>
           <th style={{width:'80px'}}>Stock</th>
           <th style={{width:'150px'}}>Price</th>
-          <th>Categorie</th>
+          <th>Category</th>
           <th style={{width:'120px'}}>Barcode</th>
           <th style={{width:'120px'}}>Edit</th>
         </tr>
@@ -48,7 +48,7 @@ useEffect(()=> {
           <td>{prod.Name}</td>
           <td>{prod.Stock}</td>
           <td>{prod.Price} TND</td>
-          <td>{prod.Categorie}</td>
+          <td>{prod.Category}</td>
           <td>{prod.Barcode}</td>
           <td><EditModal id={prod._id} /></td>
         </tr>

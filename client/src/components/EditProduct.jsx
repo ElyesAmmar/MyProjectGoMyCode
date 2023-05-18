@@ -10,19 +10,11 @@ import { useDispatch } from 'react-redux';
 
 function EditModal(id) {
   const [show, setShow] = useState(false);
-  
-  // const product = useSelector((state)=> state.productReducer.product) 
-  
-
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const [product, setProduct] = useState({})
   const [update, setUpdate] = useState({})
   const dispatch = useDispatch()
-  // const Open= ()=>{
-  // dispatch(getProductById(id))
-  
-  // }
 
 const Open= async()=>{
     try {
@@ -45,8 +37,6 @@ const Edit=()=>{
   const Delete = async()=>{
     dispatch(deleteProduct(id.id))
   }
-
-
 
   return (
     <>
@@ -77,8 +67,8 @@ const Edit=()=>{
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="formBasicPassword">
-        <Form.Label>Categorie : {product.Categorie}</Form.Label>
-        <Form.Control type="text" name="Categorie" onChange={handlechange} />
+        <Form.Label>Category : {product.Category}</Form.Label>
+        <Form.Control type="text" name="Category" onChange={handlechange} />
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="formBasicPassword">

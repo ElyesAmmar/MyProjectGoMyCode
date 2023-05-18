@@ -13,8 +13,9 @@ exports.getProducts = async(req, res)=>{
 }
 exports.getProductsCategory = async (req, res)=>{
     const category = req.query.category
+    
     try {
-        const result = await Products.find({Category:"Memoire"})
+        const result = await Products.find({Category:category})
         res.status(200).send({msg: "getting Products success", response: result})
     } catch (error) {
         console.log(error)
@@ -31,6 +32,7 @@ exports.getOneProduct = async(req, res)=>{
         return res.status(500).send({msg:"getting Product failed"})
     }
 }
+
 
 
 exports.postProduct = async(req,res)=>{
@@ -91,18 +93,20 @@ exports.deleteProduct = async(req,res)=>{
 }
 
 // exports.findProductCode = async(res,req)=>{
-//     try {
-//         const barcode= req.query.Barcode
-//         const product =  await Products.findOne({Barcode:barcode})
-//         // return res.status(200).send({msg:"getting product success", response: result})
-//         if (product) {
-//             console.log('Found product:', product);
-//            return res.json(product);
-//           } else {
-//             console.log('Product not found.');
-//            return res.status(404).json({ error: 'Product not found' });
-//           }
-//     } catch (error) {
-//         return res.status(500).send({msg:"getting Product failed"})
-//     }
-// }
+    //     try {
+    //         // const barcode= req.query.barcode
+    //         // console.log(barcode)
+    //         let code = 65165153
+    //         const product =  await Products.find({Barcode:code})
+    //         return res.status(200).send({msg: "Product found", response: product})
+    //         // if (product) {
+    //         //     console.log('Found product:', product);
+    //         //    return res.status(200).send({msg: "Product found", response: product})
+    //         //   } else {
+    //         //     console.log('Product not found.');
+    //         //    return res.status(404).send({msg: "Product Not found"})
+    //         //   }
+    //     } catch (error) {
+    //         return res.status(500).send({msg:"getting Product failed"})
+    //     }
+    // }

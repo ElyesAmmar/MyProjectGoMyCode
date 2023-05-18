@@ -13,10 +13,10 @@ const orderSchema = new Schema ({
         Quantity: {type:Number,required:true },
         Price: {type:Number,required:true}
     }],
-    TotalPrice: {type:Number, required:true },
-    TotalQuantity: {type:Number, required:true },
+    TotalPrice: {type:Number},
+    TotalQuantity: {type:Number },
 })
 
-const Order = model("Orders", orderSchema);
+const Orders = model("Orders", orderSchema);
 
-module.exports = Order;
+module.exports = Orders;

@@ -1,8 +1,8 @@
-const Order= require('../model/orders')
+const Orders= require('../model/orders')
 
 exports.getOrders = async (req,res)=>{
     try {
-        let result = await Order.find({})
+        let result = await Orders.find({})
         res.status(200).send({msg:"getting orders success", response: result})
     } catch (error) {
         console.log(error)
@@ -13,15 +13,16 @@ exports.getOrders = async (req,res)=>{
 exports.postOrders = async(req,res)=>{
     try {
         let num= 0
-        let lastOrder = await Clients.findOne().sort({_id: -1}); // Get the last ID in the database
+        let lastOrder = await Orders.findOne().sort({_id: -1}); // Get the last ID in the database
         
         if(lastOrder){
             num= lastOrder.OrderNum + 1
-          } else{                                                   // If there are no products in the database, start with ID 1
+          } else{                                     // If there are no products in the database, start with num 10000
             num= 10000
         } 
+        
         const order= req.body
-        const newOrder = new Order({...order,OrderNum:num})
+        const newOrder = new Orders({...order,OrderNum:num})
         await newOrder.save()
         res.status(200).send({msg:"adding order success", response: newOrder})
     } catch (error) {

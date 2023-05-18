@@ -17,7 +17,7 @@ exports.postClient = async(req, res)=>{
         
         if(lastClient){
             reference= lastClient.Reference + 1
-          } else{                                                   // If there are no products in the database, start with ID 1
+          } else{                                         // If there are no products in the database, start with ref 1
             reference= 1
         }                                             
         

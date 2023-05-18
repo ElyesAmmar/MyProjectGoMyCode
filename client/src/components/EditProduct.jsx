@@ -34,7 +34,7 @@ const Open= async()=>{
 }
 const handlechange =(e)=>{
       // e.preventDefault()
-      setUpdate( {[e.target.name]: e.target.value})
+      setUpdate( {...update,[e.target.name]: e.target.value})
       
 } 
 const Edit=()=>{
@@ -101,12 +101,12 @@ const Edit=()=>{
 
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="danger" onClick={()=>{Delete();handleClose()}}>Delete product</Button>
+          <Button variant="danger" style={{width:"90px"}} onClick={()=>{Delete();handleClose()}}>Delete</Button>
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
           <Button variant="primary" onClick={()=>{Edit();handleClose()}}>
-            Edit
+            Update
           </Button>
         </Modal.Footer>
       </Modal>

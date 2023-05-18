@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import { postProduct } from '../JS/actions/products';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch} from 'react-redux';
 
 function AddModal() {
   const [show, setShow] = useState(false);
@@ -21,9 +21,7 @@ function AddModal() {
       dispatch(postProduct(product));
       setProduct({Name:'',Stock:'',Image:'',Price:'',Categorie:'',Barcode:''})
   }
-// useEffect(()=>{
-//   console.log(product)
-// })
+  
   return (
     <>
       <Button variant="outline-secondary" onClick={handleShow}>

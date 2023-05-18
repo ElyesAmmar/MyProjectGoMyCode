@@ -1,11 +1,24 @@
+import React from 'react'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import AddClient from './Addclient';
+import { useDispatch } from 'react-redux';
+import { searchClient } from '../JS/actions/clients';
+
+
 
 
 function ClientsBar() {
-  
+ 
+  const dispatch = useDispatch()
 
+  const handleChange=(e)=>{
+    dispatch(searchClient(e.target.value))
+    
+  }
+  
+    
+  
   return (
     <div>
     <div className='searchbar'>
@@ -18,6 +31,7 @@ function ClientsBar() {
               placeholder="Search"
               className="me-2"
               aria-label="Search"
+              onChange={handleChange}
             />
       <Button variant="outline-success" >Search</Button>
       </div>

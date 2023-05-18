@@ -3,12 +3,14 @@ import Table from 'react-bootstrap/Table';
 import ClientsBar from "./SearchBarClient";
 import { useDispatch, useSelector } from "react-redux";
 import { getClients } from "../JS/actions/clients";
+import EditClient from "./EditClient";
 
 
 
 function Clients(){
     const dispatch = useDispatch()
     // const [clients, setClients] = useState([])
+    const input = useSelector((state)=> state.clientReducer.searchClient)
 
     useEffect(()=>{
         dispatch(getClients())
@@ -30,9 +32,12 @@ function Clients(){
         <th>Address</th>
         <th>Company</th>
         <th>Phone</th>
+        <th style={{width:"100px"}}></th>
         </tr>
     </thead>
+
     {clients
+    .filter((cl)=> cl.Name.toLowerCase().includes(input.toLowerCase()))
     .map((cl)=>   
     <tbody key={cl.Reference}>
         <tr>
@@ -42,6 +47,7 @@ function Clients(){
         <td>{cl.Address}</td>
         <td>{cl.Company}</td>
         <td>{cl.Phone}</td>
+        <td><EditClient id={cl._id}/> </td>
         </tr>
     </tbody>
     )}

@@ -16,7 +16,7 @@ useEffect(()=> {
     dispatch(getProducts())
 },[])
 
-console.log(products.Category)
+
     return(
         
 <div className="products">

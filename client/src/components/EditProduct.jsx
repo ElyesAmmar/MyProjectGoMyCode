@@ -63,7 +63,7 @@ const Edit=()=>{
 
       <Form.Group className="mb-3" controlId="formBasicPassword">
         <Form.Label>Price : {product.Price} </Form.Label>
-        <Form.Control  name="Price" onChange={handlechange} />
+        <Form.Control type='number' name="Price" onChange={handlechange} />
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="formBasicPassword">

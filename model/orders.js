@@ -3,6 +3,7 @@ const {Schema, model} = mongoose
 
 const orderSchema = new Schema ({
     OrderNum: {type:Number, required:true},
+    OrderDate: { type: String},
     OrderClient: {
         Name: { type: String},
         Address: {type: String},

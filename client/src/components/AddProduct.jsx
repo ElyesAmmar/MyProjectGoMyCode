@@ -10,10 +10,8 @@ function AddModal() {
   const [product, setProduct] = useState({Name:'',Stock:'',Image:'',Price:'',Category:'',Barcode:''})
   const dispatch = useDispatch()
   // const  success = useSelector((state)=>state.productReducer.msgSuccess)
-
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
   const Add= ()=>{
     
       dispatch(postProduct(product));

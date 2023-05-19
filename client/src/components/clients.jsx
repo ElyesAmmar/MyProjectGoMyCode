@@ -17,7 +17,7 @@ function Clients(){
     const clients = useSelector((state)=> state.clientReducer.clients)
 
     return(
-<div>
+<div className="datatable">
     <ClientsBar />
     <Table striped bordered hover className='tableClient'>
     <thead>

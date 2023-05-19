@@ -92,21 +92,21 @@ exports.deleteProduct = async(req,res)=>{
     }
 }
 
-// exports.findProductCode = async(res,req)=>{
-    //     try {
-    //         // const barcode= req.query.barcode
-    //         // console.log(barcode)
-    //         let code = 65165153
-    //         const product =  await Products.find({Barcode:code})
-    //         return res.status(200).send({msg: "Product found", response: product})
-    //         // if (product) {
-    //         //     console.log('Found product:', product);
-    //         //    return res.status(200).send({msg: "Product found", response: product})
-    //         //   } else {
-    //         //     console.log('Product not found.');
-    //         //    return res.status(404).send({msg: "Product Not found"})
-    //         //   }
-    //     } catch (error) {
-    //         return res.status(500).send({msg:"getting Product failed"})
-    //     }
-    // }
+// exports.findProductName = async(res,req)=>{
+//         try {
+//             const name= req.query.barcode
+//             console.log(name)
+            
+//             const product =  await Products.find({Name:name})
+//             return res.status(200).send({msg: "Product found", response: product})
+//             // if (product) {
+//             //     console.log('Found product:', product);
+//             //    return res.status(200).send({msg: "Product found", response: product})
+//             //   } else {
+//             //     console.log('Product not found.');
+//             //    return res.status(404).send({msg: "Product Not found"})
+//             //   }
+//         } catch (error) {
+//             return res.status(500).send({msg:"getting Product failed"})
+//         }
+//     }

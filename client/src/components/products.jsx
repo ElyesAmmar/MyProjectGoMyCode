@@ -19,7 +19,7 @@ useEffect(()=> {
 
     return(
         
-<div className="products">
+<div className="datatable">
     <Filter />
     <Table className='tableProduct' striped bordered hover size="sm">
       <thead>

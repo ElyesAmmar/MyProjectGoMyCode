@@ -1,8 +1,5 @@
 
 .dashboard{
-    background-color: rgb(231, 231, 231);
-    display: block;
-    height: 150px;
     margin-top: 50px;
 }
 .dashboard h1{
@@ -10,9 +7,14 @@
     padding-top: 30px;
     padding-left: 30px;
 }
-
+.header-dashboard{
+    background-color: rgb(231, 231, 231);
+    display: block;
+    height: 150px;
+    width: 100%;
+    
+}
 .navbar-dashboard {
-    width: 1200px;
     height: 50px;
     margin: 30px auto 0;
     display: flex;

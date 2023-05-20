@@ -7,6 +7,7 @@ function Dash() {
   
   return (
     <div className='dashboard'>
+      <div className='header-dashboard'>
       <h1>Dashboard</h1> 
     <div>
       
@@ -17,6 +18,7 @@ function Dash() {
         <li><Link to=''>Orders</Link></li>
       </ul>    
     
+    </div>
     </div>
     <Outlet />
     </div>

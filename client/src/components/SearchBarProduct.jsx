@@ -20,7 +20,16 @@ function Filter() {
       <div style={{paddingTop:'7px',paddingLeft:'7px'}}>
       <AddModal />
       </div>
+
       <div style={{display:'flex',height:'45px',paddingTop:'7px',paddingRight:'7px'}}>
+
+      <Form.Group className="mb-3">
+        <Form.Select>
+          <option>Products Category</option>
+          <option>Memoire</option>
+          <option>Carte Graphique</option>
+        </Form.Select>
+      </Form.Group>
       <Form.Control
               type="search"
               placeholder="Search"

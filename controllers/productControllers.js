@@ -13,7 +13,7 @@ exports.getProducts = async(req, res)=>{
 }
 exports.getProductsCategory = async (req, res)=>{
     const category = req.query.category
-    
+
     try {
         const result = await Products.find({Category:category})
         res.status(200).send({msg: "getting Products success", response: result})
@@ -93,20 +93,18 @@ exports.deleteProduct = async(req,res)=>{
 }
 
 // exports.findProductName = async(res,req)=>{
-//         try {
-//             const name= req.query.barcode
-//             console.log(name)
-            
-//             const product =  await Products.find({Name:name})
+               
+//     const result= req.query.name
+//     console.log(result)
+//     try {  
+//         const product =  await Products.find({Name:result})
+//            if (product){
 //             return res.status(200).send({msg: "Product found", response: product})
-//             // if (product) {
-//             //     console.log('Found product:', product);
-//             //    return res.status(200).send({msg: "Product found", response: product})
-//             //   } else {
-//             //     console.log('Product not found.');
-//             //    return res.status(404).send({msg: "Product Not found"})
-//             //   }
+//            }else{
+//             res.status(404).send({msg: "Product not found"})
+//            }
 //         } catch (error) {
-//             return res.status(500).send({msg:"getting Product failed"})
+//             // return res.status(500).send({msg:"getting Product failed"})
+//             console.log(error)
 //         }
 //     }

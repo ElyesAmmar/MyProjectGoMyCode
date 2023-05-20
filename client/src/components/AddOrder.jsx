@@ -1,23 +1,19 @@
 import React, { useState } from 'react';
-import { Form, Button, Row, Col } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
-import { addProduct } from '../JS/actions/order';
+import { Form, Button, Row, Col, } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
 
 
 function MakeOrder() {
 
-const dispatch = useDispatch()
 const [product, setProduct] = useState({name:'',quantity:''})
 console.log(product)
 
-const Products = useSelector((state)=> state.productReducer.products)
-console.log(Products)
+const products = useSelector((state)=> state.orderReducer.products)
+console.log(products)
 
-const handleSubmit = () =>{
-    console.log(product)
-    dispatch(addProduct(product)) 
-}
+
 return (
+  <div>
   <div className='order-form'>
     <div style={{margin: '10px auto 0'}}>
       <Form.Label>Add client</Form.Label><br/>
@@ -30,11 +26,11 @@ return (
         <Row>
         <Col>
           <Form.Label>Name or Barcode Product</Form.Label><br/>
-          <Form.Control style={{width:'350px'}} onSubmit={handleSubmit} onChange={(e)=>setProduct({...product,name:e.target.value})} />   
+          <Form.Control style={{width:'350px'}}  onChange={(e)=>setProduct({...product,name:e.target.value})} />   
         </Col>
         <Col>
           <Form.Label>Quantity</Form.Label><br/>
-          <Form.Control type='number' onSubmit={handleSubmit} style={{width:'70px'}} onChange={(e)=>setProduct({...product,quantity:e.target.value})} />
+          <Form.Control type='number' style={{width:'70px'}} onChange={(e)=>setProduct({...product,quantity:e.target.value})} />
         </Col>
         </Row>
         </Form>
@@ -44,9 +40,12 @@ return (
             Save and Print Invioce
       </Button>
     </div>
+    </div>
+
+    <div className='order'>
       
-      
-    
+
+    </div>
     </div>
   );
 }

@@ -2,18 +2,20 @@ import React, { useState } from "react";
 import { getProducts } from "../JS/actions/products";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import Filter from "./SearchBarProduct";
+import SearchProducts from "./SearchBarProduct";
 import Table from 'react-bootstrap/Table';
 import EditModal from './EditProduct';
 import Button from 'react-bootstrap/Button';
-import { addProduct } from "../JS/actions/order";
+import { addProductsOrder } from "../JS/actions/order";
+import { useNavigate } from "react-router-dom";
 
 
 function Products() {
-const dispatch=useDispatch()
-const products= useSelector((state)=>state.productReducer.products)
-const inputS = useSelector((state)=>state.productReducer.productSearch)
-const [productsOrder, setProductsOrder] = useState([])
+  const dispatch=useDispatch()
+  const products= useSelector((state)=>state.productReducer.products)
+  const inputS = useSelector((state)=>state.productReducer.productSearch)
+  const [productsOrder, setProductsOrder] = useState([])
+  const navigate = useNavigate();
 
 
 useEffect(()=> {
@@ -24,7 +26,11 @@ useEffect(()=> {
     return(
         
 <div className="datatable">
-    <Filter />
+    <SearchProducts />
+    <button onClick={()=>{
+      dispatch(addProductsOrder(productsOrder));
+      navigate("/dashboard/clients")
+      }}>add to order</button>
     <Table className='tableProduct' striped bordered hover size="sm">
       <thead>
         <tr>
@@ -56,8 +62,7 @@ useEffect(()=> {
           <td>{prod.Barcode}</td>
           <td><EditModal id={prod._id} /></td>
           <td><Button variant="secondary" 
-          onClick={()=>{setProductsOrder([...productsOrder,{Id:prod.ProductId, Name: prod.Name, Price:prod.Price}]);
-        dispatch(addProduct(productsOrder))}}
+          onClick={()=> setProductsOrder([...productsOrder,{Id:prod.ProductId, Name: prod.Name, Price:prod.Price}])}
           >+</Button></td>
         </tr>
         

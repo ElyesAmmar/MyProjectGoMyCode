@@ -4,7 +4,7 @@ import AddModal from './AddProduct';
 import {useDispatch} from 'react-redux'
 import { searchP } from '../JS/actions/products';
 
-function Filter() {
+function SearchProducts() {
   
   const dispatch = useDispatch()
  
@@ -44,4 +44,4 @@ function Filter() {
   );
 }
 
-export default Filter;
+export default SearchProducts;

@@ -1,24 +1,34 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState} from "react";
 import Table from 'react-bootstrap/Table';
 import ClientsBar from "./SearchBarClient";
 import { useDispatch, useSelector } from "react-redux";
 import { getClients } from "../JS/actions/clients";
 import EditClient from "./EditClient";
+import Button from 'react-bootstrap/Button';
+import { useNavigate } from "react-router-dom";
+import { addClientOrder } from "../JS/actions/order";
 
 
 function Clients(){
     const dispatch = useDispatch()
     // const [clients, setClients] = useState([])
     const input = useSelector((state)=> state.clientReducer.searchClient)
+    const clients = useSelector((state)=> state.clientReducer.clients)
+    const navigate = useNavigate();
+    const [clientOrder, setClientOrder] = useState({})
 
     useEffect(()=>{
         dispatch(getClients())
     },[])
-    const clients = useSelector((state)=> state.clientReducer.clients)
-
+    
     return(
 <div className="datatable">
     <ClientsBar />
+    <button onClick={()=>{
+      dispatch(addClientOrder(clientOrder))
+      navigate("/dashboard/currentOrder")
+      }}>add to order</button>
+    <Table striped bordered hover className='tableClient'></Table>
     <Table striped bordered hover className='tableClient'>
     <thead>
         <tr>
@@ -44,6 +54,11 @@ function Clients(){
         <td>{cl.Company}</td>
         <td>{cl.Phone}</td>
         <td><EditClient id={cl._id}/> </td>
+        <td>
+            <Button style={{width:'50px'}} variant="secondary"
+        onClick={()=> setClientOrder({ Name: cl.Name , Company:cl.Company, Address:cl.Address, Phone:cl.Phone})}
+        >+</Button>
+        </td>
         </tr>
     </tbody>
     )}

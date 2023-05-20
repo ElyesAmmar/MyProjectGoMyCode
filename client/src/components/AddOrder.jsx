@@ -1,23 +1,37 @@
 import React, { useState } from 'react';
 import { Form, Button, Row, Col, Table} from 'react-bootstrap';
 import { useSelector } from 'react-redux';
-import CloseButton from 'react-bootstrap/CloseButton';
+
 
 function MakeOrder() {
 
-const [product, setProduct] = useState({name:'',quantity:''})
-console.log(product)
-
-const [products, setProducts ]= useState(useSelector((state)=> state.orderReducer.products)) 
-console.log(products)
+  const [product, setProduct] = useState({name:'',quantity:''})
+  const [products, setProducts ]= useState(useSelector((state)=> state.orderReducer.products)) 
+  const [client, setClient] = useState(useSelector((state)=> state.orderReducer.client))
 
 
 return (
   <div>
+    
   <div className='order-form'>
+    
     <div style={{margin: '10px auto 0'}}>
       <Form.Label>Add client</Form.Label><br/>
-      <Form.Control style={{width:'450px'}} />
+      <Form.Control 
+      placeholder='Enter the client name or the company name' style={{width:'450px'}} 
+      onChange={(e)=>setClient(e.target.value)} 
+      />
+      <Button
+       variant="secondary" style={{float: 'right'}}
+      >Add client</Button>
+    </div>
+    
+    <div className='client'>
+          <h2>Client</h2><br/>
+          <p> Name : {client.Name} <br/>
+             Company : {client.Company} <br/> 
+             Address : {client.Address} <br/>
+             Phone : {client.Phone} </p>
     </div>
     <div style={{margin: '10px auto 0'}}>
       <Form>
@@ -36,7 +50,7 @@ return (
    
     </div>
     <div>
-    <Button variant="primary" >
+    <Button variant="primary" style={{width:'200px', marginLeft:'800px'} }>
             Save and Print Invioce
       </Button>
     </div>
@@ -61,21 +75,19 @@ return (
       </thead>
       
       <tbody>
-      {products.map((prod, index)=>
+      {products.map((prod)=>
         <tr>
           <td>P-{prod.Id}</td>
           <td>{prod.Name}</td>
           <td style={{width:'60px'}}><Form.Control type='number' ></Form.Control></td>
           <td>{prod.Price}</td>
-          <td>{index}</td>
-          <CloseButton onClick={()=> setProducts(products.splice(2,1))} />
+          <td></td>
+          {/* <CloseButton onClick={()=> setProducts(products.splice(2,1))} /> */}
           </tr>
-           
-        
         )  }
         <tr>
           <td colSpan={4} style={{fontWeight:'bold'}}>Total</td>
-          <td>......</td>
+          <td>...... TND</td>
           
         </tr>
       </tbody>

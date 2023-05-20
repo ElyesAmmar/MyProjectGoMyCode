@@ -45,6 +45,11 @@
     margin: 20px auto;
     
 }
+.ordertable{
+    width: 800px;
+    text-align: center;
+    margin: 20px auto;
+}
 .searchbar{
     display: flex;
     justify-content: space-between;

@@ -13,6 +13,7 @@ function Products() {
 const dispatch=useDispatch()
 const products= useSelector((state)=>state.productReducer.products)
 const inputS = useSelector((state)=>state.productReducer.productSearch)
+const [productsOrder, setProductsOrder] = useState([])
 
 
 useEffect(()=> {
@@ -54,7 +55,10 @@ useEffect(()=> {
           <td>{prod.Category}</td>
           <td>{prod.Barcode}</td>
           <td><EditModal id={prod._id} /></td>
-          <td><Button variant="secondary" onClick={()=>dispatch(addProduct({Id:prod.ProductId,Name:prod.Name}))}>+</Button></td>
+          <td><Button variant="secondary" 
+          onClick={()=>{setProductsOrder([...productsOrder,{Id:prod.ProductId, Name: prod.Name, Price:prod.Price}]);
+        dispatch(addProduct(productsOrder))}}
+          >+</Button></td>
         </tr>
         
       </tbody>)}

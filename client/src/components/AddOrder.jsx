@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
-import { Form, Button, Row, Col, } from 'react-bootstrap';
+import { Form, Button, Row, Col, Table} from 'react-bootstrap';
 import { useSelector } from 'react-redux';
-
+import CloseButton from 'react-bootstrap/CloseButton';
 
 function MakeOrder() {
 
 const [product, setProduct] = useState({name:'',quantity:''})
 console.log(product)
 
-const products = useSelector((state)=> state.orderReducer.products)
+const [products, setProducts ]= useState(useSelector((state)=> state.orderReducer.products)) 
 console.log(products)
 
 
@@ -19,8 +19,6 @@ return (
       <Form.Label>Add client</Form.Label><br/>
       <Form.Control style={{width:'450px'}} />
     </div>
-       
-        
     <div style={{margin: '10px auto 0'}}>
       <Form>
         <Row>
@@ -35,15 +33,57 @@ return (
         </Row>
         </Form>
     </div>
+   
+    </div>
     <div>
     <Button variant="primary" >
             Save and Print Invioce
       </Button>
     </div>
-    </div>
+    
+    <div className='ordertable' >
+    
+      <div>
 
-    <div className='order'>
+      </div>
+      <div>
+        
+      <Table striped bordered hover>
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Name</th>
+          <th>Quantity</th>
+          <th>U.P</th>
+          <th>Total</th>
+          
+        </tr>
+      </thead>
       
+      <tbody>
+      {products.map((prod, index)=>
+        <tr>
+          <td>P-{prod.Id}</td>
+          <td>{prod.Name}</td>
+          <td style={{width:'60px'}}><Form.Control type='number' ></Form.Control></td>
+          <td>{prod.Price}</td>
+          <td>{index}</td>
+          <CloseButton onClick={()=> setProducts(products.splice(2,1))} />
+          </tr>
+           
+        
+        )  }
+        <tr>
+          <td colSpan={4} style={{fontWeight:'bold'}}>Total</td>
+          <td>......</td>
+          
+        </tr>
+      </tbody>
+      
+      
+    </Table>
+
+      </div>
 
     </div>
     </div>

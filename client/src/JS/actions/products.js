@@ -63,8 +63,7 @@ export const getProductById =(id)=> async(dispatch)=>{
 
 export const updateProduct= (id,update) => async(dispatch)=>{
     try {
-        console.log(id)
-        console.log(update)
+        
        let result =  await axios.put(`/api/products/edit/${id}`, update )
         dispatch({
             type: UPDATE_PRODUCT,
@@ -74,6 +73,7 @@ export const updateProduct= (id,update) => async(dispatch)=>{
      console.log(error)
         
     }
+    dispatch(getProducts())
 }
 
 export const deleteProduct = (id) => async(dispatch)=>{

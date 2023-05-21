@@ -31,7 +31,6 @@ const handlechange =(e)=>{
 } 
 const Edit=()=>{
     dispatch(updateProduct(id.id,update));
-    dispatch(getProducts());
     setUpdate('')
   }
   const Delete = async()=>{

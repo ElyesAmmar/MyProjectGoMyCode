@@ -20,10 +20,10 @@ exports.postOrders = async(req,res)=>{
           } else{                                     // If there are no products in the database, start with num 10000
             num= 10000
         } 
-        // const datenow = new Date();
-        // let date = `${datenow.getDate()}-${datenow.getMonth()}-${datenow.getFullYear()}`
+        const datenow = new Date();
+        let date = `${datenow.getDate()}-${datenow.getMonth()}-${datenow.getFullYear()}`
         const order= req.body
-        const newOrder = new Orders({...order,OrderNum:num})
+        const newOrder = new Orders({...order,OrderNum:num,OrderDate:date})
         await newOrder.save()
         res.status(200).send({msg:"adding order success", response: newOrder})
     } catch (error) {

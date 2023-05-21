@@ -18,24 +18,6 @@ function Products() {
   useEffect(()=> {
     dispatch(getProducts())
 },[])
-//   const handleCheckboxChange = (checked,p) => {
-    
-//     setIsChecked(checked);
-//     if (checked) { 
-//       addProducts(p);
-//     } else {
-//       removeProduct();
-//     }
-//   };
-// const addProducts =(p)=>{
-//  setProductsOrder([...productsOrder,{Id:p.ProductId, Name: p.Name, Price:p.Price}])
-// }
-// const removeProduct = () => {
-//   const updatedData = [...productsOrder]; 
-//   updatedData.pop();
-//   setProductsOrder(updatedData); 
-// }; 
-
 
 
     return(
@@ -81,18 +63,10 @@ function Products() {
 
           </Form.Control>
           <Button variant="secondary" 
-          onClick={()=> {dispatch(addProductsOrder({mongoId: prod._id, Id:prod.ProductId, Stock:prod.Stock, Name: prod.Name, Price:prod.Price, quantity}))}}
+          onClick={()=> {dispatch(addProductsOrder({mongoId: prod._id, Id:prod.ProductId, TotalPrice: prod.Price*quantity,
+                                                    Stock:prod.Stock, Name: prod.Name, Price:prod.Price, quantity}))}}
           >+</Button>
           </div>
-            {/* <Form>
-          <Form.Check
-        type="checkbox"
-        checked={isChecked}
-        onChange={(event) => handleCheckboxChange(event.target.checked,prod)}
-        
-           />
-          </Form>
-             */}
           </td>
         </tr>
         

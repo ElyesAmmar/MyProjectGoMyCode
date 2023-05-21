@@ -12,7 +12,7 @@ function AddClient() {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  console.log(client)
+  
   const Add =()=>{
     dispatch(postClient(client));
   }

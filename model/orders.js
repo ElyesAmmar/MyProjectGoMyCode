@@ -7,15 +7,17 @@ const orderSchema = new Schema ({
     OrderClient: {
         Name: { type: String},
         Address: {type: String},
+        Company: {type: String},
         Phone: {type: Number}
     },
     Products:[{
         Name: {type:String, required:true},
         Quantity: {type:Number,required:true },
-        Price: {type:Number,required:true}
+        Price: {type:Number,required:true},
+        TotalPrice: {type:Number,required:true}
     }],
     TotalPrice: {type:Number},
-    TotalQuantity: {type:Number },
+    TotalQuantity: {type:Number},
 })
 
 const Orders = model("Orders", orderSchema);

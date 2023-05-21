@@ -1,30 +1,36 @@
-import React, { useState} from 'react';
+import React, { useState, useEffect} from 'react';
 import { Form, Button, Row, Col, Table} from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { updateProduct } from '../JS/actions/products'
-
+import {SaveOrder } from '../JS/actions/order'
 
 function MakeOrder() {
 
   const [product, setProduct] = useState({name:'',quantity:''})
   const [products, setProducts ]= useState(useSelector((state)=> state.orderReducer.products)) 
   const [client, setClient] = useState(useSelector((state)=> state.orderReducer.client))
-  const [updatedProductStock, setUpdatedProductStock] = useState([])
+  const productsOrder = products.map((prod)=> {return {Name: prod.Name , Quantity: prod.quantity , Price: prod.Price , TotalPrice: prod.TotalPrice  }})
   const dispatch = useDispatch()
 
+
+console.log(client)
   const TotalPrice = () => {
     return products.reduce((total, product) => {
       return total + (product.Price * product.quantity);
     }, 0);
   };
 
+ // add data to order
+  const saveOrder = () =>{
+    dispatch(SaveOrder({OrderClient: client, Products: productsOrder, TotalPrice: TotalPrice() }))
+  }
+
+// update Stock 
 const updateStockProduct = () =>{
       
       products.map((prod)=>dispatch(updateProduct(prod.mongoId, {Stock: prod.Stock-prod.quantity})))
-        
-      
-    
+  
 }
 
 return (
@@ -69,7 +75,7 @@ return (
     <Button 
     variant="primary" 
     style={{width:'200px', marginLeft:'800px'} }
-    onClick={updateStockProduct}>
+    onClick={()=>{updateStockProduct();saveOrder()}}>
             Save and Print Invioce
       </Button>
     </div>
@@ -99,8 +105,9 @@ return (
           <td>{prod.Price * prod.quantity }</td>
           {/* <CloseButton onClick={()=> setProducts(products.splice(2,1))} /> */}
           </tr>
-           )  
          
+           )  
+           
            }
         <tr>
           <td colSpan={4} style={{fontWeight:'bold'}}>Total</td>

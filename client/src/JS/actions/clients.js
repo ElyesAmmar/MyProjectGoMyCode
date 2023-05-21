@@ -77,6 +77,7 @@ export const deleteClient= (id)=> async(dispatch)=>{
     } catch (error) {
         console.log(error)
     }
+    
 }
 
 export const searchClient = (input) => {

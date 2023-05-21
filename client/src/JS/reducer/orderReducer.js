@@ -1,4 +1,4 @@
-import { ADD_PRODUCTS_ORDER, ADD_CLIENT_ORDER } from "../constant/actionsTypes";
+import { ADD_PRODUCTS_ORDER, ADD_CLIENT_ORDER, SAVE_ORDER } from "../constant/actionsTypes";
 
 const initialeState = {
     orders:[],
@@ -6,7 +6,8 @@ const initialeState = {
     products:[],
     product:{},
     client:{},
-    errors:[]
+    errors:[],
+    msg : ''
 }
 
 export const orderReducer = (state=initialeState, {type,payload})=>{
@@ -15,6 +16,8 @@ export const orderReducer = (state=initialeState, {type,payload})=>{
             return {...state, products: [...state.products, payload]}
         case ADD_CLIENT_ORDER:
             return {...state, client: payload}
+        case SAVE_ORDER:
+            return {...state, msg : payload }
         default:
             return state
     }

@@ -20,9 +20,7 @@ function SearchProducts() {
       <div style={{paddingTop:'7px',paddingLeft:'7px'}}>
       <AddModal />
       </div>
-
-      <div style={{display:'flex',height:'45px',paddingTop:'7px',paddingRight:'7px'}}>
-
+      <div style={{display:'flex', height:'40px', marginTop:'8px'}}>
       <Form.Group className="mb-3">
         <Form.Select>
           <option>Products Category</option>
@@ -30,6 +28,10 @@ function SearchProducts() {
           <option>Carte Graphique</option>
         </Form.Select>
       </Form.Group>
+      <Button variant="outline-success" >Filter</Button>
+      </div>
+      
+      <div style={{display:'flex',height:'45px',paddingTop:'7px',paddingRight:'7px'}}>
       <Form.Control
               type="search"
               placeholder="Search"

@@ -3,8 +3,8 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import axios from 'axios';
-import { deleteProduct, getProducts, updateProduct } from '../JS/actions/products';
-import { useDispatch } from 'react-redux';
+import { deleteProduct, updateProduct } from '../JS/actions/products';
+import { useDispatch, useSelector } from 'react-redux';
  
 
 
@@ -15,7 +15,8 @@ function EditModal(id) {
   const [product, setProduct] = useState({})
   const [update, setUpdate] = useState({})
   const dispatch = useDispatch()
-
+  const msg = useSelector((state)=> state.productReducer.msg)
+  
 const Open= async()=>{
     try {
       let result = await axios.get(`/api/products/product/${id.id}`)

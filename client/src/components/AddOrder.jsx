@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState } from 'react';
 import { Form, Button, Row, Col, Table} from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
@@ -39,18 +39,18 @@ return (
   <div className='order-form'>
     
     <div style={{margin: '10px auto 0'}}>
-      <Form.Label>Add client</Form.Label><br/>
+      <Form.Label>Add Customer</Form.Label><br/>
       <Form.Control 
       placeholder='Enter the client name or the company name' style={{width:'450px'}} 
       onChange={(e)=>setClient(e.target.value)} 
       />
       <Button
        variant="secondary" style={{float: 'right'}}
-      >Add client</Button>
+      >Add Customer</Button>
     </div>
     
     <div className='client'>
-          <h2>Client</h2><br/>
+          <h2>Customer</h2><br/>
           <p> Name : {client.Name} <br/>
              Company : {client.Company} <br/> 
              Address : {client.Address} <br/>

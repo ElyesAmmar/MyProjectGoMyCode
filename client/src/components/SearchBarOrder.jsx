@@ -12,7 +12,7 @@ function OrdersBar() {
     <div>
     <div className='searchbar'>
       <div style={{paddingTop:'7px',paddingLeft:'7px'}}>
-        
+      <Button variant="secondary">Print Invoices</Button>
       </div>
       <div style={{display:'flex',height:'45px',paddingTop:'7px',paddingRight:'7px'}}>
       <Form.Control

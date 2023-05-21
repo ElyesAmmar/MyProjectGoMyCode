@@ -25,7 +25,7 @@ export const postProduct =(newproduct)=> async (dispatch)=> {
     
     try {
             let result = await axios.post('/api/products/addproduct', newproduct )
-        
+           alert(result.data.msg)
         dispatch({
             type: POST_PRODUCT_SUCCESS,
             payload: result.data.msg

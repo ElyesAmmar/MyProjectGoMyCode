@@ -8,6 +8,7 @@ import Dash  from "./components/HeaderDash";
 import { BrowserRouter, Routes, Route} from 'react-router-dom';
 import Clients from './components/clients';
 import MakeOrder from './components/AddOrder';
+import Orders from './components/orders';
 
 
 
@@ -21,8 +22,9 @@ function App() {
       <Route path='/dashboard' element={<Dash />}>
             <Route index element={<Dashboard />}/>
             <Route path='products' element={<Products />}/>
-            <Route path='clients' element ={<Clients />}/>
+            <Route path='Customer' element ={<Clients />}/>
             <Route path='currentOrder' element ={<MakeOrder />}/>
+            <Route path='Orders' element ={ <Orders /> }/>
       </Route>
           
       </Routes>

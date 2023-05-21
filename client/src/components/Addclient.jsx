@@ -19,7 +19,7 @@ function AddClient() {
   return (
     <>
       <Button variant="outline-secondary" onClick={handleShow}>
-        Add Client
+        Add Customer
       </Button>
 
       <Modal show={show} onHide={handleClose}>

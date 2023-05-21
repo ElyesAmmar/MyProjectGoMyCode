@@ -41,7 +41,7 @@ const Edit=()=>{
   return (
     <>
       <Button variant="outline-secondary" onClick={()=>{handleShow();Open()}}>
-        show more
+        Edit
       </Button>
 
       <Modal show={show} onHide={handleClose}>

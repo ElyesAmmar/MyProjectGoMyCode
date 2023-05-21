@@ -8,7 +8,7 @@ import EditModal from './EditProduct';
 import Button from 'react-bootstrap/Button';
 import { addProductsOrder } from "../JS/actions/order";
 import { useNavigate } from "react-router-dom";
-
+import Form from 'react-bootstrap/Form';
 
 function Products() {
   const dispatch=useDispatch()
@@ -16,11 +16,35 @@ function Products() {
   const inputS = useSelector((state)=>state.productReducer.productSearch)
   const [productsOrder, setProductsOrder] = useState([])
   const navigate = useNavigate();
-
-
-useEffect(()=> {
+  const [quantity, setQuantity] = useState('')
+  
+  useEffect(()=> {
     dispatch(getProducts())
 },[])
+
+
+
+  
+  
+
+//   const handleCheckboxChange = (checked,p) => {
+    
+//     setIsChecked(checked);
+//     if (checked) { 
+//       addProducts(p);
+//     } else {
+//       removeProduct();
+//     }
+//   };
+// const addProducts =(p)=>{
+//  setProductsOrder([...productsOrder,{Id:p.ProductId, Name: p.Name, Price:p.Price}])
+// }
+// const removeProduct = () => {
+//   const updatedData = [...productsOrder]; 
+//   updatedData.pop();
+//   setProductsOrder(updatedData); 
+// }; 
+
 
 
     return(
@@ -42,8 +66,8 @@ useEffect(()=> {
           <th style={{width:'150px'}}>Price</th>
           <th>Category</th>
           <th style={{width:'120px'}}>Barcode</th>
-          <th style={{width:'120px'}}>Edit</th>
-          <th style={{width:'70px'}}>add to order</th>
+          <th style={{width:'70px'}}>Edit</th>
+          <th style={{width:'120px'}}>add to order</th>
         </tr>
       </thead>
 
@@ -61,12 +85,27 @@ useEffect(()=> {
           <td>{prod.Category}</td>
           <td>{prod.Barcode}</td>
           <td><EditModal id={prod._id} /></td>
-          <td><Button variant="secondary" 
-          onClick={()=> setProductsOrder([...productsOrder,{Id:prod.ProductId, Name: prod.Name, Price:prod.Price}])}
-          >+</Button></td>
+          <td>
+            <div style={{display:'flex', justifyContent:'space-around'}}>
+          <Form.Control style={{width:'60px'}} type='number' onChange={(e)=> setQuantity(e.target.value) }></Form.Control>
+          <Button variant="secondary" 
+          onClick={()=> {  setProductsOrder([...productsOrder,{Id:prod.ProductId, Name: prod.Name, Price:prod.Price, totalPrice: '', quantity}])}}
+          >+</Button>
+          </div>
+            {/* <Form>
+          <Form.Check
+        type="checkbox"
+        checked={isChecked}
+        onChange={(event) => handleCheckboxChange(event.target.checked,prod)}
+        
+           />
+          </Form>
+             */}
+          </td>
         </tr>
         
-      </tbody>)}
+      </tbody>)
+      }
     </Table>
         
 </div>

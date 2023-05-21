@@ -55,7 +55,7 @@ function Clients(){
         <td>{cl.Phone}</td>
         <td><EditClient id={cl._id}/> </td>
         <td>
-            <Button style={{width:'50px'}} variant="secondary"
+            <Button  style={{width:'50px'}} variant="secondary"
         onClick={()=> setClientOrder({ Name: cl.Name , Company:cl.Company, Address:cl.Address, Phone:cl.Phone})}
         >+</Button>
         </td>

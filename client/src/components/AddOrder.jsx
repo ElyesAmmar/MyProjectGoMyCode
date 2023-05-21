@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Form, Button, Row, Col, Table} from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
@@ -8,6 +8,13 @@ function MakeOrder() {
   const [product, setProduct] = useState({name:'',quantity:''})
   const [products, setProducts ]= useState(useSelector((state)=> state.orderReducer.products)) 
   const [client, setClient] = useState(useSelector((state)=> state.orderReducer.client))
+  const [total, setTotalProduct] = useState('')
+  
+  const TotalPrice = () => {
+    return products.reduce((total, product) => {
+      return total + (product.Price * product.quantity);
+    }, 0);
+  };
 
 
 return (
@@ -46,22 +53,17 @@ return (
         </Col>
         </Row>
         </Form>
-    </div>
-   
+     </div>
     </div>
     <div>
     <Button variant="primary" style={{width:'200px', marginLeft:'800px'} }>
             Save and Print Invioce
       </Button>
     </div>
-    
-    <div className='ordertable' >
-    
-      <div>
 
-      </div>
-      <div>
-        
+    <div className='ordertable' >
+      
+      <div> 
       <Table striped bordered hover>
       <thead>
         <tr>
@@ -70,31 +72,27 @@ return (
           <th>Quantity</th>
           <th>U.P</th>
           <th>Total</th>
-          
         </tr>
       </thead>
-      
+  
       <tbody>
       {products.map((prod)=>
-        <tr>
+        <tr key={prod.Id}>
           <td>P-{prod.Id}</td>
           <td>{prod.Name}</td>
-          <td style={{width:'60px'}}><Form.Control type='number' ></Form.Control></td>
+          {/* <td style={{width:'60px'}}><Form.Control type='number' onChange={(e)=>totalPriceProduct( e.target.value)} ></Form.Control></td> */}
+          <td>{prod.quantity}</td>
           <td>{prod.Price}</td>
-          <td></td>
+          <td>{prod.Price * prod.quantity }</td>
           {/* <CloseButton onClick={()=> setProducts(products.splice(2,1))} /> */}
           </tr>
-        )  }
+           )  }
         <tr>
           <td colSpan={4} style={{fontWeight:'bold'}}>Total</td>
-          <td>...... TND</td>
-          
+          <td>{TotalPrice()} TND</td>
         </tr>
       </tbody>
-      
-      
     </Table>
-
       </div>
 
     </div>
@@ -105,9 +103,3 @@ return (
 export default MakeOrder;
 
 
- {/* { Products
-                .filter((prod)=> prod.Name.toLowerCase().includes(product.name.toLowerCase())) 
-                .map((prod) => ( 
-                     
-                ))
-                } */}

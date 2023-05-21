@@ -12,7 +12,7 @@ const initialeState = {
 export const orderReducer = (state=initialeState, {type,payload})=>{
     switch (type) {
         case ADD_PRODUCTS_ORDER:
-            return {...state, products:  payload}
+            return {...state, products: [...state.products, payload]}
         case ADD_CLIENT_ORDER:
             return {...state, client: payload}
         default:

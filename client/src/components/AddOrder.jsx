@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState} from 'react';
 import { Form, Button, Row, Col, Table} from 'react-bootstrap';
 import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { updateProduct } from '../JS/actions/products'
 
 
 function MakeOrder() {
@@ -8,14 +10,22 @@ function MakeOrder() {
   const [product, setProduct] = useState({name:'',quantity:''})
   const [products, setProducts ]= useState(useSelector((state)=> state.orderReducer.products)) 
   const [client, setClient] = useState(useSelector((state)=> state.orderReducer.client))
-  const [total, setTotalProduct] = useState('')
-  
+  const [updatedProductStock, setUpdatedProductStock] = useState([])
+  const dispatch = useDispatch()
+
   const TotalPrice = () => {
     return products.reduce((total, product) => {
       return total + (product.Price * product.quantity);
     }, 0);
   };
 
+const updateStockProduct = () =>{
+      
+      products.map((prod)=>dispatch(updateProduct(prod.mongoId, {Stock: prod.Stock-prod.quantity})))
+        
+      
+    
+}
 
 return (
   <div>
@@ -56,7 +66,10 @@ return (
      </div>
     </div>
     <div>
-    <Button variant="primary" style={{width:'200px', marginLeft:'800px'} }>
+    <Button 
+    variant="primary" 
+    style={{width:'200px', marginLeft:'800px'} }
+    onClick={updateStockProduct}>
             Save and Print Invioce
       </Button>
     </div>
@@ -86,7 +99,9 @@ return (
           <td>{prod.Price * prod.quantity }</td>
           {/* <CloseButton onClick={()=> setProducts(products.splice(2,1))} /> */}
           </tr>
-           )  }
+           )  
+         
+           }
         <tr>
           <td colSpan={4} style={{fontWeight:'bold'}}>Total</td>
           <td>{TotalPrice()} TND</td>

@@ -7,26 +7,17 @@ import Table from 'react-bootstrap/Table';
 import EditModal from './EditProduct';
 import Button from 'react-bootstrap/Button';
 import { addProductsOrder } from "../JS/actions/order";
-import { useNavigate } from "react-router-dom";
 import Form from 'react-bootstrap/Form';
 
 function Products() {
   const dispatch=useDispatch()
   const products= useSelector((state)=>state.productReducer.products)
   const inputS = useSelector((state)=>state.productReducer.productSearch)
-  const [productsOrder, setProductsOrder] = useState([])
-  const navigate = useNavigate();
   const [quantity, setQuantity] = useState('')
   
   useEffect(()=> {
     dispatch(getProducts())
 },[])
-
-
-
-  
-  
-
 //   const handleCheckboxChange = (checked,p) => {
     
 //     setIsChecked(checked);
@@ -51,10 +42,6 @@ function Products() {
         
 <div className="datatable">
     <SearchProducts />
-    <button onClick={()=>{
-      dispatch(addProductsOrder(productsOrder));
-      navigate("/dashboard/clients")
-      }}>add to order</button>
     <Table className='tableProduct' striped bordered hover size="sm">
       <thead>
         <tr>
@@ -87,9 +74,14 @@ function Products() {
           <td><EditModal id={prod._id} /></td>
           <td>
             <div style={{display:'flex', justifyContent:'space-around'}}>
-          <Form.Control style={{width:'60px'}} type='number' onChange={(e)=> setQuantity(e.target.value) }></Form.Control>
+          <Form.Control style={{width:'60px'}} 
+          type='number' 
+          onChange={(e)=> {setQuantity(e.target.value);
+          } }>
+
+          </Form.Control>
           <Button variant="secondary" 
-          onClick={()=> {  setProductsOrder([...productsOrder,{Id:prod.ProductId, Name: prod.Name, Price:prod.Price, totalPrice: '', quantity}])}}
+          onClick={()=> {dispatch(addProductsOrder({mongoId: prod._id, Id:prod.ProductId, Stock:prod.Stock, Name: prod.Name, Price:prod.Price, quantity}))}}
           >+</Button>
           </div>
             {/* <Form>

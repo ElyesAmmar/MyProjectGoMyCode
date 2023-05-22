@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { updateProduct } from '../JS/actions/products'
 import {SaveOrder } from '../JS/actions/order'
 import AddOrderForm from './AddOrderForm';
-import GenerateInvoice from './InvoiceConvertPdf';
+
 
 function MakeOrder() {
 
@@ -52,7 +52,7 @@ return (
             Save and Print Invioce
       </Button>
     </div>
-    <GenerateInvoice />
+    
     <div className='ordertable' >
       
       <div> 

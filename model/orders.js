@@ -16,8 +16,8 @@ const orderSchema = new Schema ({
         Price: {type:Number,required:true},
         TotalPrice: {type:Number,required:true}
     }],
-    TotalPrice: {type:Number},
-    TotalQuantity: {type:Number},
+    TotalPrice: {type:Number}
+    
 })
 
 const Orders = model("Orders", orderSchema);

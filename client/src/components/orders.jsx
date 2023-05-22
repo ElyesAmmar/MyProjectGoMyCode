@@ -1,5 +1,7 @@
-import React from "react";
+import React, {useEffect} from "react";
+import { useDispatch, useSelector } from "react-redux";
 import OrdersBar from "./SearchBarOrder";
+import { getOrders }  from "../JS/actions/order";
 import Table from 'react-bootstrap/Table';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
@@ -7,8 +9,12 @@ import Button from 'react-bootstrap/Button';
 
 function Orders(){
 
-
-
+const dispatch = useDispatch()
+const orders = useSelector((state)=> state.orderReducer.orders)
+console.log(orders)
+useEffect(()=>{
+   dispatch(getOrders())
+},[])
 
     return(
         <div className="datatable">
@@ -19,21 +25,24 @@ function Orders(){
           <th>#</th>
           <th style={{width:'150px'}}>Invoice Number</th>
           <th>Customer</th>
-          <th>Total</th>
+          <th>Total (TND)</th>
           <th>Date</th>
           <th style={{width:'200px'}}>Print Invoice</th>
         </tr>
       </thead>
-      <tbody>
-        <tr>
+      {orders.map((ord)=>
+        <tbody key={ord._id}>
+        <tr >
           <td><Form.Check /></td>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-          <td>@mdo</td>
-          <td><Button variant="secondary">Print Invoices</Button></td>
+          <td>{ord.OrderNum}</td>
+          <td>{ord.OrderClient.Name}</td>
+          <td>{ord.TotalPrice}</td>
+          <td>{ord.OrderDate}</td>
+          <td><Button variant="secondary">Print Invoice</Button></td>
         </tr>
       </tbody>
+      )}
+      
     </Table>
         </div>
     )

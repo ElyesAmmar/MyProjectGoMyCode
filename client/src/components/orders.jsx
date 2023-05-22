@@ -25,6 +25,7 @@ useEffect(()=>{
           <th>#</th>
           <th style={{width:'150px'}}>Invoice Number</th>
           <th>Customer</th>
+          <th>Company</th>
           <th>Total (TND)</th>
           <th>Date</th>
           <th style={{width:'200px'}}>Print Invoice</th>
@@ -34,8 +35,9 @@ useEffect(()=>{
         <tbody key={ord._id}>
         <tr >
           <td><Form.Check /></td>
-          <td>{ord.OrderNum}</td>
+          <td>N°{ord.OrderNum}</td>
           <td>{ord.OrderClient.Name}</td>
+          <td>{ord.OrderClient.Company}</td>
           <td>{ord.TotalPrice}</td>
           <td>{ord.OrderDate}</td>
           <td><Button variant="secondary">Print Invoice</Button></td>

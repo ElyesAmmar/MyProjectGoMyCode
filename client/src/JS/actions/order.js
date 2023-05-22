@@ -1,4 +1,4 @@
-import { ADD_PRODUCTS_ORDER, ADD_CLIENT_ORDER, SAVE_ORDER, GET_ORDERS_LOAD, GET_ORDERS_SUCCESS, GET_ORDERS_FAIL } from "../constant/actionsTypes";
+import { ADD_PRODUCTS_ORDER, ADD_CLIENT_ORDER, SAVE_ORDER, GET_ORDERS_LOAD, GET_ORDERS_SUCCESS, GET_ORDERS_FAIL, GENERATE_INVOICE } from "../constant/actionsTypes";
 import axios from 'axios'
 
 export const addProductsOrder = (product)=>{
@@ -45,6 +45,18 @@ export const getOrders = () => async(dispatch)=>{
             type: GET_ORDERS_FAIL,
             payload: error.response.data.msg
         })
+        
+    }
+}
+
+export const generateInvoice= (id)=> async(dispatch)=>{
+    try {
+        let result = await axios.get(`/api/orders/invoice${id}`)
+        dispatch({
+            type: GENERATE_INVOICE,
+            payload: result
+        })
+    } catch (error) {
         
     }
 }

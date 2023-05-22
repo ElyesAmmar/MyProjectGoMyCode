@@ -26,6 +26,7 @@ export const SaveOrder = (order) => async(dispatch)=>{
     } catch (error) {
         console.log(error)
     }
+    dispatch(getOrders())
 }
 
 export const getOrders = () => async(dispatch)=>{

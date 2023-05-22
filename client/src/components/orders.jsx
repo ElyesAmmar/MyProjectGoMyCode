@@ -11,6 +11,7 @@ function Orders(){
 
 const dispatch = useDispatch()
 const orders = useSelector((state)=> state.orderReducer.orders)
+const reversedOrders = orders.slice().reverse()
 console.log(orders)
 useEffect(()=>{
    dispatch(getOrders())
@@ -31,7 +32,7 @@ useEffect(()=>{
           <th style={{width:'200px'}}>Print Invoice</th>
         </tr>
       </thead>
-      {orders.map((ord)=>
+      {reversedOrders.map((ord)=>
         <tbody key={ord._id}>
         <tr >
           <td><Form.Check /></td>

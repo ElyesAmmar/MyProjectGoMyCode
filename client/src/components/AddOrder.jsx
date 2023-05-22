@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { updateProduct } from '../JS/actions/products'
 import {SaveOrder } from '../JS/actions/order'
 import AddOrderForm from './AddOrderForm';
+import { useNavigate } from "react-router-dom";
 
 
 function MakeOrder() {
@@ -13,6 +14,7 @@ function MakeOrder() {
   const [client, setClient] = useState(useSelector((state)=> state.orderReducer.client))
   const productsOrder = products.map((prod)=> {return {Name: prod.Name , Quantity: prod.quantity , Price: prod.Price , TotalPrice: prod.TotalPrice  }})
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   
   const TotalPrice = () => {
     return products.reduce((total, product) => {
@@ -35,8 +37,10 @@ const updateStockProduct = () =>{
 
 
 return (
-  <div>
+  <div style={{marginTop:'30px'}}>
+    <div style={{textAlign:'center'}}>
     <AddOrderForm />
+    </div>
     <div className='client' style={{paddingLeft:'300px'}}>
           <h2>Customer</h2><br/>
           <p> Name : {client.Name} <br/>
@@ -48,8 +52,8 @@ return (
     <Button 
     variant="primary" 
     style={{width:'200px', marginLeft:'800px'} }
-    onClick={()=>{updateStockProduct();saveOrder() }}>
-            Save and Print Invioce
+    onClick={()=>{updateStockProduct();saveOrder(); navigate("/dashboard/Orders")}}>
+            Save Order
       </Button>
     </div>
     

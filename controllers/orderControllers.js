@@ -54,7 +54,7 @@ exports.getInvoiceOrder = async(req,res)=>{
     const invoiceData = await Orders.findById(id).lean();
 
     // Company Logo
-    // doc.image('https://drive.google.com/file/d/1BmQoKRTqKfaz00GbOTHQTkdHodlyL2JW/view?usp=sharing', 50, 50, { width: 100 });
+    doc.image('./elyes-ammar-logo.png', 50, 40, { width: 200 });
 
     // Company Details
     doc.fontSize(14).text('Elyes Ammar', 180, 50, { align: 'right' });
@@ -70,38 +70,32 @@ exports.getInvoiceOrder = async(req,res)=>{
     doc.fontSize(10).text(`Customer Email: ${invoiceData.OrderClient.Company}`, 50, 270);
     
 
-    // Table of Products
-    const tableTop = 330;
-    const columnWidths = [200, 75, 100, 125];
-    const tableHeaders = ['Products', 'Quantity', 'Price', 'Total'];
+    // Set the table properties
+  const tableTop = 330;
+  const tableLeft = 50;
+  const columnSpacing = 150;
 
-    doc.font('Helvetica-Bold');
-    tableHeaders.forEach((header, columnIndex) => {
-      const xPos = 50 + columnIndex * columnWidths[columnIndex];
-      doc.fontSize(12).text(header, xPos, tableTop, { align: 'center' });
-    });
+  // Table headers
+  doc.font('Helvetica-Bold').fontSize(12);
+  doc.text('Product', tableLeft, tableTop);
+  doc.text('Quantity', tableLeft + 2 * columnSpacing, tableTop);
+  doc.text('Price', tableLeft + 3 * columnSpacing, tableTop);
+  doc.text('Total', tableLeft + 4 * columnSpacing, tableTop);
 
-    doc.font('Helvetica');
-    invoiceData.Products.forEach((product, rowIndex) => {
-      const row = [
-        product.Name,
-        product.Quantity.toString(),
-        product.Price.toString(),
-        product.TotalPrice.toString(),
-      ];
+  // Set the initial table y-position
+  let tableY = tableTop + 20;
 
-      row.forEach((cell, columnIndex) => {
-        const xPos = 50 + columnIndex * columnWidths[columnIndex];
-        const yPos = tableTop + (rowIndex + 1) * 20;
-        doc.fontSize(10).text(cell, xPos, yPos, { align: 'center' });
+      // Loop through each product and render the table row
+      doc.font('Helvetica').fontSize(10);
+      invoiceData.Products.forEach((product) => {
+        doc.text(product.Name, tableLeft, tableY);
+        doc.text(product.Quantity.toString(), tableLeft + columnSpacing, tableY);
+        doc.text(product.Price.toString(), tableLeft + 2 * columnSpacing, tableY);
+        doc.text(product.TotalPrice.toString(), tableLeft + 3 * columnSpacing, tableY);
+    
+        // Increment the y-position for the next row
+        tableY += 20;
       });
-    });
-
-    // Total
-    const total = invoiceData.TotalPrice.toString();
-    doc.fontSize(12).text('Total:', 350, tableTop + (invoiceData.Products.length + 1) * 20, { align: 'right', width: 100 });
-    doc.fontSize(12).text(total, 450, tableTop + (invoiceData.Products.length + 1) * 20, { align: 'right', width: 100 });
-
     // Finalize the PDF document
     doc.end();
   } catch (error) {

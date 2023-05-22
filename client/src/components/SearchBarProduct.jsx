@@ -7,8 +7,6 @@ import { searchP } from '../JS/actions/products';
 function SearchProducts() {
   
   const dispatch = useDispatch()
- 
-  
   const handleChange= (e)=>{  
        dispatch(searchP(e.target.value))
   }

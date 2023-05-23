@@ -1,4 +1,4 @@
-import { ADD_PRODUCTS_ORDER, ADD_CLIENT_ORDER, SAVE_ORDER, GET_ORDERS_LOAD, GET_ORDERS_SUCCESS, GET_ORDERS_FAIL } from "../constant/actionsTypes";
+import { ADD_PRODUCTS_ORDER, ADD_CLIENT_ORDER, SAVE_ORDER, GET_ORDERS_LOAD, GET_ORDERS_SUCCESS, GET_ORDERS_FAIL, GENERATE_INVOICE } from "../constant/actionsTypes";
 
 const initialeState = {
     loadOrders: false,
@@ -8,7 +8,8 @@ const initialeState = {
     product:{},
     client:{},
     errors:[],
-    msg : ''
+    msg : '', 
+    invoice: ''
 }
 
 export const orderReducer = (state=initialeState, {type,payload})=>{
@@ -25,6 +26,8 @@ export const orderReducer = (state=initialeState, {type,payload})=>{
             return {...state, orders: payload}
         case GET_ORDERS_FAIL: 
             return {...state, msg: payload}
+        case GENERATE_INVOICE:
+            return {...state, invoice : payload}
         default:
             return state
     }

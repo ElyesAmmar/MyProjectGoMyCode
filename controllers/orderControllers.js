@@ -1,5 +1,8 @@
 const Orders= require('../model/orders')
 const PDFDocument = require('pdfkit');
+const blobStream = require('blob-stream');
+
+
 
 exports.getOrders = async (req,res)=>{
     try {
@@ -43,13 +46,16 @@ exports.getInvoiceOrder = async(req,res)=>{
   // Set the PDF filename
   res.set('Content-Disposition', 'attachment; filename=invoice.pdf');
 
-  // Pipe the PDF document to the response
-  doc.pipe(res);
+   // Pipe the PDF document to the response
+  // doc.pipe(res);
+  // pipe the document to a blob
+const stream = doc.pipe(blobStream());
+
 
   try {
     
     const id = req.params.id
-    console.log(id)
+    
     // Retrieve invoice data from the database
     const invoiceData = await Orders.findById(id).lean();
 
@@ -78,9 +84,9 @@ exports.getInvoiceOrder = async(req,res)=>{
   // Table headers
   doc.font('Helvetica-Bold').fontSize(12);
   doc.text('Product', tableLeft, tableTop);
-  doc.text('Quantity', tableLeft + 2 * columnSpacing, tableTop);
-  doc.text('Price', tableLeft + 3 * columnSpacing, tableTop);
-  doc.text('Total', tableLeft + 4 * columnSpacing, tableTop);
+  doc.text('Quantity', tableLeft + columnSpacing + 20, tableTop);
+  doc.text('Price', tableLeft + 2 * columnSpacing, tableTop);
+  doc.text('Total', tableLeft + 3 * columnSpacing, tableTop);
 
   // Set the initial table y-position
   let tableY = tableTop + 20;
@@ -89,15 +95,31 @@ exports.getInvoiceOrder = async(req,res)=>{
       doc.font('Helvetica').fontSize(10);
       invoiceData.Products.forEach((product) => {
         doc.text(product.Name, tableLeft, tableY);
-        doc.text(product.Quantity.toString(), tableLeft + columnSpacing, tableY);
+        doc.text(product.Quantity.toString(), tableLeft +  columnSpacing + 30, tableY);
         doc.text(product.Price.toString(), tableLeft + 2 * columnSpacing, tableY);
         doc.text(product.TotalPrice.toString(), tableLeft + 3 * columnSpacing, tableY);
     
         // Increment the y-position for the next row
         tableY += 20;
       });
+
+      // Total
+    const total = invoiceData.TotalPrice.toString();
+    doc.fontSize(12).text('Total:', tableLeft + 2 * columnSpacing, tableTop + (invoiceData.Products.length + 1) * 20  );
+    doc.fontSize(12).text(total, tableLeft + 3 * columnSpacing , tableTop + (invoiceData.Products.length + 1) * 20 );
+
     // Finalize the PDF document
     doc.end();
+
+    stream.on('finish', () => {
+      // or get a blob URL for display in the browser
+      const url = stream.toBlobURL('application/pdf');
+      res.send(url)
+      
+    });
+   
+    
+
   } catch (error) {
     console.error('Error retrieving invoice data:', error);
     res.status(500).send('Error generating invoice PDF')

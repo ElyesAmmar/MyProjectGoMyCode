@@ -35,7 +35,7 @@ export const getOrders = () => async(dispatch)=>{
     })
     try {
         let result = await axios.get('/api/orders/')
-        console.log(result)
+        
         dispatch({
             type: GET_ORDERS_SUCCESS,
             payload: result.data.response
@@ -52,12 +52,14 @@ export const getOrders = () => async(dispatch)=>{
 
 export const generateInvoice= (id)=> async(dispatch)=>{
     try {
-        let result = await axios.get(`/api/orders/invoice${id}`)
+        let result = await axios.get(`/api/orders/invoice/${id}`)
+        console.log(result)
+        
         dispatch({
             type: GENERATE_INVOICE,
-            payload: result
+            payload: result.data
         })
     } catch (error) {
-        
+        console.log(error)
     }
 }

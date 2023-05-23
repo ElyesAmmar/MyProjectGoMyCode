@@ -1,10 +1,12 @@
 import React, {useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import OrdersBar from "./SearchBarOrder";
-import { getOrders }  from "../JS/actions/order";
+import { generateInvoice, getOrders }  from "../JS/actions/order";
 import Table from 'react-bootstrap/Table';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import OpenBlobButton from "./InvoiceViewer";
+
 
 
 function Orders(){
@@ -12,10 +14,16 @@ function Orders(){
 const dispatch = useDispatch()
 const orders = useSelector((state)=> state.orderReducer.orders)
 const reversedOrders = orders.slice().reverse()
-console.log(orders)
+
 useEffect(()=>{
    dispatch(getOrders())
 },[])
+
+const PrintInvoice = (id) =>{
+  console.log(id)
+  dispatch(generateInvoice(id))
+  
+}
 
     return(
         <div className="datatable">
@@ -41,7 +49,8 @@ useEffect(()=>{
           <td>{ord.OrderClient.Company}</td>
           <td>{ord.TotalPrice}</td>
           <td>{ord.OrderDate}</td>
-          <td><Button variant="secondary">Print Invoice</Button></td>
+          <td><Button variant="secondary" onClick={()=>PrintInvoice(ord._id)  }>Print Invoice</Button></td>
+         <OpenBlobButton  /> 
         </tr>
       </tbody>
       )}

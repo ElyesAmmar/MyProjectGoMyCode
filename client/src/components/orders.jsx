@@ -5,7 +5,6 @@ import { generateInvoice, getOrders }  from "../JS/actions/order";
 import Table from 'react-bootstrap/Table';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import OpenBlobButton from "./InvoiceViewer";
 
 
 
@@ -50,7 +49,7 @@ const PrintInvoice = (id) =>{
           <td>{ord.TotalPrice}</td>
           <td>{ord.OrderDate}</td>
           <td><Button variant="secondary" onClick={()=>PrintInvoice(ord._id)  }>Print Invoice</Button></td>
-         <OpenBlobButton  /> 
+        
         </tr>
       </tbody>
       )}

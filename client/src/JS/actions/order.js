@@ -52,9 +52,15 @@ export const getOrders = () => async(dispatch)=>{
 
 export const generateInvoice= (id)=> async(dispatch)=>{
     try {
-        let result = await axios.get(`/api/orders/invoice/${id}`)
+        let result = await axios.get(`/api/orders/invoice/${id}`,{
+            responseType: 'blob', // Required to receive a binary response
+          });
         console.log(result)
-        
+        // Create a URL object from the received binary data
+        const pdfUrl = URL.createObjectURL(result.data);
+
+        // Open the PDF in a new tab
+        window.open(pdfUrl, '_blank');
         dispatch({
             type: GENERATE_INVOICE,
             payload: result.data

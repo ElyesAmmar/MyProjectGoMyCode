@@ -1,6 +1,7 @@
 const Orders= require('../model/orders')
 const PDFDocument = require('pdfkit');
 const blobStream = require('blob-stream');
+const fs = require('fs');
 
 
 
@@ -37,9 +38,8 @@ exports.postOrders = async(req,res)=>{
 }
 
 exports.getInvoiceOrder = async(req,res)=>{
-    const doc = new PDFDocument();
-   
-
+    
+  const doc = new PDFDocument();
   // Set the PDF content type
   res.set('Content-Type', 'application/pdf');
 
@@ -47,11 +47,8 @@ exports.getInvoiceOrder = async(req,res)=>{
   res.set('Content-Disposition', 'attachment; filename=invoice.pdf');
 
    // Pipe the PDF document to the response
-  // doc.pipe(res);
-  // pipe the document to a blob
-const stream = doc.pipe(blobStream());
-
-
+  doc.pipe(res);
+ 
   try {
     
     const id = req.params.id
@@ -111,27 +108,8 @@ const stream = doc.pipe(blobStream());
     // Finalize the PDF document
     doc.end();
 
-    stream.on('finish', () => {
-      // or get a blob URL for display in the browser
-      const url = stream.toBlobURL('application/pdf');
-      res.send(url)
-      
-    });
-   
-    
-
   } catch (error) {
     console.error('Error retrieving invoice data:', error);
     res.status(500).send('Error generating invoice PDF')
 }
 }
-// exports.getInvoiceOrder = async(req,res)=>{
-//   try {
-//     const id = req.params.id
-//     const result = await Orders.findById(id)
-//     res.status(200).send(result)
-//   } catch (error) {
-//     console.log(error)
-//     res.status(500).send('errreeeeeur')
-//   }
-// }

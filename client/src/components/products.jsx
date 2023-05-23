@@ -9,12 +9,13 @@ import Button from 'react-bootstrap/Button';
 import { addProductsOrder } from "../JS/actions/order";
 import Form from 'react-bootstrap/Form';
 
+
 function Products() {
   const dispatch=useDispatch()
   const products= useSelector((state)=>state.productReducer.products)
   const inputS = useSelector((state)=>state.productReducer.productSearch)
   const [quantity, setQuantity] = useState('')
-  
+ 
   useEffect(()=> {
     dispatch(getProducts())
 },[])
@@ -66,6 +67,7 @@ function Products() {
           onClick={()=> {dispatch(addProductsOrder({mongoId: prod._id, Id:prod.ProductId, TotalPrice: prod.Price*quantity,
                                                     Stock:prod.Stock, Name: prod.Name, Price:prod.Price, quantity}))}}
           >+</Button>
+          
           </div>
           </td>
         </tr>

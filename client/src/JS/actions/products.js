@@ -1,5 +1,5 @@
 import { GET_PRODUCT_LOAD, GET_PRODUCT_SUCCESS, GET_PRODUCT_FAIL, GET_ONEPRODUCT_SUCCESS, POST_PRODUCT_FAIL,
-        GET_ONEPRODUCT_FAIL, POST_PRODUCT_SUCCESS, SEARCH_PRODUCT, UPDATE_PRODUCT, DELETE_PRODUCT} from "../constant/actionsTypes";
+        GET_ONEPRODUCT_FAIL, POST_PRODUCT_SUCCESS, SEARCH_PRODUCT, UPDATE_PRODUCT, DELETE_PRODUCT, FILTER_PRODUCT_CATEGORY} from "../constant/actionsTypes";
 import axios from "axios"
 
 export const getProducts =()=> async (dispatch)=> {
@@ -92,6 +92,12 @@ export const deleteProduct = (id) => async(dispatch)=>{
 export const searchP =(input)=>{
     return {
         type : SEARCH_PRODUCT,
+        payload: input
+    }
+}
+export const FilterByCategorie =(input)=>{
+    return {
+        type : FILTER_PRODUCT_CATEGORY,
         payload: input
     }
 }

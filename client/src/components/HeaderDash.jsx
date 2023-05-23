@@ -12,7 +12,7 @@ function Dash() {
     <div>
       
       <ul className='navbar-dashboard'>
-        <li><Link to='products'>Products</Link></li>
+       <li><Link to='products'>Products</Link></li>
         <li><Link to='Customer'> Customers</Link></li>
         <li><Link to='currentOrder'>CurrentOrder</Link></li>
         <li><Link to='Orders'>Orders</Link></li>

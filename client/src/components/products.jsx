@@ -14,12 +14,12 @@ function Products() {
   const dispatch=useDispatch()
   const products= useSelector((state)=>state.productReducer.products)
   const inputS = useSelector((state)=>state.productReducer.productSearch)
+  const inputFilter = useSelector((state)=> state.productReducer.filterInput)
   const [quantity, setQuantity] = useState('')
  
   useEffect(()=> {
     dispatch(getProducts())
 },[])
-
 
     return(
         
@@ -43,6 +43,7 @@ function Products() {
 
         {products
         .filter((prod)=> prod.Name.toLowerCase().includes(inputS.toLowerCase()))
+        .filter((prod)=> prod.Category.toLowerCase().includes(inputFilter.toLowerCase()))
         .map((prod)=> 
       
       <tbody key={prod.ProductId}>
@@ -64,8 +65,9 @@ function Products() {
 
           </Form.Control>
           <Button variant="secondary" 
-          onClick={()=> {dispatch(addProductsOrder({mongoId: prod._id, Id:prod.ProductId, TotalPrice: prod.Price*quantity,
-                                                    Stock:prod.Stock, Name: prod.Name, Price:prod.Price, quantity}))}}
+          onClick={
+            ()=> {dispatch(addProductsOrder({mongoId: prod._id, Id:prod.ProductId, TotalPrice: prod.Price*quantity,
+                                            Stock:prod.Stock, Name: prod.Name, Price:prod.Price, quantity}))}}
           >+</Button>
           
           </div>

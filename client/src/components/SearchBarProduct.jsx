@@ -1,16 +1,22 @@
+import React, {useState} from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import AddModal from './AddProduct';
 import {useDispatch} from 'react-redux'
-import { searchP } from '../JS/actions/products';
+import { FilterByCategorie, searchP } from '../JS/actions/products';
 
 function SearchProducts() {
-  
+  const [selectedValue, setSelectedValue] = useState('');
   const dispatch = useDispatch()
   const handleChange= (e)=>{  
        dispatch(searchP(e.target.value))
   }
-  
+  const handleSelectChange = (e) => {
+    setSelectedValue(e.target.value);
+  };
+  const Filter = ()=>{
+    dispatch(FilterByCategorie(selectedValue))
+  }
 
   return (
     <div>
@@ -20,13 +26,15 @@ function SearchProducts() {
       </div>
       <div style={{display:'flex', height:'40px', marginTop:'8px'}}>
       <Form.Group className="mb-3">
-        <Form.Select>
+        <Form.Select value={selectedValue} onChange={handleSelectChange}>
           <option>Products Category</option>
-          <option>Memoire</option>
-          <option>Carte Graphique</option>
+          <option value='Memoire'>Memoire</option>
+          <option value='Carte Graphique'>Carte Graphique</option>
+          <option value='Processeur'>Processeur</option>
+          <option value='Carte Mère'>Carte Mère</option>
         </Form.Select>
       </Form.Group>
-      <Button variant="outline-success" >Filter</Button>
+      <Button variant="outline-success" onClick={Filter} >Filter</Button>
       </div>
       
       <div style={{display:'flex',height:'45px',paddingTop:'7px',paddingRight:'7px'}}>

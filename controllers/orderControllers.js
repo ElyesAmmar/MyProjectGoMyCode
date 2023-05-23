@@ -42,9 +42,10 @@ exports.getInvoiceOrder = async(req,res)=>{
   const doc = new PDFDocument();
   // Set the PDF content type
   res.set('Content-Type', 'application/pdf');
-
+  // file name
+  const filname= 'invoice.pdf'
   // Set the PDF filename
-  res.set('Content-Disposition', 'attachment; filename=invoice.pdf');
+  res.setHeader('Content-Disposition', `attachment; filename=${filname}`);
 
    // Pipe the PDF document to the response
   doc.pipe(res);
@@ -70,7 +71,7 @@ exports.getInvoiceOrder = async(req,res)=>{
     doc.fontSize(10).text(`Invoice Date: ${invoiceData.OrderDate}`, 50, 225);
     doc.fontSize(10).text(`Customer Name: ${invoiceData.OrderClient.Name}`, 50, 240);
     doc.fontSize(10).text(`Customer Address: ${invoiceData.OrderClient.Address}`, 50, 255);
-    doc.fontSize(10).text(`Customer Email: ${invoiceData.OrderClient.Company}`, 50, 270);
+    doc.fontSize(10).text(`Customer Company: ${invoiceData.OrderClient.Company}`, 50, 270);
     
 
     // Set the table properties

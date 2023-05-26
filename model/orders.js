@@ -5,10 +5,10 @@ const orderSchema = new Schema ({
     OrderNum: {type:Number, required:true},
     OrderDate: { type: String},
     OrderClient: {
-        Name: { type: String},
-        Address: {type: String},
+        Name: { type: String, required:true},
+        Address: {type: String, required:true},
         Company: {type: String},
-        Phone: {type: Number}
+        Phone: {type: Number, required:true}
     },
     Products:[{
         Name: {type:String, required:true},

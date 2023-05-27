@@ -1,13 +1,14 @@
 const User = require('../model/user');
+const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
+const isAuth = require('../middleware/isAuth');
 require('dotenv').config({path:'../.env'})
 
-exports.Register = async(req,res)=>{
+exports.register = async(req,res)=>{
     
   const result = req.body
   try {
-      
-
+    
       const user = await User.findOne({Email: result.Email})
       if(user){
         return res.status(400).send({msg: "user already exist"})
@@ -19,7 +20,13 @@ exports.Register = async(req,res)=>{
         const hashedPassword = await bcrypt.hash(result.Password, salt)
         newUser.Password = hashedPassword;
         await newUser.save()
-        return res.status(200).send({msg: "User Register Success", newUser})
+
+        // sign user 
+        const   payload = {
+          id: newUser._id,
+         }
+        const token = await jwt.sign(payload, process.env.secretKey)
+        return res.status(200).send({msg: "User Register Success", newUser, token})
       }
 
   } catch (error) {
@@ -28,7 +35,7 @@ exports.Register = async(req,res)=>{
   }
 }
 
-exports.Login = async(req,res)=>{
+exports.login = async(req,res)=>{
 const result = req.body
   try {
      
@@ -40,7 +47,12 @@ const result = req.body
         if(!isMatch){
           return res.status(400).send({msg:'Bad Credentials password'})
         }else{
-          return res.status(200).send({msg:'User Login success', user})
+          // sign user 
+         const payload = {
+          id: user._id,
+         }
+        const token = await jwt.sign(payload, process.env.secretKey)
+          return res.status(200).send({msg:'User Login success', user, token})
         }
       }
   } catch (error) {
@@ -48,6 +60,10 @@ const result = req.body
       res.status(500).send({msg:"User Login Failed"})
   }
 }
+
+// exports.getAuthUser = isAuth, (req, res)=>{
+//   res.status(200).send({user: req.user})
+// }
 
 
 // manuel validation 

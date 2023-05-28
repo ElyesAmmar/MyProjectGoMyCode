@@ -1,6 +1,7 @@
 import React from "react";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import UserRegiser from "../components/formUser";
 
 
 function Home() {
@@ -26,9 +27,9 @@ function Home() {
       <Button variant="primary" type="submit">
         Log In
       </Button>
-      <Button variant="secondary"  type="submit" style={{marginLeft:"30px"}} > 
-      Sign Up 
-      </Button> 
+       
+      <UserRegiser />
+     
         
      
     </Form>

@@ -9,24 +9,24 @@ exports.register = async(req,res)=>{
   const result = req.body
   try {
     
-      const user = await User.findOne({Email: result.Email})
-      if(user){
+      const check = await User.findOne({Email: result.Email})
+      if(check){
         return res.status(400).send({msg: "user already exist"})
       }else{
-        const newUser = new User(result)
+        const user = new User(result)
 
         // create salt and hash
         const salt = 10;
         const hashedPassword = await bcrypt.hash(result.Password, salt)
-        newUser.Password = hashedPassword;
-        await newUser.save()
+        user.Password = hashedPassword;
+        await user.save()
 
         // sign user 
         const   payload = {
-          id: newUser._id,
+          id: user._id,
          }
         const token = await jwt.sign(payload, process.env.secretKey)
-        return res.status(200).send({msg: "User Register Success", newUser, token})
+        return res.status(200).send({msg: "User Register Success", user, token})
       }
 
   } catch (error) {
@@ -57,7 +57,7 @@ const result = req.body
       }
   } catch (error) {
       console.log(error)
-      res.status(500).send({msg:"User Login Failed"})
+      res.status(500).send({msg:"User Login Failed", error})
   }
 }
 

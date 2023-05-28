@@ -9,6 +9,7 @@ import { BrowserRouter, Routes, Route} from 'react-router-dom';
 import Clients from './components/clients';
 import MakeOrder from './components/AddOrder';
 import Orders from './components/orders';
+import Footer from './components/footer';
 
 
 
@@ -26,8 +27,8 @@ function App() {
             <Route path='currentOrder' element ={<MakeOrder />}/>
             <Route path='Orders' element ={ <Orders /> }/>
       </Route>
-          
       </Routes>
+      <Footer />
       </BrowserRouter>
       
     </div>

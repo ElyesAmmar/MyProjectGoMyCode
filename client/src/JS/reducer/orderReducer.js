@@ -19,7 +19,7 @@ export const orderReducer = (state=initialeState, {type,payload})=>{
         case ADD_CLIENT_ORDER:
             return {...state, client: payload}
         case SAVE_ORDER:
-            return {...state, msg : payload }
+            return {...state, client:{}, products:[], msg : payload }
         case GET_ORDERS_LOAD:
             return {...state, loadOrders: true}
         case GET_ORDERS_SUCCESS:

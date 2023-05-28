@@ -19,7 +19,7 @@ useEffect(()=>{
 },[])
 
 const PrintInvoice = (id) =>{
-  console.log(id)
+  
   dispatch(generateInvoice(id))
   
 }

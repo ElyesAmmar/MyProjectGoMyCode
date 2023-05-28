@@ -7,16 +7,19 @@ const initialeState = {
     msg: ''
 }
 
-const userReducer = (state= initialeState, {type, payload})=>{
+
+export const userReducer = (state= initialeState, {type, payload})=>{
+    
     switch (type) {
         case USER_REGISTER:
+            localStorage.setItem("token", payload.token)
+            return {... state, isLoading:false, isAuth:true, user: payload.user, msg:payload.msg}
         case USER_LOGIN:
             localStorage.setItem("token", payload.token)
            return {... state, isLoading:false, isAuth:true, user: payload.user, msg:payload.msg}
            
     
         default:
-            
+            return state;
     }
 }
-export default userReducer; 

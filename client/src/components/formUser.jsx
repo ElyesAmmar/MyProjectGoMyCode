@@ -24,8 +24,8 @@ const SaveUser=()=>{
 
   return (
 
-    <div>
-    <Button variant="secondary" onClick={handleShow} style={{marginLeft:"30px"}}>
+    <div  style={{width:'120px'}} >
+    <Button variant="secondary" onClick={handleShow} style={{ width:'120px'}}>
         Sign up
       </Button>
       <Modal show={show} onHide={handleClose}>

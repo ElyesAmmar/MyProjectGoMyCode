@@ -37,6 +37,7 @@ exports.register = async(req,res)=>{
 
 exports.login = async(req,res)=>{
 const result = req.body
+
   try {
      
       const user = await User.findOne({Email: result.Email})
@@ -44,6 +45,7 @@ const result = req.body
           return res.status(400).send({msg: "user does not exist"})
         }else{
       const isMatch = await bcrypt.compare(result.Password, user.Password )
+      
         if(!isMatch){
           return res.status(400).send({msg:'Bad Credentials password'})
         }else{

@@ -4,6 +4,7 @@ import axios from 'axios';
 
 
 export const userRegister = (formData)=> async(dispatch)=>{
+    dispatch(loadingUser())
     try {
         const response = await axios.post('/api/users/register', formData)
         
@@ -16,6 +17,7 @@ export const userRegister = (formData)=> async(dispatch)=>{
     }
 }
 export const userLogin = (formData)=> async(dispatch)=>{
+    dispatch(loadingUser())
     try {
         const response = await axios.post('/api/users/login', formData)
         
@@ -29,6 +31,7 @@ export const userLogin = (formData)=> async(dispatch)=>{
 }
 
 export const getAuthUser = ()=> async(dispatch)=>{
+    dispatch(loadingUser())
     try {
         const config = {
             headers : {
@@ -44,4 +47,17 @@ export const getAuthUser = ()=> async(dispatch)=>{
     } catch (error) {
         dispatch({type: AUTH_ERRORS})
     }
+}
+
+export const loadingUser = ()=> async(dispatch)=>{
+    
+        dispatch({
+            type: LOAD_USER
+        })
+}
+export const userLogout = ()=> async(dispatch)=>{
+    
+    dispatch({
+        type: USER_LOGOUT
+    })
 }

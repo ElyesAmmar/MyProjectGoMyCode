@@ -13,7 +13,7 @@ const isAuth = async(req, res, next) =>{
             return res.status(400).send({msg:'No token, authorization denied'});
         }
         const decode = await jwt.verify(token, process.env.secretKey)
-       console.log(decode)
+       
         // get user by id from payload
         const user = await User.findById(decode.id);
         if(!user){

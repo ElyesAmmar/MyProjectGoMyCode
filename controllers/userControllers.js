@@ -37,9 +37,9 @@ exports.register = async(req,res)=>{
 
 exports.login = async(req,res)=>{
 const result = req.body
-
+console.log(result)
   try {
-     
+    console.log(process.env.secretKey)
       const user = await User.findOne({Email: result.Email})
       if(!user){
           return res.status(400).send({msg: "user does not exist"})
@@ -53,6 +53,7 @@ const result = req.body
          const payload = {
           id: user._id,
          }
+         
         const token = await jwt.sign(payload, process.env.secretKey)
           return res.status(200).send({msg:'User Login success', user, token})
         }

@@ -11,8 +11,10 @@ function Home() {
   const dispatch = useDispatch();
   const [user, setUser] = useState({Email:"", Password:""});
   
-  const handleLogin = ()=>{
+  const handleLogin = (e)=>{
+    e.preventDefault()
     dispatch(userLogin(user));
+    setUser({Email:"", Password:""})
   }
   return (
     <div  className="home" >
@@ -20,7 +22,7 @@ function Home() {
       <Form >
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Email address</Form.Label>
-        <Form.Control type="email" placeholder="Enter email" onChange={(e)=> setUser({...user, Email: e.target.value})} />
+        <Form.Control type="email" placeholder="Enter email"  value={user.Email} onChange={(e)=> setUser({...user, Email: e.target.value})} />
         <Form.Text className="text-muted">
           We'll never share your email with anyone else.
         </Form.Text>
@@ -28,7 +30,7 @@ function Home() {
 
       <Form.Group className="mb-3" controlId="formBasicPassword">
         <Form.Label>Password</Form.Label>
-        <Form.Control type="password" placeholder="Password" onChange={(e)=> setUser({...user, Password: e.target.value})} />
+        <Form.Control type="password" value={user.Password} placeholder="Password" onChange={(e)=> setUser({...user, Password: e.target.value})} />
       </Form.Group>
       <Form.Group className="mb-3" controlId="formBasicCheckbox">
         <Form.Check type="checkbox" label="Check me out" />

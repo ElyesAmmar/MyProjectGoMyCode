@@ -1,5 +1,19 @@
 import {GET_CLIENTS_LOAD, GET_CLIENTS_SUCCESS, GET_CLIENTS_FAIL, POST_CLIENT_SUCCESS, POST_CLIENT_FAIL,GET_ONECLIENT,UPDATE_CLIENT, DELETE_CLIENT, SEARCH_CLIENT} from '../constant/actionsTypes'
 import axios from 'axios'
+import { toast } from 'react-toastify';
+
+const reactToastSucess = (msg)=>{
+    toast.success(msg, {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
+}
 
 export const getClients=()=> async(dispatch)=>{
     dispatch({
@@ -11,6 +25,7 @@ export const getClients=()=> async(dispatch)=>{
             type:GET_CLIENTS_SUCCESS,
             payload:result.data.response
         })
+        
     } catch (error) {
         console.log(error)
         dispatch({
@@ -29,6 +44,7 @@ export const postClient =(client)=> async(dispatch)=>{
             type: POST_CLIENT_SUCCESS,
             payload: result.data.msg
         })
+        reactToastSucess(result.data.msg)
     } catch (error) {
         console.log(error)
         dispatch({
@@ -60,6 +76,7 @@ export const updateClient = (id, client)=> async(dispatch)=>{
             type: UPDATE_CLIENT,
             payload: result.data.msg
         })
+        reactToastSucess(result.data.msg)
     } catch (error) {
         console.log(error)
         
@@ -74,6 +91,7 @@ export const deleteClient= (id)=> async(dispatch)=>{
             type: DELETE_CLIENT,
             payload: result.data.msg
         })
+        reactToastSucess(result.data.msg)
     } catch (error) {
         console.log(error)
     }

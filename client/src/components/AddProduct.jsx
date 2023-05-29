@@ -5,15 +5,18 @@ import Form from 'react-bootstrap/Form';
 import { postProduct } from '../JS/actions/products';
 import { useDispatch} from 'react-redux';
 
+
 function AddModal() {
   const [show, setShow] = useState(false);
   const [product, setProduct] = useState({Name:'',Stock:'',Image:'',Price:'',Category:'',Barcode:''})
   const dispatch = useDispatch()
-  // const  success = useSelector((state)=>state.productReducer.msgSuccess)
+  // const  msg = useSelector((state)=>state.productReducer.msg)
+
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+ 
+
   const Add= ()=>{
-    
       dispatch(postProduct(product));
       setProduct({Name:'',Stock:'',Image:'',Price:'',Category:'',Barcode:''})
   }

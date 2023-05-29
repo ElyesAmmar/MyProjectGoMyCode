@@ -13,6 +13,7 @@ import Footer from './components/footer';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { getAuthUser } from './JS/actions/user';
+import { ToastContainer } from 'react-toastify';
 
 
 function App() {
@@ -41,7 +42,8 @@ useEffect(()=>{
       </Routes>
       <Footer />
       </BrowserRouter>
-      
+      <ToastContainer />
+
     </div>
   );
 }

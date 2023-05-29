@@ -1,15 +1,32 @@
 import { ADD_PRODUCTS_ORDER, ADD_CLIENT_ORDER, SAVE_ORDER, GET_ORDERS_LOAD, GET_ORDERS_SUCCESS, GET_ORDERS_FAIL, GENERATE_INVOICE } from "../constant/actionsTypes";
 import axios from 'axios'
+import { toast } from 'react-toastify';
+
+const reactToastSucess = (msg)=>{
+    toast.info(msg, {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
+}
 
 export const addProductsOrder = (product)=>{
-    
+    let msg = 'product added to order'
+    reactToastSucess(msg)
     return{
         type:ADD_PRODUCTS_ORDER,
-        payload: product
+        payload: product    
     }
     
 }
 export const addClientOrder = (client)=>{
+    let msg = 'client added to order'
+    reactToastSucess(msg)
     return{
         type:ADD_CLIENT_ORDER,
         payload: client

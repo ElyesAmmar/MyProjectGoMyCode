@@ -12,7 +12,6 @@ function Home() {
   const [user, setUser] = useState({Email:"", Password:""});
   
   const handleLogin = ()=>{
-    console.log(user)
     dispatch(userLogin(user));
   }
   return (

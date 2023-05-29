@@ -1,4 +1,4 @@
-import {USER_LOGIN, USER_LOGOUT, USER_REGISTER, LOAD_USER, AUTH_ERRORS} from '../constant/actionsTypes'
+import {USER_LOGIN, USER_LOGOUT, USER_REGISTER, LOAD_USER, AUTH_ERRORS, GET_AUTH_USER} from '../constant/actionsTypes'
 import axios from 'axios';
 
 
@@ -25,5 +25,23 @@ export const userLogin = (formData)=> async(dispatch)=>{
         })
     } catch (error) {
        console.log(error)
+    }
+}
+
+export const getAuthUser = ()=> async(dispatch)=>{
+    try {
+        const config = {
+            headers : {
+                "x-auth-token": localStorage.getItem('token')
+            }
+        }
+        const result = await axios.get('/api/users/', config)
+        dispatch({
+            type: GET_AUTH_USER,
+            payload: result.data
+        })
+        
+    } catch (error) {
+        dispatch({type: AUTH_ERRORS})
     }
 }

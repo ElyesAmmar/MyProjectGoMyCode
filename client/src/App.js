@@ -10,10 +10,21 @@ import Clients from './components/clients';
 import MakeOrder from './components/AddOrder';
 import Orders from './components/orders';
 import Footer from './components/footer';
-
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { getAuthUser } from './JS/actions/user';
 
 
 function App() {
+const dispatch= useDispatch()
+
+const getUser= async()=>{
+ await dispatch(getAuthUser())
+}
+
+useEffect(()=>{
+  getUser()
+},[])
   return (
     <div  >
       <BrowserRouter>

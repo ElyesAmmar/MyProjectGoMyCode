@@ -81,7 +81,7 @@ exports.getInvoiceOrder = async(req,res)=>{
 
   // Table headers
   doc.font('Helvetica-Bold').fontSize(12);
-  doc.text('Product', tableLeft, tableTop);
+  doc.text('Products', tableLeft, tableTop);
   doc.text('Quantity', tableLeft + columnSpacing + 20, tableTop);
   doc.text('Price', tableLeft + 2 * columnSpacing, tableTop);
   doc.text('Total', tableLeft + 3 * columnSpacing, tableTop);

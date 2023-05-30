@@ -3,6 +3,8 @@ import axios from 'axios';
 
 
 
+
+
 export const userRegister = (formData)=> async(dispatch)=>{
     dispatch(loadingUser())
     try {
@@ -14,6 +16,7 @@ export const userRegister = (formData)=> async(dispatch)=>{
         })
     } catch (error) {
        console.log(error)
+       alert(error.response.data.msg)
     }
 }
 export const userLogin = (formData)=> async(dispatch)=>{
@@ -27,6 +30,7 @@ export const userLogin = (formData)=> async(dispatch)=>{
         })
     } catch (error) {
        console.log(error)
+       alert(error.response.data.msg)
     }
 }
 

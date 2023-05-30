@@ -42,12 +42,12 @@ console.log(result)
     console.log(process.env.secretKey)
       const user = await User.findOne({Email: result.Email})
       if(!user){
-          return res.status(400).send({msg: "user does not exist"})
+          return res.status(400).send({msg: "Please provide a valid email address and password. "})
         }else{
       const isMatch = await bcrypt.compare(result.Password, user.Password )
       
         if(!isMatch){
-          return res.status(400).send({msg:'Bad Credentials password'})
+          return res.status(400).send({msg:'Please provide a valid email address and password. '})
         }else{
           // sign user 
          const payload = {

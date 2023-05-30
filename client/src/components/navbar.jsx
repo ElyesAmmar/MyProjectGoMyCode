@@ -13,8 +13,10 @@ function Bar() {
   const user = useSelector((state)=> state.userReducer.user)
   const isAuth = useSelector((state)=> state.userReducer.isAuth)
   const dispatch = useDispatch()
+
   const handleLogout =()=>{
-    dispatch(userLogout())
+    dispatch(userLogout());
+    
   }
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" style={{position:"fixed",top:"0",width:"100%"}}>

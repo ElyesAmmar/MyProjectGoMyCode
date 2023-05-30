@@ -36,10 +36,10 @@ useEffect(()=>{
       <Route path='/'element={<Home  />}/>
       <Route path='/dashboard' element={<Dash /> }>
             <Route index element={<PrivateRoute> <Dashboard /></PrivateRoute> }/>
-            <Route path='products' element={<Products />}/>
-            <Route path='Customer' element ={<Clients />}/>
-            <Route path='currentOrder' element ={<MakeOrder />}/>
-            <Route path='Orders' element ={ <Orders /> }/>
+            <Route path='products' element={<PrivateRoute><Products /></PrivateRoute>}/>
+            <Route path='Customer' element ={<PrivateRoute><Clients /></PrivateRoute>}/>
+            <Route path='currentOrder' element ={<PrivateRoute><MakeOrder /></PrivateRoute>}/>
+            <Route path='Orders' element ={ <PrivateRoute><Orders /></PrivateRoute> }/>
       </Route>
       </Routes>
       <Footer />

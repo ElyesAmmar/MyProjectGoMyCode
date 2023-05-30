@@ -38,8 +38,8 @@ function Bar() {
           
           </Nav>
           <Nav>
-          <Nav.Link href="#deets">About Us</Nav.Link>
-          <Nav.Link href="#pricing">Contact</Nav.Link>
+          <Nav.Link href="#deets">  <Link to="/contact" style={{ textDecoration: "none" }} > Contact </Link></Nav.Link>
+          <Nav.Link href="">About Us</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>

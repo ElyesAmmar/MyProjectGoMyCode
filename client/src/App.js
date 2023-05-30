@@ -15,6 +15,7 @@ import { useEffect } from 'react';
 import { getAuthUser } from './JS/actions/user';
 import { ToastContainer } from 'react-toastify';
 import PrivateRoute from './components/PrivateRoute';
+import ContactUs from './components/contactUs';
 
 
 
@@ -41,6 +42,7 @@ useEffect(()=>{
             <Route path='currentOrder' element ={<PrivateRoute><MakeOrder /></PrivateRoute>}/>
             <Route path='Orders' element ={ <PrivateRoute><Orders /></PrivateRoute> }/>
       </Route>
+      <Route path='/contact'element={<ContactUs />}/>
       </Routes>
       <Footer />
       </BrowserRouter>

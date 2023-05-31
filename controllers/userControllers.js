@@ -37,9 +37,9 @@ exports.register = async(req,res)=>{
 
 exports.login = async(req,res)=>{
 const result = req.body
-console.log(result)
+
   try {
-    console.log(process.env.secretKey)
+    
       const user = await User.findOne({Email: result.Email})
       if(!user){
           return res.status(400).send({msg: "Please provide a valid email address and password. "})

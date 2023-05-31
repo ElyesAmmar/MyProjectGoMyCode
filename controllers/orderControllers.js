@@ -26,7 +26,12 @@ exports.postOrders = async(req,res)=>{
             num= 10000
         } 
         const datenow = new Date();
-        let date = `${datenow.getDate()}-${datenow.getMonth()}-${datenow.getFullYear()}`
+        // let date = `${datenow.getDate()}-0${datenow.getMonth()+1}-${datenow.getFullYear()}`
+        let date = {
+          Day : datenow.getDate(),
+          Month : datenow.getMonth()+1,
+          Year : datenow.getFullYear()
+        }
         const order= req.body
         const newOrder = new Orders({...order,OrderNum:num,OrderDate:date})
         await newOrder.save()
@@ -36,6 +41,24 @@ exports.postOrders = async(req,res)=>{
         res.status(500).send({msg:"adding order feiled"})
     }
 }
+
+exports.getOrdersByMonth = async(req,res)=>{
+      try {
+        let month = req.body
+        console.log(req.body)
+        const orders = await Orders.find({'OrderDate.Month': month.Month})
+        if(orders){
+          res.status(200).send({response:orders})
+        }else{
+          res.status(400).send({msg: 'No orders maked in this month'})
+        }
+      } catch (error) {
+        console.log(error)
+        res.status(500).send({msg:'finding orders failed'})
+      }
+
+}
+
 
 exports.getInvoiceOrder = async(req,res)=>{
     
@@ -67,12 +90,15 @@ exports.getInvoiceOrder = async(req,res)=>{
 
     // Customer Information
     doc.fontSize(14).text('Customer', 50, 180);
-    doc.fontSize(10).text(`Invoice N°: ${invoiceData.OrderNum}`, 50, 210);
-    doc.fontSize(10).text(`Invoice Date: ${invoiceData.OrderDate}`, 50, 225);
-    doc.fontSize(10).text(`Customer Name: ${invoiceData.OrderClient.Name}`, 50, 240);
-    doc.fontSize(10).text(`Customer Address: ${invoiceData.OrderClient.Address}`, 50, 255);
-    doc.fontSize(10).text(`Customer Company: ${invoiceData.OrderClient.Company}`, 50, 270);
+    doc.fontSize(10).text(`Name: ${invoiceData.OrderClient.Name}`, 50, 210);
+    doc.fontSize(10).text(`Address: ${invoiceData.OrderClient.Address}`, 50, 225);
+    doc.fontSize(10).text(`Company: ${invoiceData.OrderClient.Company}`, 50, 240);
+    doc.fontSize(10).text(`Phone: ${invoiceData.OrderClient.Phone}`, 50, 255);
     
+    // Invoice information
+    doc.fontSize(14).text('Invoice', 400, 180);
+    doc.fontSize(10).text(`Invoice N°: ${invoiceData.OrderNum}`, 400, 210);
+    doc.fontSize(10).text(`Invoice Date: ${invoiceData.OrderDate.Day}-0${invoiceData.OrderDate.Month}-${invoiceData.OrderDate.Year}`, 400, 225);
 
     // Set the table properties
   const tableTop = 330;

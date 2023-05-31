@@ -1,4 +1,4 @@
-import { ADD_PRODUCTS_ORDER, ADD_CLIENT_ORDER, SAVE_ORDER, GET_ORDERS_LOAD, GET_ORDERS_SUCCESS, GET_ORDERS_FAIL, GENERATE_INVOICE } from "../constant/actionsTypes";
+import { ADD_PRODUCTS_ORDER, ADD_CLIENT_ORDER, SAVE_ORDER, GET_ORDERS_LOAD,GET_ORDERS_BY_MONTH, GET_ORDERS_SUCCESS, GET_ORDERS_FAIL, GENERATE_INVOICE } from "../constant/actionsTypes";
 import axios from 'axios'
 import { toast } from 'react-toastify';
 
@@ -82,6 +82,21 @@ export const generateInvoice= (id)=> async(dispatch)=>{
             type: GENERATE_INVOICE,
             payload: result.data
         })
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export const FindOrdersByMonth =(month)=> async(dispatch) =>{
+    try {
+        console.log("month : " ,month)
+        const orders = await axios.get('/api/orders/findorders', month)
+        dispatch({
+            type:GET_ORDERS_BY_MONTH,
+            payload: orders.data.response
+        })
+
+        
     } catch (error) {
         console.log(error)
     }

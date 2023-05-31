@@ -5,5 +5,6 @@ const controllers= require("../controllers/orderControllers");
 router.get('/', controllers.getOrders)
 router.post('/addorder', controllers.postOrders)
 router.get('/invoice/:id', controllers.getInvoiceOrder)
+router.get('/findorders', controllers.getOrdersByMonth)
 
 module.exports = router

@@ -47,7 +47,7 @@ const PrintInvoice = (id) =>{
           <td>{ord.OrderClient.Name}</td>
           <td>{ord.OrderClient.Company}</td>
           <td>{ord.TotalPrice}</td>
-          <td>{ord.OrderDate}</td>
+          <td>{`${ord.OrderDate.Day}-0${ord.OrderDate.Month}-${ord.OrderDate.Year}`}</td>
           <td><Button variant="secondary" onClick={()=>PrintInvoice(ord._id)  }>Print Invoice</Button></td>
         
         </tr>

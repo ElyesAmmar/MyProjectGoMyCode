@@ -3,7 +3,11 @@ const {Schema, model} = mongoose
 
 const orderSchema = new Schema ({
     OrderNum: {type:Number, required:true},
-    OrderDate: { type: String},
+    OrderDate: { 
+        Day: {type: Number, required: true},
+        Month: {type: Number, required: true},
+        Year: {type: Number, required: true}
+    },
     OrderClient: {
         Name: { type: String, required:true},
         Address: {type: String, required:true},

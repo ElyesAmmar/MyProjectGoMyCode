@@ -44,9 +44,9 @@ exports.postOrders = async(req,res)=>{
 
 exports.getOrdersByMonth = async(req,res)=>{
       try {
-        let month = req.body
-        console.log(req.body)
-        const orders = await Orders.find({'OrderDate.Month': month.Month})
+        let month = req.query.Month
+        console.log(req.query)
+        const orders = await Orders.find({'OrderDate.Month': month})
         if(orders){
           res.status(200).send({response:orders})
         }else{

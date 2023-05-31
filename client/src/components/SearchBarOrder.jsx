@@ -8,11 +8,11 @@ import OrdersExport from './ordersbyMonth';
 
 
 function OrdersBar() {
-  const [selectedValue, setSelectedValue] = useState({Month:''});
+  const [selectedValue, setSelectedValue] = useState('');
   const dispatch = useDispatch()
  
 const handleSelectChange = (e) => {
-setSelectedValue({Month:Number(e.target.value)});
+setSelectedValue(Number(e.target.value));
 };
 
 console.log(selectedValue)

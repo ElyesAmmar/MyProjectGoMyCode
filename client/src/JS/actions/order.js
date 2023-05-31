@@ -89,8 +89,8 @@ export const generateInvoice= (id)=> async(dispatch)=>{
 
 export const FindOrdersByMonth =(month)=> async(dispatch) =>{
     try {
-        console.log("month : " ,month)
-        const orders = await axios.get('/api/orders/findorders', month)
+        
+        const orders = await axios.get('/api/orders/findorders', {params :{Month:month}})
         dispatch({
             type:GET_ORDERS_BY_MONTH,
             payload: orders.data.response

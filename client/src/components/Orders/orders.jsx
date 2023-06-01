@@ -1,7 +1,7 @@
 import React, {useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import OrdersBar from "./SearchBarOrder";
-import { generateInvoice, getOrders }  from "../JS/actions/order";
+import { generateInvoice, getOrders }  from "../../JS/actions/order";
 import Table from 'react-bootstrap/Table';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
@@ -19,9 +19,7 @@ useEffect(()=>{
 },[])
 
 const PrintInvoice = (id) =>{
-  
   dispatch(generateInvoice(id))
-  
 }
 
     return(
@@ -39,6 +37,7 @@ const PrintInvoice = (id) =>{
           <th style={{width:'200px'}}>Print Invoice</th>
         </tr>
       </thead>
+      
       {reversedOrders.map((ord)=>
         <tbody key={ord._id}>
         <tr >
@@ -47,13 +46,14 @@ const PrintInvoice = (id) =>{
           <td>{ord.OrderClient.Name}</td>
           <td>{ord.OrderClient.Company}</td>
           <td>{ord.TotalPrice}</td>
-          <td>{`${ord.OrderDate.Day}-0${ord.OrderDate.Month}-${ord.OrderDate.Year}`}</td>
+          <td>{`${ord.OrderDate.Day}-${ord.OrderDate.Month}-${ord.OrderDate.Year}`}</td>
           <td><Button variant="secondary" onClick={()=>PrintInvoice(ord._id)  }>Print Invoice</Button></td>
         
         </tr>
-      </tbody>
+         </tbody>
       )}
       
+     
     </Table>
         </div>
     )

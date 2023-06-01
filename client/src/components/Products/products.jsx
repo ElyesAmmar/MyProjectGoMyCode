@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { getProducts } from "../JS/actions/products";
+import { getProducts } from "../../JS/actions/products";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import SearchProducts from "./SearchBarProduct";
 import Table from 'react-bootstrap/Table';
 import EditModal from './EditProduct';
 import Button from 'react-bootstrap/Button';
-import { addProductsOrder } from "../JS/actions/order";
+import { addProductsOrder } from "../../JS/actions/order";
 import Form from 'react-bootstrap/Form';
 
 

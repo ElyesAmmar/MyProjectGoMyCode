@@ -3,12 +3,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Bar from './components/navbar';
 import Home from "./pages/home"
 import Dashboard from './pages/dashboard';
-import Products from "./components/products";
+import Products from "./components/Products/products";
 import Dash  from "./components/HeaderDash";
 import { BrowserRouter, Routes, Route} from 'react-router-dom';
-import Clients from './components/clients';
-import MakeOrder from './components/AddOrder';
-import Orders from './components/orders';
+import Clients from './components/Customer/clients';
+import MakeOrder from './components/Orders/AddOrder';
+import Orders from './components/Orders/orders';
 import Footer from './components/footer';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';

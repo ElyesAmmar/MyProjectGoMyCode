@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import AddModal from './AddProduct';
 import {useDispatch} from 'react-redux'
-import { FilterByCategorie, searchP } from '../JS/actions/products';
+import { FilterByCategorie, searchP } from '../../JS/actions/products';
 
 function SearchProducts() {
   const [selectedValue, setSelectedValue] = useState('');

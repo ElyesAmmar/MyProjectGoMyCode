@@ -2,10 +2,10 @@ import React, { useEffect, useState} from "react";
 import Table from 'react-bootstrap/Table';
 import ClientsBar from "./SearchBarClient";
 import { useDispatch, useSelector } from "react-redux";
-import { getClients } from "../JS/actions/clients";
+import { getClients } from "../../JS/actions/clients";
 import EditClient from "./EditClient";
 import Button from 'react-bootstrap/Button';
-import { addClientOrder } from "../JS/actions/order";
+import { addClientOrder } from "../../JS/actions/order";
 
 
 function Clients(){

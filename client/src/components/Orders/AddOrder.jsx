@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { Button, Table} from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { updateProduct } from '../JS/actions/products'
-import {SaveOrder } from '../JS/actions/order'
+import { updateProduct } from '../../JS/actions/products'
+import {SaveOrder } from '../../JS/actions/order'
 import AddOrderForm from './AddOrderForm';
 import { useNavigate } from "react-router-dom";
 
@@ -16,6 +16,7 @@ function MakeOrder() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   
+  //method 1 for totalPrice
   const TotalPrice = () => {
     return products.reduce((total, product) => {
       return total + (product.Price * product.quantity);

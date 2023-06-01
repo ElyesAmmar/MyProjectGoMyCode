@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import { useDispatch } from 'react-redux';
-import {postClient } from '../JS/actions/clients';
+import {postClient } from '../../JS/actions/clients';
 
 function AddClient() {
   const [show, setShow] = useState(false);

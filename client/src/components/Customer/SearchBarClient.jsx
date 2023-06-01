@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import AddClient from './Addclient';
 import { useDispatch } from 'react-redux';
-import { searchClient } from '../JS/actions/clients';
+import { searchClient } from '../../JS/actions/clients';
 
 
 

@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import axios from 'axios';
-import { deleteProduct, updateProduct } from '../JS/actions/products';
+import { deleteProduct, updateProduct } from '../../JS/actions/products';
 import { useDispatch, useSelector } from 'react-redux';
  
 

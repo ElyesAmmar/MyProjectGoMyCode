@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useEffect,useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import OrdersBar from "./SearchBarOrder";
 import { generateInvoice, getOrders }  from "../../JS/actions/order";
@@ -8,11 +8,25 @@ import Button from 'react-bootstrap/Button';
 
 
 
+
+
 function Orders(){
 
 const dispatch = useDispatch()
 const orders = useSelector((state)=> state.orderReducer.orders)
-const reversedOrders = orders.slice().reverse()
+const ordersMonth = useSelector((state)=> state.orderReducer.ordersMonth)
+
+
+
+ //method 2 for totalPrice
+ const TotalOrders=()=>{
+  let T = 0
+  ordersMonth.map((ord)=>
+  T=T+ord.TotalPrice
+  )
+  return T
+}
+
 
 useEffect(()=>{
    dispatch(getOrders())
@@ -25,6 +39,7 @@ const PrintInvoice = (id) =>{
     return(
         <div className="datatable">
        <OrdersBar />
+      
        <Table  striped>
       <thead>
         <tr>
@@ -37,8 +52,7 @@ const PrintInvoice = (id) =>{
           <th style={{width:'200px'}}>Print Invoice</th>
         </tr>
       </thead>
-      
-      {reversedOrders.map((ord)=>
+      {ordersMonth.length === 0 && orders.slice().reverse().map((ord)=>
         <tbody key={ord._id}>
         <tr >
           <td><Form.Check /></td>
@@ -52,6 +66,25 @@ const PrintInvoice = (id) =>{
         </tr>
          </tbody>
       )}
+      
+        <tbody >
+        {ordersMonth.length > 0 && ordersMonth.slice().reverse().map((ord)=>
+        <tr key={ord._id} >
+          <td><Form.Check /></td>
+          <td>N°{ord.OrderNum}</td>
+          <td>{ord.OrderClient.Name}</td>
+          <td>{ord.OrderClient.Company}</td>
+          <td>{ord.TotalPrice}</td>
+          <td>{`${ord.OrderDate.Day}-${ord.OrderDate.Month}-${ord.OrderDate.Year}`}</td>
+          <td><Button variant="secondary" onClick={()=>PrintInvoice(ord._id)  }>Print Invoice</Button></td>
+        </tr>
+        )}
+        <tr>
+          <td colSpan={4} style={{fontWeight:'bold', textAlign:'center'}}>Total</td>
+          <td>{TotalOrders()} TND</td>
+        </tr>
+         </tbody>
+     
       
      
     </Table>

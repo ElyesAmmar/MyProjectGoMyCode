@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useDispatch } from 'react-redux';
 import { FindOrdersByMonth } from '../../JS/actions/order';
-import OrdersExport from './ordersbyMonth';
+
 
 
 
@@ -46,8 +46,8 @@ const Find = ()=>{
           <option value='12'>December</option>
         </Form.Select>
       </Form.Group>
-      {/* <Button variant="outline-success" onClick={Find} >Apply</Button> */}
-      <OrdersExport handleFind={Find}/>
+      <Button variant="outline-success" onClick={Find} >Apply</Button>
+    
       </div>
       <div style={{display:'flex',height:'45px',paddingTop:'7px',paddingRight:'7px'}}>
       <Form.Control

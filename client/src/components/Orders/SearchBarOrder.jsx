@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useDispatch } from 'react-redux';
 import { FindOrdersByMonth } from '../../JS/actions/order';
-
+import SummaryExports from './SummaryExports'
 
 
 
@@ -14,8 +14,6 @@ function OrdersBar() {
 const handleSelectChange = (e) => {
 setSelectedValue(Number(e.target.value));
 };
-
-console.log(selectedValue)
 
 const Find = ()=>{
   dispatch(FindOrdersByMonth(selectedValue))
@@ -47,7 +45,7 @@ const Find = ()=>{
         </Form.Select>
       </Form.Group>
       <Button variant="outline-success" onClick={Find} >Apply</Button>
-    
+     <SummaryExports />
       </div>
       <div style={{display:'flex',height:'45px',paddingTop:'7px',paddingRight:'7px'}}>
       <Form.Control

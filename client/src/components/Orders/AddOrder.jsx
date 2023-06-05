@@ -12,7 +12,8 @@ function MakeOrder() {
 
   const [products, setProducts ]= useState(useSelector((state)=> state.orderReducer.products)) 
   const [client, setClient] = useState(useSelector((state)=> state.orderReducer.client))
-  const productsOrder = products.map((prod)=> {return {Name: prod.Name , Quantity: prod.quantity , Price: prod.Price , TotalPrice: prod.TotalPrice  }})
+  const productsOrder = products.map((prod)=> {return {Name: prod.Name , Quantity: prod.quantity ,TotalCost:prod.TotalCost, 
+                                                        Cost: prod.Cost, Price: prod.Price , TotalPrice: prod.TotalPrice  }})
   const dispatch = useDispatch()
   const navigate = useNavigate()
   
@@ -22,10 +23,18 @@ function MakeOrder() {
       return total + (product.Price * product.quantity);
     }, 0);
   };
+  //method 2 for totalPrice
+ const TotalCost=()=>{
+  let T = 0
+  products.map((prod)=>
+  T=T+prod.TotalCost
+  )
+  return T
+}
 
  // add data to order
   const saveOrder = () =>{
-    dispatch(SaveOrder({OrderClient: client, Products: productsOrder, TotalPrice: TotalPrice() }))
+    dispatch(SaveOrder({OrderClient: client, Products: productsOrder, TotalCost:TotalCost(), TotalPrice: TotalPrice() }))
   }
 
 // update Stock 

@@ -27,7 +27,7 @@ const ordersMonth = useSelector((state)=> state.orderReducer.ordersMonth)
   return T
 }
 
-
+console.log(orders)
 useEffect(()=>{
    dispatch(getOrders())
 },[])
@@ -79,14 +79,12 @@ const PrintInvoice = (id) =>{
           <td><Button variant="secondary" onClick={()=>PrintInvoice(ord._id)  }>Print Invoice</Button></td>
         </tr>
         )}
-        <tr>
+        {ordersMonth.length > 0 && <tr>
           <td colSpan={4} style={{fontWeight:'bold', textAlign:'center'}}>Total</td>
           <td>{TotalOrders()} TND</td>
-        </tr>
+        </tr>}
+        
          </tbody>
-     
-      
-     
     </Table>
         </div>
     )

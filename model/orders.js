@@ -18,8 +18,11 @@ const orderSchema = new Schema ({
         Name: {type:String, required:true},
         Quantity: {type:Number,required:true },
         Price: {type:Number,required:true},
+        Cost: {type:Number},
+        TotalCost: {type:Number},
         TotalPrice: {type:Number,required:true}
     }],
+    TotalCost: {type:Number},
     TotalPrice: {type:Number}
     
 })

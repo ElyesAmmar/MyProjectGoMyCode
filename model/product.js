@@ -8,7 +8,8 @@ const productSchema = new Schema ({
     Barcode: {type:Number, unique:true},
     Stock: {type:Number, required:true},
     Price: {type:Number, required:true},
-    Category: {type:String, required:true}
+    Category: {type:String, required:true},
+    Cost: {type:Number}
 })
 
 const Products = model("Products", productSchema);

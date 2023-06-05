@@ -81,6 +81,11 @@ const Edit=()=>{
         <Form.Control type="text" name="Barcode" onChange={handlechange}  />
       </Form.Group>
 
+      <Form.Group className="mb-3" controlId="formBasicPassword">
+        <Form.Label>Cost : {product.Cost} </Form.Label>
+        <Form.Control type="text" name="Cost" onChange={handlechange}  />
+      </Form.Group>
+
     </Form>
 
         </Modal.Body>

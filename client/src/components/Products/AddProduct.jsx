@@ -8,7 +8,7 @@ import { useDispatch} from 'react-redux';
 
 function AddModal() {
   const [show, setShow] = useState(false);
-  const [product, setProduct] = useState({Name:'',Stock:'',Image:'',Price:'',Category:'',Barcode:''})
+  const [product, setProduct] = useState({Name:'',Stock:'',Image:'',Price:'',Category:'',Barcode:'',Cost:''})
   const dispatch = useDispatch()
   // const  msg = useSelector((state)=>state.productReducer.msg)
 
@@ -18,7 +18,7 @@ function AddModal() {
 
   const Add= ()=>{
       dispatch(postProduct(product));
-      setProduct({Name:'',Stock:'',Image:'',Price:'',Category:'',Barcode:''})
+      setProduct({Name:'',Stock:'',Image:'',Price:'',Category:'',Barcode:'',Cost:''})
   }
   
   return (
@@ -62,6 +62,11 @@ function AddModal() {
       <Form.Group className="mb-3" controlId="formBasicPassword">
         <Form.Label>Barcode</Form.Label>
         <Form.Control type="text" placeholder="Barcode" onChange={(e)=>setProduct({...product,Barcode: e.target.value})} />
+      </Form.Group>
+
+      <Form.Group className="mb-3" controlId="formBasicPassword">
+        <Form.Label>Cost</Form.Label>
+        <Form.Control type="text" placeholder="Cost" onChange={(e)=>setProduct({...product,Cost: e.target.value})} />
       </Form.Group>
 
     </Form>

@@ -67,7 +67,8 @@ function Products() {
           <Button variant="secondary" 
           onClick={
             ()=> {dispatch(addProductsOrder({mongoId: prod._id, Id:prod.ProductId, TotalPrice: prod.Price*quantity,
-                                            Stock:prod.Stock, Name: prod.Name, Price:prod.Price, quantity}))}}
+                                            Stock:prod.Stock, Name: prod.Name, Price:prod.Price,
+                                            Cost:prod.Cost, Cost:prod.Cost, TotalCost:prod.Cost*quantity, quantity}))}}
           >+</Button>
           
           </div>

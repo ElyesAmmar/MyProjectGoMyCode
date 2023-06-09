@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { useSelector } from 'react-redux';
@@ -8,10 +8,11 @@ function SummaryExports() {
   const [show, setShow] = useState(false);
   const orders = useSelector((state)=> state.orderReducer.ordersMonth)
   const [products, setProducts] = useState([])
+  const [reducedProducts, setReducedProducts] = useState([])
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const [showProducts, setShowProducts] = useState(false);
-  
+
  //method 2 for totalPrice
  const TotalOrders=()=>{
   let T = 0
@@ -32,12 +33,25 @@ const TotalCost=()=>{
 
 const getProducts = ()=>{
     orders.map((ord)=> ord.Products.map((prod)=>
-    setProducts((prevProd)=>[...prevProd, prod ])
-    )
-    )
+        setProducts((prevProd)=>[...prevProd, prod ])
+    ))
+    console.log(products)
 }
 
-console.log('products ::: ',products)
+useEffect(()=>{
+  const reducedTab = products.reduce((accumulator,current)=>{
+    const existingItem = accumulator.find((item)=> item.Name === current.Name);
+    if(existingItem){
+      existingItem.Quantity+= current.Quantity
+      existingItem.TotalPrice += current.TotalPrice
+    }else{
+      accumulator.push(current);
+    }
+    return accumulator;
+  },[])
+  setReducedProducts(reducedTab)
+},[products])
+
   return (
     <>
       <Button variant="light" style={{marginLeft:'20px'}} onClick={handleShow}>
@@ -91,24 +105,26 @@ console.log('products ::: ',products)
         <tr>
         <th>Product Name</th>
         <th>Cost</th>
+        <th>Total Cost</th>
         <th>Price</th>
         <th>Quantity</th>
         <th>Total Price</th>
+        <th>Income</th>
       </tr>
       </thead>
       <tbody>
+      {reducedProducts.map((p)=>
       <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td>{p.Name}</td>
+        <td>{p.Cost}</td>
+        <td>{p.Cost*p.Quantity}</td>
+        <td>{p.Price}</td>
+        <td>{p.Quantity}</td>
+        <td>{p.TotalPrice}</td>
+        <td>{p.TotalPrice-(p.Quantity*p.Cost)}</td>
       </tr>
-       <tr>
-         <td>3</td>
-         <td colSpan={2}></td>
-         <td></td>
-       </tr>
-     </tbody>
+      )}
+        </tbody>
    </Table>
     }
         </Modal.Body>

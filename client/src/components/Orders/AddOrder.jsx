@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState } from 'react';
 import { Button, Table} from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
@@ -15,6 +15,7 @@ function MakeOrder() {
   const user = useSelector((state)=> state.userReducer.user)
   const order = useSelector((state)=> state.orderReducer.order)
   console.log(order)
+
   const productsOrder = products.map((prod)=> {return {Name: prod.Name , Quantity: prod.quantity ,TotalCost:prod.TotalCost, 
                                                         Cost: prod.Cost, Price: prod.Price , TotalPrice: prod.TotalPrice  }})
   const dispatch = useDispatch()
@@ -35,14 +36,12 @@ function MakeOrder() {
   return T
 }
 
-useEffect(()=>{
-  dispatch(sendMailOrder({user,order}))
-},[order])
+
 
  // add data to order
-  const saveOrder = () =>{
-    dispatch(SaveOrder({OrderClient: client, Products: productsOrder, TotalCost:TotalCost(), TotalPrice: TotalPrice() }))
-    
+  const saveOrder = async() =>{
+    await dispatch(SaveOrder({OrderClient: client, Products: productsOrder, TotalCost:TotalCost(), TotalPrice: TotalPrice() }));
+    dispatch(sendMailOrder({user,order}))
   }
 
 // update Stock 

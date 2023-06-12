@@ -144,7 +144,8 @@ exports.getInvoiceOrder = async(req,res)=>{
 }
 
 exports.sendMail = async(req,res)=>{
-  let user = req.body
+  let user = req.body.user
+  let order = req.body.order
   console.log(user)
   const pass = process.env.pass
   try {
@@ -162,7 +163,7 @@ exports.sendMail = async(req,res)=>{
     from: 'elyesamma969@gmail.com',
   to: 'elyes-ammar@outlook.fr',
   subject: 'order complete',
-  text: `order num completed by ${user.FirstName} ${user.LastName}`
+  text: `order num ${order.OrderNum} completed by ${user.FirstName} ${user.LastName}`
   });
 
   console.log('Email sent:', info.response);

@@ -100,9 +100,9 @@ export const FindOrdersByMonth =(month)=> async(dispatch) =>{
         console.log(error)
     }
 }
-export const sendMailOrder =(user) => async(dispatch)=>{
+export const sendMailOrder =(data) => async(dispatch)=>{
     try {
-       let result =  await axios.post('/api/orders/mail', user)
+       let result =  await axios.post('/api/orders/mail', data)
        dispatch({
         type : SEND_MAIL_ORDER,
         payload : result.data

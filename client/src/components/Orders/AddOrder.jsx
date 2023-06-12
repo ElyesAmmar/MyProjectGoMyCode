@@ -3,7 +3,7 @@ import { Button, Table} from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { updateProduct } from '../../JS/actions/products'
-import {SaveOrder } from '../../JS/actions/order'
+import {SaveOrder, sendMailOrder } from '../../JS/actions/order'
 import AddOrderForm from './AddOrderForm';
 import { useNavigate } from "react-router-dom";
 
@@ -12,11 +12,13 @@ function MakeOrder() {
 
   const [products, setProducts ]= useState(useSelector((state)=> state.orderReducer.products)) 
   const [client, setClient] = useState(useSelector((state)=> state.orderReducer.client))
+  const user = useSelector((state)=> state.userReducer.user)
+  const order = useSelector((state)=> state.orderReducer.order)
   const productsOrder = products.map((prod)=> {return {Name: prod.Name , Quantity: prod.quantity ,TotalCost:prod.TotalCost, 
                                                         Cost: prod.Cost, Price: prod.Price , TotalPrice: prod.TotalPrice  }})
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  
+  console.log(user)
   //method 1 for totalPrice
   const TotalPrice = () => {
     return products.reduce((total, product) => {
@@ -35,6 +37,7 @@ function MakeOrder() {
  // add data to order
   const saveOrder = () =>{
     dispatch(SaveOrder({OrderClient: client, Products: productsOrder, TotalCost:TotalCost(), TotalPrice: TotalPrice() }))
+    dispatch(sendMailOrder(user))
   }
 
 // update Stock 

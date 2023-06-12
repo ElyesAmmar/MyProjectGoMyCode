@@ -2,6 +2,8 @@ const Orders= require('../model/orders')
 const PDFDocument = require('pdfkit');
 const blobStream = require('blob-stream');
 const fs = require('fs');
+const nodemailer = require("nodemailer");
+require("dotenv").config({path:"./.env"});
 
 
 
@@ -139,4 +141,34 @@ exports.getInvoiceOrder = async(req,res)=>{
     console.error('Error retrieving invoice data:', error);
     res.status(500).send('Error generating invoice PDF')
 }
+}
+
+exports.sendMail = async(req,res)=>{
+  let user = req.body
+  console.log(user)
+  const pass = process.env.pass
+  try {
+
+  const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: 'elyesamma969@gmail.com',
+      pass: pass
+    }
+  });
+
+  
+  let info = await transporter.sendMail({
+    from: 'elyesamma969@gmail.com',
+  to: 'elyes-ammar@outlook.fr',
+  subject: 'order complete',
+  text: `order num completed by ${user.FirstName} ${user.LastName}`
+  });
+
+  console.log('Email sent:', info.response);
+  res.send('email sent')
+
+  } catch (error) {
+    console.error('Error:', error);
+  }
 }

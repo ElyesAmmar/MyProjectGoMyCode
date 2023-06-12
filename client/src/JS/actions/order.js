@@ -1,4 +1,4 @@
-import { ADD_PRODUCTS_ORDER, ADD_CLIENT_ORDER, SAVE_ORDER, GET_ORDERS_LOAD,GET_ORDERS_BY_MONTH, GET_ORDERS_SUCCESS, GET_ORDERS_FAIL, GENERATE_INVOICE } from "../constant/actionsTypes";
+import { ADD_PRODUCTS_ORDER, ADD_CLIENT_ORDER,SEND_MAIL_ORDER, SAVE_ORDER, GET_ORDERS_LOAD,GET_ORDERS_BY_MONTH, GET_ORDERS_SUCCESS, GET_ORDERS_FAIL, GENERATE_INVOICE } from "../constant/actionsTypes";
 import axios from 'axios'
 import { toast } from 'react-toastify';
 
@@ -38,7 +38,7 @@ export const SaveOrder = (order) => async(dispatch)=>{
         let result = await axios.post('/api/orders/addorder', order)
         dispatch({
             type:SAVE_ORDER,
-            payload: result.data.msg
+            payload: result.data
         })
     } catch (error) {
         console.log(error)
@@ -96,6 +96,17 @@ export const FindOrdersByMonth =(month)=> async(dispatch) =>{
         })
 
         
+    } catch (error) {
+        console.log(error)
+    }
+}
+export const sendMailOrder =(user) => async(dispatch)=>{
+    try {
+       let result =  await axios.post('/api/orders/mail', user)
+       dispatch({
+        type : SEND_MAIL_ORDER,
+        payload : result.data
+       })
     } catch (error) {
         console.log(error)
     }

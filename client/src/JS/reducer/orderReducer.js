@@ -1,4 +1,4 @@
-import { ADD_PRODUCTS_ORDER, ADD_CLIENT_ORDER, GET_ORDERS_BY_MONTH, SAVE_ORDER, GET_ORDERS_LOAD, GET_ORDERS_SUCCESS, GET_ORDERS_FAIL, GENERATE_INVOICE } from "../constant/actionsTypes";
+import { ADD_PRODUCTS_ORDER, ADD_CLIENT_ORDER,SEND_MAIL_ORDER, GET_ORDERS_BY_MONTH, SAVE_ORDER, GET_ORDERS_LOAD, GET_ORDERS_SUCCESS, GET_ORDERS_FAIL, GENERATE_INVOICE } from "../constant/actionsTypes";
 
 const initialeState = {
     loadOrders: false,
@@ -20,7 +20,7 @@ export const orderReducer = (state=initialeState, {type,payload})=>{
         case ADD_CLIENT_ORDER:
             return {...state, client: payload}
         case SAVE_ORDER:
-            return {...state, client:{}, products:[], msg : payload }
+            return {...state, client:{},order: payload.response, products:[], msg : payload.msg }
         case GET_ORDERS_LOAD:
             return {...state, loadOrders: true}
         case GET_ORDERS_SUCCESS:
@@ -30,7 +30,9 @@ export const orderReducer = (state=initialeState, {type,payload})=>{
         case GENERATE_INVOICE:
             return {...state, invoice : payload}
         case GET_ORDERS_BY_MONTH:
-            return {...state, ordersMonth: payload}    
+            return {...state, ordersMonth: payload}  
+        case SEND_MAIL_ORDER:
+                return {...state, msg: payload }
         default:
             return state
     }

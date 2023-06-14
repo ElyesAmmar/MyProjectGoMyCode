@@ -27,7 +27,6 @@ const ordersMonth = useSelector((state)=> state.orderReducer.ordersMonth)
   return T
 }
 
-console.log(orders)
 useEffect(()=>{
    dispatch(getOrders())
 },[])

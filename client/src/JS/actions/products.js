@@ -1,5 +1,6 @@
 import { GET_PRODUCT_LOAD, GET_PRODUCT_SUCCESS, GET_PRODUCT_FAIL, GET_ONEPRODUCT_SUCCESS, POST_PRODUCT_FAIL,
-        GET_ONEPRODUCT_FAIL, POST_PRODUCT_SUCCESS, SEARCH_PRODUCT, UPDATE_PRODUCT, DELETE_PRODUCT, FILTER_PRODUCT_CATEGORY} from "../constant/actionsTypes";
+        GET_ONEPRODUCT_FAIL, POST_PRODUCT_SUCCESS, 
+        GET_PRODUCT_BY_BARCODE, SEARCH_PRODUCT, UPDATE_PRODUCT, DELETE_PRODUCT, FILTER_PRODUCT_CATEGORY} from "../constant/actionsTypes";
 import axios from "axios"
 import { toast } from 'react-toastify';
 
@@ -75,6 +76,20 @@ export const getProductById =(id)=> async(dispatch)=>{
         })
     }
 
+}
+
+export const findProductByBarcode = (barcode)=> async(dispatch)=>{
+    console.log(barcode)
+    try {
+        let result = await axios.get('/api/products/product/', {params : {Barcode:barcode}})
+        console.log(result)
+        dispatch({
+            type : GET_PRODUCT_BY_BARCODE,
+            payload : result.data.response
+        })
+    } catch (error) {
+        console.log(error)
+    }
 }
 
 export const updateProduct= (id,update) => async(dispatch)=>{

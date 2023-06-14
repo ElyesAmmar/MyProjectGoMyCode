@@ -1,15 +1,23 @@
 import React, {useState} from 'react';
+import {useDispatch} from 'react-redux'
 import { Form, Button, Row, Col} from 'react-bootstrap';
-
 import Modal from 'react-bootstrap/Modal';
+import { findProductByBarcode } from '../../JS/actions/products';
 
 
 function AddOrderForm() {
-  const [product, setProduct] = useState({name:'',quantity:''})
-  const [client, setClient] = useState({name:'', company:''})
+  const dispatch = useDispatch()
+  const [ProductName, setProductName] = useState('')
+  const [Barcode, setBarcode] = useState('')
+  const [clientName, setClientName] = useState({name:'', company:''})
+  const [Quantity, setQuantity] = useState('')
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const getproduct =()=>{
+      dispatch(findProductByBarcode(Barcode))
+  }
 
   return (
     <>
@@ -27,20 +35,28 @@ function AddOrderForm() {
 <div >
   <Form.Label>Add Customer</Form.Label><br/>
   <Form.Control 
-  placeholder='Enter the client name or the company name' style={{width:'450px'}} 
-  onChange={(e)=>setClient(e.target.value)} 
+  style={{width:'450px'}} 
+  onChange={(e)=>setClientName(e.target.value)} 
   />
 </div>
   <div style={{width:'450px', marginTop:'10px'}}>
   <Form>
     <Row>
     <Col>
-      <Form.Label>Name or Barcode Product</Form.Label><br/>
-      <Form.Control style={{width:'350px'}}  onChange={(e)=>setProduct({...product,name:e.target.value})} />   
+      <Form.Label>Product Name</Form.Label><br/>
+      <Form.Control style={{width:'350px'}}  onChange={(e)=>setProductName({...product,name:e.target.value})} />   
     </Col>
     <Col>
       <Form.Label>Quantity</Form.Label><br/>
-      <Form.Control type='number' style={{width:'70px'}} onChange={(e)=>setProduct({...product,quantity:e.target.value})} />
+      <Form.Control type='number' style={{width:'70px'}} onChange={(e)=>setQuantity(Number(e.target.value))} />
+    </Col>
+    <Col>
+      <Form.Label>Product Barcode</Form.Label><br/>
+      <Form.Control style={{width:'350px'}}  onChange={(e)=>setBarcode(e.target.value)} />   
+    </Col>
+    <Col>
+      <Form.Label>Quantity</Form.Label><br/>
+      <Form.Control type='number' style={{width:'70px'}} onChange={(e)=>setQuantity(Number(e.target.value))} />
     </Col>
     </Row>
     </Form>
@@ -53,7 +69,7 @@ function AddOrderForm() {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleClose}>
+          <Button variant="primary" onClick={()=>{getproduct();handleClose()}}>
             Save Order
           </Button>
         </Modal.Footer>

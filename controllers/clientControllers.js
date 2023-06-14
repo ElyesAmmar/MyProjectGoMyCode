@@ -67,27 +67,28 @@ exports.deleteClient = async(req,res)=>{
         
     }
 }
-// exports.getClientByName = async(req,res)=>{
-//     try {
-//         const name = req.query.name
-//         const company = req.query.company
-//         if(name){
-//             const result = await Clients.find({ Name:{ $regex: new RegExp('^' + name + '$', 'i') } })
-//             if(result){
-//                 return res.status(200).send({msg:'getting  success', response:result})
-//                }  else{
-//                 return res.status(400).send({msg:'client not found'})
-//         }}
-//         else if(company){
-//             const result = await Clients.find({ Company:{ $regex: new RegExp('^' + company + '$', 'i') } })
-//            if(!result){
-//             return res.status(400).send({msg:'client not found'})
-//            }  else{
-//             return res.status(200).send({msg:'getting client success', response:result})
-//         }
-//         }
+exports.getClientByName = async(req,res)=>{
+    try {
+        const name = req.query.Name
+        const company = req.query.Company
+        if(name){
+            const result = await Clients.findOne({ Name:{ $regex: new RegExp('^' + name + '$', 'i') }})
+            if(result){
+                return res.status(200).send({msg:'getting  success', response:result})
+               }  else{
+                return res.status(400).send({msg:'client not found'})
+        }}
+        else if(company){
+            const result = await Clients.findOne({ Company: { $regex: new RegExp('^' + company + '$', 'i') }})
+           if(!result){
+            return res.status(400).send({msg:'client not found'})
+           }  else{
+            return res.status(200).send({msg:'getting client success', response:result})
+        }
+        }
         
-//     } catch (error) {
-//         return res.status(500).send({msg:"getting client failed"})
-//     }
-// }
+    } catch (error) {
+        return res.status(500).send({msg:"getting client failed"})
+    }
+}
+

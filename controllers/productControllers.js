@@ -92,19 +92,27 @@ exports.deleteProduct = async(req,res)=>{
     }
 }
 
-// exports.findProductName = async(res,req)=>{
-               
-//     const result= req.query.name
-//     console.log(result)
-//     try {  
-//         const product =  await Products.find({Name:result})
-//            if (product){
-//             return res.status(200).send({msg: "Product found", response: product})
-//            }else{
-//             res.status(404).send({msg: "Product not found"})
-//            }
-//         } catch (error) {
-//             // return res.status(500).send({msg:"getting Product failed"})
-//             console.log(error)
-//         }
-//     }
+exports.getProductNameOrCode = async(req,res)=>{
+    try {
+        const name = req.query.Name
+        const barcode = req.query.Barcode
+        if(name){
+            const result = await Products.find({ Name:{ $regex: new RegExp('^' + name + '$', 'i') }})
+            if(result){
+                return res.status(200).send({msg:'getting product success', response:result})
+               }  else{
+                return res.status(400).send({msg:'product not found'})
+        }}
+        else if(barcode){
+            const result = await Products.findOne({ Barcode: barcode})
+           if(!result){
+            return res.status(400).send({msg:'product not found'})
+           }  else{
+            return res.status(200).send({msg:'getting product success', response:result})
+        }
+        }
+        
+    } catch (error) {
+        return res.status(500).send({msg:"getting client failed"})
+    }
+}

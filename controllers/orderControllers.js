@@ -147,6 +147,7 @@ exports.sendMail = async(req,res)=>{
   let user = req.body.user
   let order = req.body.order
   console.log(user)
+  console.log(order)
   const pass = process.env.pass
   try {
 

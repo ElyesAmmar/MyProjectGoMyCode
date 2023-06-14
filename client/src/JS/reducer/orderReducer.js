@@ -14,6 +14,7 @@ const initialeState = {
 }
 
 export const orderReducer = (state=initialeState, {type,payload})=>{
+    console.log('productsreducer:',state.products)
     switch (type) {
         case ADD_PRODUCTS_ORDER:
             return {...state, products: [...state.products, payload]}

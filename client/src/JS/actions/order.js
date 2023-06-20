@@ -1,10 +1,12 @@
-import { ADD_PRODUCTS_ORDER, ADD_CLIENT_ORDER,SEND_MAIL_ORDER, SAVE_ORDER, GET_ORDERS_LOAD,GET_ORDERS_BY_MONTH, GET_ORDERS_SUCCESS, GET_ORDERS_FAIL, GENERATE_INVOICE } from "../constant/actionsTypes";
+import { ADD_PRODUCTS_ORDER , ADD_CLIENT_ORDER,SEND_MAIL_ORDER, SAVE_ORDER, GET_ORDERS_LOAD,GET_ORDERS_BY_MONTH, GET_ORDERS_SUCCESS, GET_ORDERS_FAIL, GENERATE_INVOICE } from "../constant/actionsTypes";
 import axios from 'axios'
 import { toast } from 'react-toastify';
 
+
+
 const reactToastSucess = (msg)=>{
     toast.info(msg, {
-        position: "top-center",
+        position: "top-right",
         autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: true,
@@ -21,9 +23,11 @@ export const addProductsOrder = (product)=>{
     return{
         type:ADD_PRODUCTS_ORDER,
         payload: product    
+        
     }
     
 }
+
 export const addClientOrder = (client)=>{
     let msg = 'client added to order'
     reactToastSucess(msg)
@@ -33,13 +37,15 @@ export const addClientOrder = (client)=>{
     }     
 }
 
-export const SaveOrder = (order) => async(dispatch)=>{
+export const SaveOrder = ({user,order}) => async(dispatch)=>{
     try {
         let result = await axios.post('/api/orders/addorder', order)
+        dispatch(sendMailOrder({user, order:result.data.response}))
         dispatch({
             type:SAVE_ORDER,
-            payload: result.data
+            payload: result.data.response
         })
+        
     } catch (error) {
         console.log(error)
     }
@@ -57,6 +63,7 @@ export const getOrders = () => async(dispatch)=>{
             type: GET_ORDERS_SUCCESS,
             payload: result.data.response
         })
+        
     } catch (error) {
         console.log(error)
         dispatch({

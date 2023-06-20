@@ -9,7 +9,7 @@ function AddOrderForm() {
   const dispatch = useDispatch()
   const [ProductName, setProductName] = useState('')
   const [Barcode, setBarcode] = useState('')
-  const [clientName, setClientName] = useState({name:'', company:''})
+  const [clientName, setClientName] = useState('')
   const [Quantity, setQuantity] = useState('')
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);

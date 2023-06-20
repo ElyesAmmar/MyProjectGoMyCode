@@ -1,4 +1,4 @@
-import { ADD_PRODUCTS_ORDER, ADD_CLIENT_ORDER,SEND_MAIL_ORDER, GET_ORDERS_BY_MONTH, SAVE_ORDER, GET_ORDERS_LOAD, GET_ORDERS_SUCCESS, GET_ORDERS_FAIL, GENERATE_INVOICE } from "../constant/actionsTypes";
+import { ADD_PRODUCTS_ORDER ,ADD_CLIENT_ORDER,SEND_MAIL_ORDER, GET_ORDERS_BY_MONTH, SAVE_ORDER, GET_ORDERS_LOAD, GET_ORDERS_SUCCESS, GET_ORDERS_FAIL, GENERATE_INVOICE } from "../constant/actionsTypes";
 
 const initialeState = {
     loadOrders: false,
@@ -10,14 +10,15 @@ const initialeState = {
     errors:[],
     ordersMonth:[],
     msg : '', 
-    invoice: ''
+    invoice: '',
+    productsRed:[]
 }
 
 export const orderReducer = (state=initialeState, {type,payload})=>{
     console.log('productsreducer:',state.products)
     switch (type) {
         case ADD_PRODUCTS_ORDER:
-            return {...state, products: [...state.products, payload]}
+            return {...state, products:[...state.products , payload] }
         case ADD_CLIENT_ORDER:
             return {...state, client: payload}
         case SAVE_ORDER:

@@ -7,16 +7,11 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
 
-
-
-
 function Orders(){
 
 const dispatch = useDispatch()
 const orders = useSelector((state)=> state.orderReducer.orders)
 const ordersMonth = useSelector((state)=> state.orderReducer.ordersMonth)
-
-
 
  //method 2 for totalPrice
  const TotalOrders=()=>{

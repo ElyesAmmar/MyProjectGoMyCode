@@ -16,6 +16,7 @@ function MakeOrder() {
   const products = useSelector((state)=> state.orderReducer.products)
   const client = useSelector((state)=> state.orderReducer.client)
   const user = useSelector((state)=> state.userReducer.user)
+
   const currentOrder = products.map(item => ({ ...item }));
   const reducedTab = currentOrder.reduce((accumulator,current)=>{
     const existingItem = accumulator.find((item)=> item.Name === current.Name);
@@ -27,9 +28,7 @@ function MakeOrder() {
     }
     return accumulator;
   },[])
-  console.log("reducedTab : " , reducedTab)
-
-
+  
   const productsOrder = reducedTab.map((prod)=> {return {Name: prod.Name , Quantity: prod.Quantity ,TotalCost:prod.TotalCost, 
                                                         Cost: prod.Cost, Price: prod.Price , TotalPrice: prod.TotalPrice  }})
   
@@ -53,35 +52,23 @@ function MakeOrder() {
   const saveOrder =() =>{
     dispatch(SaveOrder({user,order:{OrderClient: client, Products: productsOrder, TotalCost:TotalCost(), TotalPrice: TotalPrice()}}));
   }
-console.log(client)
 // update Stock 
 const updateStockProduct = () =>{
       products.map((prod)=>dispatch(updateProduct(prod.mongoId, {Stock: prod.Stock-prod.Quantity})))
   
 }
-// useEffect(()=>{
-//   let array = []
-//   let existing = false
-//   products.map((prod)=>{
-//     array.forEach((el)=>{
-//       if (prod.Name === el.Name){
-//         console.log('testtest')
-//         existing = true
-//         el.Quantity += prod.Quantity
-//         el.TotalPrice += prod.TotalPrice
-//         el.TotalCost += prod.TotalCost
-//       }
-//     })
-//     if(!existing){
-//       array.push(prod)
-//     }
-//   })
-//   setProducts(array)
-  
-  
-// },[])
 
-// console.log(AllProducts)
+const handleOrder = () =>{
+  if(Object.keys(client).length === 0){
+    alert('client is required')
+  }else if(products.length === 0){
+    alert('products are required')
+  }else{
+    updateStockProduct();
+    saveOrder();
+    navigate("/dashboard/Orders")
+  }
+}
 
 return (
   <div style={{marginTop:'30px'}}>
@@ -99,7 +86,7 @@ return (
     <Button 
     variant="primary" 
     style={{width:'200px', marginLeft:'800px'} }
-    onClick={()=>{updateStockProduct();saveOrder();navigate("/dashboard/Orders")}}>
+    onClick={handleOrder}>
             Save Order
       </Button>
     </div>

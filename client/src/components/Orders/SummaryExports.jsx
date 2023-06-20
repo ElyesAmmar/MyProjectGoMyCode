@@ -66,6 +66,36 @@ useEffect(()=>{
       </Button>
         </Modal.Header>
         <Modal.Body>
+        {showProducts && 
+      <Table striped bordered hover>
+      <thead>
+        <tr>
+        <th>Product Name</th>
+        <th>Quantity</th>
+        <th>Cost</th>
+        <th>Total Cost</th>
+        <th>Price</th>
+        <th>Total Price</th>
+        <th>Income</th>
+        <th>Income %</th>
+      </tr>
+      </thead>
+      <tbody>
+      {reducedProducts.map((p)=>
+      <tr>
+        <td>{p.Name}</td>
+        <td>{p.Quantity}</td>
+        <td>{p.Cost}</td>
+        <td>{p.Cost*p.Quantity}</td>
+        <td>{p.Price}</td>
+        <td>{p.TotalPrice}</td>
+        <td>{p.TotalPrice-(p.Quantity*p.Cost)}</td>
+        <td>{(((p.Cost*p.Quantity)/p.TotalPrice)*100).toFixed(3)} %</td>
+      </tr>
+      )}
+        </tbody>
+   </Table>
+    }
         <Table striped bordered hover>
       <thead>
         <tr>
@@ -99,34 +129,7 @@ useEffect(()=>{
         </tr>
       </tbody>
     </Table>
-    {showProducts && 
-      <Table striped bordered hover>
-      <thead>
-        <tr>
-        <th>Product Name</th>
-        <th>Cost</th>
-        <th>Total Cost</th>
-        <th>Price</th>
-        <th>Quantity</th>
-        <th>Total Price</th>
-        <th>Income</th>
-      </tr>
-      </thead>
-      <tbody>
-      {reducedProducts.map((p)=>
-      <tr>
-        <td>{p.Name}</td>
-        <td>{p.Cost}</td>
-        <td>{p.Cost*p.Quantity}</td>
-        <td>{p.Price}</td>
-        <td>{p.Quantity}</td>
-        <td>{p.TotalPrice}</td>
-        <td>{p.TotalPrice-(p.Quantity*p.Cost)}</td>
-      </tr>
-      )}
-        </tbody>
-   </Table>
-    }
+    
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>

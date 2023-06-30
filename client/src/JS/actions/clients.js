@@ -15,12 +15,12 @@ const reactToastSucess = (msg)=>{
         });
 }
 
-export const getClients=()=> async(dispatch)=>{
+export const getClients=(userid)=> async(dispatch)=>{
     dispatch({
         type:GET_CLIENTS_LOAD
     })
     try {
-        const result = await axios.get('/api/clients/')
+        const result = await axios.get(`/api/clients/${userid}`)
         dispatch({
             type:GET_CLIENTS_SUCCESS,
             payload:result.data.response
@@ -36,9 +36,9 @@ export const getClients=()=> async(dispatch)=>{
 
 }
 
-export const postClient =(client)=> async(dispatch)=>{
+export const postClient =(userid,client)=> async(dispatch)=>{
     try {
-        let result = await axios.post('/api/clients/addclient', client)
+        let result = await axios.post(`/api/clients/addclient/${userid}`, client)
 
         dispatch({
             type: POST_CLIENT_SUCCESS,
@@ -54,7 +54,7 @@ export const postClient =(client)=> async(dispatch)=>{
         
         
     }
-    dispatch(getClients())
+    dispatch(getClients(userid))
 }
 
 export const getOneClient =(id) => async (dispatch)=>{
@@ -69,7 +69,7 @@ export const getOneClient =(id) => async (dispatch)=>{
     }
 }
 
-export const updateClient = (id, client)=> async(dispatch)=>{
+export const updateClient = (userid,id, client)=> async(dispatch)=>{
     try {
         let result = await axios.put(`/api/clients/edit/${id}`, client)
         dispatch({
@@ -77,6 +77,7 @@ export const updateClient = (id, client)=> async(dispatch)=>{
             payload: result.data.msg
         })
         reactToastSucess(result.data.msg)
+        dispatch(getClients(userid))
     } catch (error) {
         console.log(error)
         
@@ -84,7 +85,7 @@ export const updateClient = (id, client)=> async(dispatch)=>{
 
 }
 
-export const deleteClient= (id)=> async(dispatch)=>{
+export const deleteClient= (userid,id)=> async(dispatch)=>{
     try {
         let result = await axios.delete(`/api/clients/delete/${id}`)
         dispatch({
@@ -92,6 +93,7 @@ export const deleteClient= (id)=> async(dispatch)=>{
             payload: result.data.msg
         })
         reactToastSucess(result.data.msg)
+        dispatch(getClients(userid))
     } catch (error) {
         console.log(error)
     }

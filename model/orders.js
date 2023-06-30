@@ -2,6 +2,7 @@ const mongoose= require('mongoose')
 const {Schema, model} = mongoose
 
 const orderSchema = new Schema ({
+    UserID: {type:Number},
     OrderNum: {type:Number, required:true},
     OrderDate: { 
         Day: {type: Number, required: true},

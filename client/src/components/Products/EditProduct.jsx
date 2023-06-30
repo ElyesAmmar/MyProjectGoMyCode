@@ -16,6 +16,7 @@ function EditModal(id) {
   const [update, setUpdate] = useState({})
   const dispatch = useDispatch()
   const msg = useSelector((state)=> state.productReducer.msg)
+  const user = useSelector((state)=> state.userReducer.user)
   
 const Open= async()=>{
     try {
@@ -31,11 +32,11 @@ const handlechange =(e)=>{
       
 } 
 const Edit=()=>{
-    dispatch(updateProduct(id.id,update));
+    dispatch(updateProduct(user.UserID,id.id,update));
     setUpdate('')
   }
   const Delete = async()=>{
-    dispatch(deleteProduct(id.id))
+    dispatch(deleteProduct(user.UserID,id.id))
   }
 
   return (

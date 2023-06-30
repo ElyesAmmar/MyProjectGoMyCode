@@ -9,14 +9,15 @@ import { addClientOrder } from "../../JS/actions/order";
 
 
 function Clients(){
+    const user = useSelector((state)=> state.userReducer.user)
     const dispatch = useDispatch()
     const input = useSelector((state)=> state.clientReducer.searchClient)
     const clients = useSelector((state)=> state.clientReducer.clients)
     
-  
+  console.log(clients)
 
     useEffect(()=>{
-        dispatch(getClients())
+        dispatch(getClients(user.UserID))
     },[])
     
     return(

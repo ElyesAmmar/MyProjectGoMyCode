@@ -8,12 +8,19 @@ exports.register = async(req,res)=>{
     
   const result = req.body
   try {
-    
+    let UserId= 0
+        let lastUser = await User.findOne().sort({_id: -1}); // Get the last ID in the database
+        
+        if(lastUser){
+          UserId= lastUser.UserID + 1
+          } else{                                                   // If there are no products in the database, start with ID 1
+            UserId= 1
+        } 
       const check = await User.findOne({Email: result.Email})
       if(check){
         return res.status(400).send({msg: "user already exist"})
       }else{
-        const user = new User(result)
+        const user = new User({...result,UserID:Number(UserId)})
 
         // create salt and hash
         const salt = 10;

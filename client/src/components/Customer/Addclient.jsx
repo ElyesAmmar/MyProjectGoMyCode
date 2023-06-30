@@ -2,19 +2,20 @@ import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {postClient } from '../../JS/actions/clients';
 
 function AddClient() {
+  const user = useSelector((state)=> state.userReducer.user)
   const [show, setShow] = useState(false);
   const dispatch = useDispatch()
   const [client, setClient] = useState({Name:'',Email:'',Address:'',Company:'',Phone:''})
-
+ 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   
   const Add =()=>{
-    dispatch(postClient(client));
+    dispatch(postClient(user.UserID,client));
   }
   return (
     <>

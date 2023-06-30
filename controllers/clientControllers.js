@@ -2,7 +2,8 @@ const Clients = require('../model/clients')
 
 exports.getClients = async(req, res)=>{
     try{
-       const result= await Clients.find({})
+        userId = req.params.userid
+       const result= await Clients.find({UserID:userId})
        return res.status(200).send({msg:"getting Clients success", response: result})
     }catch(error){
         console.log(error)
@@ -12,8 +13,9 @@ exports.getClients = async(req, res)=>{
 
 exports.postClient = async(req, res)=>{
     try {
+        userId = req.params.userid
         let reference= 0
-        let lastClient = await Clients.findOne().sort({_id: -1}); // Get the last ID in the database
+        let lastClient = await Clients.findOne({UserID:userId}).sort({_id: -1}); // Get the last ID in the database
         
         if(lastClient){
             reference= lastClient.Reference + 1
@@ -26,7 +28,7 @@ exports.postClient = async(req, res)=>{
         if (!client.Name || !client.Phone || !client.Address){
             return res.status(400).send({msg:"please enter the missing fields"})
         }else{
-            const newClient= new Clients({...client,Reference:reference})
+            const newClient= new Clients({...client,Reference:reference,UserID:userId})
             await newClient.save()
             return res.status(200).send({msg:"adding product successfully", response:newClient})
         }

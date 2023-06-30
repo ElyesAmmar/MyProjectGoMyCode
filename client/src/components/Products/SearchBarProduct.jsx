@@ -2,11 +2,12 @@ import React, {useState} from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import AddModal from './AddProduct';
-import {useDispatch} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 import { FilterByCategorie, searchP } from '../../JS/actions/products';
 
 function SearchProducts() {
   const [selectedValue, setSelectedValue] = useState('');
+  const user = useSelector((state)=> state.userReducer.user)
   const dispatch = useDispatch()
   const handleChange= (e)=>{  
        dispatch(searchP(e.target.value))

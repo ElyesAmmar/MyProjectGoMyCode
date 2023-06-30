@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const {Schema,model} = mongoose;
 
 const clientSchema = new Schema ({
+    UserID: {type:Number},
     Name: {type:String, required:true},
     Email: {type:String},
     Address: {type:String, required:true},

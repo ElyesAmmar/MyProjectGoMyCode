@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
-import { useDispatch } from 'react-redux';
+import { useDispatch,useSelector } from 'react-redux';
 import { deleteClient, getClients, updateClient } from '../../JS/actions/clients';
 import axios from 'axios';
 
 function EditClient({id}) {
+  const user = useSelector((state)=> state.userReducer.user)
   const [show, setShow] = useState(false);
   const dispatch= useDispatch()
   const handleClose = () => setShow(false);
@@ -30,12 +31,12 @@ const handleChange=(e)=>{
 }
 const Edit = () =>{
     console.log(id,update)
-    dispatch(updateClient(id,update));
-    dispatch(getClients())
+    dispatch(updateClient(user.UserID,id,update));
+    
 }
 const Delete = () =>{
-    dispatch(deleteClient(id))
-    dispatch(getClients())
+    dispatch(deleteClient(user.UserID,id))
+
 }
   return (
     <>

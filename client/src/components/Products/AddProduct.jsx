@@ -3,12 +3,14 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import { postProduct } from '../../JS/actions/products';
-import { useDispatch} from 'react-redux';
+import { useDispatch, useSelector} from 'react-redux';
 
 
 function AddModal() {
   const [show, setShow] = useState(false);
   const [product, setProduct] = useState({Name:'',Stock:'',Image:'',Price:'',Category:'',Barcode:'',Cost:''})
+  const user = useSelector((state)=> state.userReducer.user)
+  console.log(user)
   const dispatch = useDispatch()
   // const  msg = useSelector((state)=>state.productReducer.msg)
 
@@ -17,7 +19,7 @@ function AddModal() {
  
 
   const Add= ()=>{
-      dispatch(postProduct(product));
+      dispatch(postProduct(user.UserID,product));
       setProduct({Name:'',Stock:'',Image:'',Price:'',Category:'',Barcode:'',Cost:''})
   }
   

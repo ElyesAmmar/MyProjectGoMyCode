@@ -15,10 +15,11 @@ function Products() {
   const products= useSelector((state)=>state.productReducer.products)
   const inputS = useSelector((state)=>state.productReducer.productSearch)
   const inputFilter = useSelector((state)=> state.productReducer.filterInput)
+  const user = useSelector((state)=> state.userReducer.user)
   const [Quantity, setQuantity] = useState('')
  
   useEffect(()=> {
-    dispatch(getProducts())
+    dispatch(getProducts(user.UserID))
 },[])
 
     return(

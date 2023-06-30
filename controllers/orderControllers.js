@@ -9,7 +9,8 @@ require("dotenv").config({path:"./.env"});
 
 exports.getOrders = async (req,res)=>{
     try {
-        let result = await Orders.find({})
+       const userId = req.params.userid
+        let result = await Orders.find({UserID:userId})
         res.status(200).send({msg:"getting orders success", response: result})
     } catch (error) {
         console.log(error)
@@ -19,8 +20,9 @@ exports.getOrders = async (req,res)=>{
 
 exports.postOrders = async(req,res)=>{
     try {
+        const userId = req.params.userid
         let num= 0
-        let lastOrder = await Orders.findOne().sort({_id: -1}); // Get the last ID in the database
+        let lastOrder = await Orders.findOne({UserID:userId}).sort({_id: -1}); // Get the last ID in the database
         
         if(lastOrder){
             num= lastOrder.OrderNum + 1
@@ -35,7 +37,7 @@ exports.postOrders = async(req,res)=>{
           Year : datenow.getFullYear()
         }
         const order= req.body
-        const newOrder = new Orders({...order,OrderNum:num,OrderDate:date})
+        const newOrder = new Orders({...order,OrderNum:num,OrderDate:date, UserID:userId})
         await newOrder.save()
         res.status(200).send({msg:"adding order success", response: newOrder})
     } catch (error) {
@@ -47,8 +49,9 @@ exports.postOrders = async(req,res)=>{
 exports.getOrdersByMonth = async(req,res)=>{
       try {
         let month = req.query.Month
+        const userId = req.params.userid
         console.log(req.query)
-        const orders = await Orders.find({'OrderDate.Month': month})
+        const orders = await Orders.find({UserID:userId,'OrderDate.Month': month})
         if(orders){
           res.status(200).send({response:orders})
         }else{

@@ -37,9 +37,9 @@ export const addClientOrder = (client)=>{
     }     
 }
 
-export const SaveOrder = ({user,order}) => async(dispatch)=>{
+export const SaveOrder = (userid,{user,order}) => async(dispatch)=>{
     try {
-        let result = await axios.post('/api/orders/addorder', order)
+        let result = await axios.post(`/api/orders/addorder/${userid}`, order)
         dispatch(sendMailOrder({user, order:result.data.response}))
         dispatch({
             type:SAVE_ORDER,
@@ -49,15 +49,15 @@ export const SaveOrder = ({user,order}) => async(dispatch)=>{
     } catch (error) {
         console.log(error)
     }
-    dispatch(getOrders())
+    dispatch(getOrders(userid))
 }
 
-export const getOrders = () => async(dispatch)=>{
+export const getOrders = (userid) => async(dispatch)=>{
     dispatch({
         type: GET_ORDERS_LOAD
     })
     try {
-        let result = await axios.get('/api/orders/')
+        let result = await axios.get(`/api/orders/${userid}`)
         
         dispatch({
             type: GET_ORDERS_SUCCESS,
@@ -94,9 +94,9 @@ export const generateInvoice= (id)=> async(dispatch)=>{
     }
 }
 
-export const FindOrdersByMonth =(month)=> async(dispatch) =>{
+export const FindOrdersByMonth =(userid,month)=> async(dispatch) =>{
     try {
-        const orders = await axios.get('/api/orders/findorders', {params :{Month:month}})
+        const orders = await axios.get(`/api/orders/findorders/${userid}`, {params :{Month:month}})
         dispatch({
             type:GET_ORDERS_BY_MONTH,
             payload: orders.data.response

@@ -17,11 +17,11 @@ const reactToastSucess = (msg)=>{
         });
 }
 
-export const getProducts =()=> async (dispatch)=> {
+export const getProducts =(userid)=> async (dispatch)=> {
     
     dispatch({type:GET_PRODUCT_LOAD})
     try {
-        let result = await axios.get('/api/products/')
+        let result = await axios.get(`/api/products/${userid}`)
         
         dispatch({
             type: GET_PRODUCT_SUCCESS,
@@ -37,10 +37,10 @@ export const getProducts =()=> async (dispatch)=> {
     }
 }
 
-export const postProduct =(newproduct)=> async (dispatch)=> {
+export const postProduct =(userid,newproduct)=> async (dispatch)=> {
     
     try {
-            let result = await axios.post('/api/products/addproduct', newproduct )
+            let result = await axios.post(`/api/products/addproduct/${userid}`, newproduct )
            
         dispatch({
             type: POST_PRODUCT_SUCCESS,
@@ -55,7 +55,7 @@ export const postProduct =(newproduct)=> async (dispatch)=> {
             payload: error.response.data.msg
         })
     }
-    dispatch(getProducts())
+    dispatch(getProducts(userid))
 }
 
 export const getProductById =(id)=> async(dispatch)=>{
@@ -78,11 +78,10 @@ export const getProductById =(id)=> async(dispatch)=>{
 
 }
 
-export const findProductByBarcode = (barcode)=> async(dispatch)=>{
+export const findProductByBarcode = (userid,barcode)=> async(dispatch)=>{
     console.log(barcode)
     try {
-        let result = await axios.get('/api/products/product/', {params : {Barcode:barcode}})
-        console.log(result)
+        let result = await axios.get(`/api/products/product/${userid}`, {params : {Barcode:barcode}})
         dispatch({
             type : GET_PRODUCT_BY_BARCODE,
             payload : result.data.response
@@ -92,7 +91,7 @@ export const findProductByBarcode = (barcode)=> async(dispatch)=>{
     }
 }
 
-export const updateProduct= (id,update) => async(dispatch)=>{
+export const updateProduct= (userid,id,update) => async(dispatch)=>{
     try {
         
        let result =  await axios.put(`/api/products/edit/${id}`, update )
@@ -105,10 +104,10 @@ export const updateProduct= (id,update) => async(dispatch)=>{
      console.log(error)
         
     }
-    dispatch(getProducts())
+    dispatch(getProducts(userid))
 }
 
-export const deleteProduct = (id) => async(dispatch)=>{
+export const deleteProduct = (userid,id) => async(dispatch)=>{
     try {
         let result = await axios.delete(`/api/products/delete/${id}`)
         dispatch({
@@ -119,7 +118,7 @@ export const deleteProduct = (id) => async(dispatch)=>{
       } catch (error) {
         console.log(error)
       }
-      dispatch(getProducts())
+      dispatch(getProducts(userid))
 }
 
 export const searchP =(input)=>{
@@ -129,6 +128,7 @@ export const searchP =(input)=>{
     }
 }
 export const FilterByCategorie =(input)=>{
+    console.log(input)
     return {
         type : FILTER_PRODUCT_CATEGORY,
         payload: input

@@ -22,9 +22,12 @@ function AddOrderForm() {
     event.preventDefault();
       dispatch(findProductByBarcode(Barcode))
   }
+useEffect(()=>{
+  setProducts([...products,{...pro,Quantity:Quantity}])
+},[pro])
 // useEffect(()=>{
-//   setProducts([...products,{...pro,Quantity:Quantity}])
-// },[products,Quantity])
+//   setProduct({...product,Quantity:Quantity})
+// },[Quantity])
 console.log(products)
   return (
     <>
@@ -60,7 +63,24 @@ console.log(products)
     <Col>
       <Form.Label>Product Barcode</Form.Label><br/>
       <Form.Control style={{width:'350px'}}  onChange={(e)=>setBarcode(e.target.value)} />   
-      <input type='submit' value='submit'></input>
+      <Table striped bordered hover>
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Quantity</th>
+        </tr>
+      </thead>
+      {products.map((p)=>{
+      <tbody key={p._id}>
+          <tr>
+          <td>{p.Name}</td>
+          <td>{p.Quantity}</td>
+        </tr>
+        
+      </tbody>
+      })}
+    </Table>
+      <input type='submit' value='submit' onSubmit={()=> getproduct()}></input>
     </Col>
     <Col>
       <Form.Label type='submit'>Quantity</Form.Label><br/>
@@ -68,23 +88,6 @@ console.log(products)
     </Col>
     </Row>
     </Form>
-    { products.map((p)=>
-    <Table striped bordered hover>
-      <thead key={p._id}>
-        <tr>
-          <th>Product</th>
-          <th>Quantity</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>{p.Name}</td>
-          <td>{p.Quantity}</td>
-        </tr>
-      </tbody>
-    </Table>
-    ) }
-   
     </div>
  </div>
         </Modal.Body>

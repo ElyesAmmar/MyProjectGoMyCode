@@ -50,7 +50,7 @@ function MakeOrder() {
 }
 // add data to order
   const saveOrder =() =>{
-    dispatch(SaveOrder({user,order:{OrderClient: client, Products: productsOrder, TotalCost:TotalCost(), TotalPrice: TotalPrice()}}));
+    dispatch(SaveOrder(user.UserID,{user,order:{OrderClient: client, Products: productsOrder, TotalCost:TotalCost(), TotalPrice: TotalPrice()}}));
   }
 // update Stock 
 const updateStockProduct = () =>{
@@ -114,7 +114,7 @@ return (
           <td>
             {/* <Form.Control style={{width:'60px'}} 
           type='number' 
-          onChange={(e)=> {setProducts([...products,{...prod, Quantity: e.target.value}])} }>
+          onChange={(e)=> {setreducedTab([...products,{...prod, Quantity: e.target.value}])} }>
 
           </Form.Control> */}
           

@@ -100,7 +100,9 @@ exports.getProductNameOrCode = async(req,res)=>{
     try {
         const name = req.query.Name
         const barcode = req.query.Barcode
+        console.log(barcode)
         const userId = req.params.userid
+        console.log(userId)
         if(name){
             const result = await Products.find({ Name:{ $regex: new RegExp('^' + name + '$', 'i') }})
             if(result){
@@ -109,7 +111,7 @@ exports.getProductNameOrCode = async(req,res)=>{
                 return res.status(400).send({msg:'product not found'})
         }}
         else if(barcode){
-            const result = await Products.find({Barcode: barcode, UserID:userId})
+            const result = await Products.find({UserID:userId, Barcode: barcode})
            if(!result){
             return res.status(400).send({msg:'product not found'})
            }  else{

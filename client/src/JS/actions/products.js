@@ -3,6 +3,7 @@ import { GET_PRODUCT_LOAD, GET_PRODUCT_SUCCESS, GET_PRODUCT_FAIL, GET_ONEPRODUCT
         GET_PRODUCT_BY_BARCODE, SEARCH_PRODUCT, UPDATE_PRODUCT, DELETE_PRODUCT, FILTER_PRODUCT_CATEGORY} from "../constant/actionsTypes";
 import axios from "axios"
 import { toast } from 'react-toastify';
+import { addProductsOrder } from "../../JS/actions/order";
 
 const reactToastSucess = (msg)=>{
     toast.success(msg, {
@@ -78,10 +79,13 @@ export const getProductById =(id)=> async(dispatch)=>{
 
 }
 
-export const findProductByBarcode = (userid,barcode)=> async(dispatch)=>{
-    console.log(barcode)
+export const findProductByBarcode = (userid,barcode,quantity)=> async(dispatch)=>{
     try {
-        let result = await axios.get(`/api/products/product/${userid}`, {params : {Barcode:barcode}})
+        let result = await axios.get(`/api/products/products/${userid}`, {params : {Barcode:barcode}})
+        let product = result.data.response[0]
+        console.log('actions', product,barcode,quantity)
+        dispatch(addProductsOrder({mongoId: product._id, Id:product.ProductId,Quantity:Number(quantity),
+            Stock:product.Stock, Cost: product.Cost, Name: product.Name, Price:product.Price, TotalPrice: product.Price*Number(quantity), TotalCost:product.Cost*Number(quantity)}))
         dispatch({
             type : GET_PRODUCT_BY_BARCODE,
             payload : result.data.response

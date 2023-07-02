@@ -12,7 +12,7 @@ function SummaryExports() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const [showProducts, setShowProducts] = useState(false);
-
+  console.log(orders)
  //method 2 for totalPrice
  const TotalOrders=()=>{
   let T = 0

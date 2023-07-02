@@ -19,6 +19,7 @@ const reactToastSucess = (msg)=>{
 
 export const addProductsOrder = (product)=>{
     let msg = 'product added to order'
+    console.log(product)
     reactToastSucess(msg)
     return{
         type:ADD_PRODUCTS_ORDER,
@@ -101,8 +102,6 @@ export const FindOrdersByMonth =(userid,month)=> async(dispatch) =>{
             type:GET_ORDERS_BY_MONTH,
             payload: orders.data.response
         })
-
-        
     } catch (error) {
         console.log(error)
     }

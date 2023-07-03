@@ -19,9 +19,11 @@ function AddOrderForm() {
   const handleShow = () => setShow(true);
  
 
-  const getproduct =()=>{
-    // event.preventDefault();
+  const getproduct =(event)=>{
+    console.log("event((((")
+    event.preventDefault();
       dispatch(findProductByBarcode(user.UserID,Barcode,Quantity))
+      handleClose()
   }
 
 // useEffect(()=>{
@@ -45,7 +47,7 @@ function AddOrderForm() {
         Add An Order
       </Button>
 
-      <Modal show={show} onSubmit={()=>{getproduct();handleClose()}} onHide={handleClose}>
+      <Modal show={show}  onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Add Order</Modal.Title>
         </Modal.Header>
@@ -65,13 +67,16 @@ function AddOrderForm() {
     <Col>
       <Form.Label>Product Barcode</Form.Label><br/>
       <Form.Control style={{width:'350px'}}  onChange={(e)=>setBarcode(Number(e.target.value))} />   
-      <input type='submit'  value='submit'></input>
+      {/* <input type='submit'  value='submit'></input> */}
     </Col>
     <Col>
-      <Form.Label type='submit'>Quantity</Form.Label><br/>
+      <Form.Label>Quantity</Form.Label><br/>
       <Form.Control type='number'  style={{width:'70px'}} onChange={(e)=>setQuantity(Number(e.target.value))} />
     </Col>
     </Row>
+    <Col>
+      <Form.Control type='submit' value="submit"  style={{width:'70px'}}  />
+    </Col>
     </Form>
     </div>
  </div>
@@ -80,7 +85,7 @@ function AddOrderForm() {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={()=>{getproduct();handleClose()}}>
+          <Button variant="primary">
             Save Order
           </Button>
         </Modal.Footer>
